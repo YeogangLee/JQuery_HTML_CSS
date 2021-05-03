@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Insert title here</title>
+	<style type="text/css">
+		* {
+			font-family: "Trebuchet MS", sans-serif;
+		}
+		table {
+			text-align: center;
+			width: 100%;
+		}
+		th {
+			background-color: blue;
+			color: white;
+		}
+		td {
+			border: solid lightgray 1px;
+		}
+		/* even: 2n, odd: 2n+1 */
+		tr:nth-child(2n+1) {
+			background-color: yellow;
+		}
+		
+		/* tr의 th, td 따로 지정하지 않고, 하나만 지정해도 너비가 자동으로 같이 바뀐다*/
+		/* tr th:first-child { */
+		tr td:first-child {
+			width: 100px;
+		}
+		tr td:last-child {
+			font-weight: bold;
+			text-align: left;
+			padding-left: 20px;
+		}
+	</style>
+</head>
+<body>
+	<table>
+		<tr>
+			<th>이름</th>
+			<th>이메일</th>
+		</tr>
+		<tr>
+			<td>김철수</td>
+			<td>chul@google.com</td>
+		</tr>
+		<tr>
+			<td>김영희</td>
+			<td>young@google.com</td>
+		</tr>
+		<tr>
+			<td>홍길동</td>
+			<td>hong@google.com</td>
+		</tr>
+		<tr>
+			<td>김수진</td>
+			<td>sujin@google.com</td>
+		</tr>
+	</table>
+</body>
+</html>

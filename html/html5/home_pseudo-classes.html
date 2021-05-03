@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Pseudo-class</title>
+	<style type="text/css">
+		* {
+			font-family: "나눔 고딕", "맑은 고딕";
+		}
+		table {
+			text-align: center;
+			width: 600px;
+ 			border-collapse: collapse;
+		}
+		table tr {
+			height: 50px;
+		}
+		th {
+			background-color: yellow;
+			border: solid red 2px;
+			font-weight: normal;
+		}
+		td {
+			border: solid red 2px;
+		}
+		tr:nth-child(2n) {
+			background-color: #98ff98;
+		}
+	</style>
+</head>
+<body>
+	<table>
+		<tr>
+			<th>알라딘</th>
+			<th>임꺽정</th>
+			<th>개나리</th>
+			<th>홍길동</th>
+		</tr>
+		<tr>
+			<td>패밀리</td>
+			<td>스타일</td>
+			<td>텍스트</td>
+			<td>볼드체</td>
+		</tr>
+		<tr>
+			<td>선택자</td>
+			<td>인라인</td>
+			<td>패밀리</td>
+			<td>요소들</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+		</tr>
+	</table>
+</body>
+</html>

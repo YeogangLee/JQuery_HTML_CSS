@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Insert title here</title>
+	<style type="text/css">
+		.sample1 {
+			list-style-type: lower-roman;
+		}
+		.sample2 {
+			list-style-type: lower-roman;
+			/*ol의 marker를 안으로 밀어넣기, 기본값은 outside*/
+			list-style-position: inside;
+		}
+		ul.menu {
+			border-top: solid red 1px;
+			border-bottom: solid red 1px;
+			padding: 10px 0px;
+			text-align: center;
+		}
+		.menu li {
+			text-transform: uppercase;
+			display: inline;
+			border: 1px solid;
+			padding: 2px 5px;
+			letter-spacing: 4px;
+			margin: 0px 10px;
+			
+		}
+		.menu li:hover {
+			background-color: gold;
+		}
+		.menu li a {
+			text-decoration: none;
+			color: black;
+		}
+		.menu li a:hover {
+			background-color: gold;
+		}
+		/*나중에 해보기*/
+		.imageMarker {
+			list-style-image: url("../../images/lion.jfif");
+		}
+	</style>
+</head>
+<body>
+	<ul>
+		<li>아메리카노</li>
+		<li>카페라떼</li>
+		<li>카페모카</li>
+	</ul>
+	<hr>
+	<ul class="sample1">
+		<li>아메리카노</li>
+		<li>카페라떼</li>
+		<li>카페모카</li>
+	</ul>
+	<ol class="sample2">
+		<li>아메리카노</li>
+		<li>카페라떼</li>
+		<li>카페모카</li>
+	</ol>
+	<hr>
+	<ul class="menu">
+		<li><a href="">home</a></li>
+		<li><a href="">blog</a></li>
+		<li><a href="">about</a></li>
+		<li><a href="">contact</a></li>
+	</ul>
+	<ul class="imageMarker"></ul>
+</body>
+</html>

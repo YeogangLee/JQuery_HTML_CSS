@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>예제3 - 회원 가입 화면</title>
+	<style>		
+		fieldset {
+			width: 380px;
+			height: 170px;
+			border: 2px solid blue;
+		}
+	</style>
+</head>
+<body>
+	<fieldset>
+		<form>
+			<br>
+			이름&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" required/><br>
+			주소&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="url" required/><br>
+			이메일&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="email" required/><br>
+			<input type="radio" name="gender" id="genderMale"><label for="genderMale">Male</label><br>
+			<input type="radio" name="gender" id="genderFemale"><label for="genderFemale">Female</label><br>
+			<input type="submit" value="send"/>
+			<button type="reset">원래대로</button>
+		</form>
+	</fieldset>
+</body>
+</html>

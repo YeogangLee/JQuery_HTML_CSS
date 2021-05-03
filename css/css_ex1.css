@@ -1,0 +1,34 @@
+@charset "UTF-8";
+html {
+	background-color: yellow;
+}
+h1 {
+	color: red;
+	border-bottom: 1px solid gray;
+	font-family: serif;
+}
+img {
+	height:120px;
+}
+p {
+	font-family: serif;
+}
+span {
+	font-size: 2em;
+	color: red;
+}
+h2 {
+	font-family: sans-serif;
+}
+h3 {
+	font-family: cursive;
+}
+h4 {
+	font-family: fantasy;	
+}
+h5 {
+	font-family: monospace;	
+}
+h6 {
+	font-family: inherit;
+}

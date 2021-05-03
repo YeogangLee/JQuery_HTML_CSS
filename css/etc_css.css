@@ -1,0 +1,13 @@
+@charset "UTF-8";
+
+body {
+		background-color: yellow;
+	}
+	h1 {
+		color: red;
+		border-bottom: 5px solid green;
+	}
+	span {
+		color: red;
+		font-size: 1.5em; /* em: 배수 */
+	}

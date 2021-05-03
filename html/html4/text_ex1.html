@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>텍스트 스타일 예제</title>
+	<style type="text/css">
+		h1 {
+			text-align: right; 
+		}
+		/* p:nth-child(2) {
+			text-align: left; 
+		} */
+		/* p:last-child {
+			text-align: center;
+		} */
+		.center {
+			text-align: center;
+			text-transform: uppercase;
+		}
+		.right {
+			text-align: right;
+			text-decoration: underline;
+		}
+		.left {
+			text-align: left;
+			text-transform: capitalize;
+		}
+		.overline {
+			text-decoration: overline;
+		}
+		.underline {
+			text-decoration: underline;
+		}
+		.cancel {
+			text-decoration: line-through;
+		}
+		.shadow {
+			/*가로, 세로, 그림자번짐정도, 색상*/
+			text-shadow: 5px 10px 15px red;
+		}
+		
+		
+	</style>
+</head>
+<body>
+	<!-- 다중 클래스 지정 가능, 클래스 구분-띄어쓰기: ex.중앙정렬 윗줄 -->
+	<h1 class="center overline">파리(Fly)</h1>	<!-- 윗줄 -->
+	<p class="right">원태연</p>					<!-- 밑줄  -->
+	<p class="left">난다고 다 새냐 how are you doing?</p>
+	<p class="cancel">난다고 다 새냐</p>				<!-- 취소선 -->
+	<hr>
+	<h1 class="center">애국가</h1>
+	<p>동해물과 백두산이 마르고 닳도록 하느님이 보우하사 우리나라 만세</p>
+	<hr>
+	<h1 class="center">홍길동</h1>
+	<p class="shadow">서자 출신</p>
+	<p class="underline">아버지를 아버지라 부르지 못하고 형을 형이라 부르지 못하고</p>
+	<hr>
+	<p>1)원본</p>
+	<div style="border: 1px solid; width: 100px;">
+		동해물과 백두산이 마르고 caaaaaaaaaaaaaaaaaaaaaaaps
+		닳도록 하느님이 보우하사 우리나라 만세
+	</div>
+	<p>2)word-wrap: break-word;</p>
+	<div style="border: 1px solid; width: 100px; word-wrap: break-word;">
+	<!-- 삐져나온 영어를 영역으로 집어넣어주기 -->
+		동해물과 백두산이 마르고 caaaaaaaaaaaaaaaaaaaaaaaps
+		닳도록 하느님이 보우하사 우리나라 만세
+	</div>
+	<p>3)word-break: break-word; (2.와 동일한 효과, 3.word-break 하나로 쓰면 된다.)</p>
+	<div style="border: 1px solid; width: 100px; word-break: break-word;">
+		동해물과 백두산이 마르고 caaaaaaaaaaaaaaaaaaaaaaaps
+		닳도록 하느님이 보우하사 우리나라 만세
+	</div>
+	<p>4)word-break: break-all;</p>
+	<div style="border: 1px solid; width: 100px; word-break: break-word;">
+		동해물과 백두산이 마르고 caaaaaaaaaaaaaaaaaaaaaaaps
+		닳도록 하느님이 보우하사 우리나라 만세
+	</div>
+	<br>
+	<hr>
+	<br>
+	<div style="column-count: 3;">
+		Just because you'll always be
+		Miles ahead of me
+		I don't see why I shouldn't try
+		To catch up with you
+		'Cause in my mind a thousand times or more
+		I've been there before
+		There's nothin' I can see
+		That will stop me, believe me
+		Our time will come
+		An' I don't think I will let another chance
+		Pass me by
+		Our time will come an' I don't think
+		I will let another chance
+		Pass me by
+		No, I don't want you to get bored
+		Like you have a thousand times before
+		Give me some time
+		Just to show that I am up to it
+		Our time will come
+		An' I don't think I will let another chance
+		Pass me by
+		Our time will come an' I don't think
+		I will let another chance
+		Pass me by
+		There is something that can be done
+		To bring us back together as one
+		There is something else I can do
+		That's why I'm sending this message to you
+		I will try another thousand times
+		To bring us back together as one
+		I will try another thousand times
+		Till you decide to change your mind
+		I will try another thousand times
+		To bring us back together as one
+		I will try another thousand times
+		Can you decide to change your mind?
+		I will try another thousand times
+		I will try another thousand times
+		To bring us back together as one
+		I will try another thousand times
+		Till you decide to change your mind
+	</div>
+	<br>
+	<hr>
+	<br>
+	<div style="column-count: 5;">
+		반짝 눈부신 날
+		쨘하고 나타날 것 같아
+		방금 짓궂은 그 표정
+		문득 머리위로
+		차가운 공기가 흐른다
+		이젠 인사를 할 시간
+		시작하는 여행자여 안녕
+		언젠가 우리 다시 만날때
+		오 그대로 내가 사랑한
+		너의 말투 너의 웃음 그대로
+		생각해보면 똑같은 풍경
+		이 하늘과 바람, 복잡한 도시
+		오 그대여 눈을 감으면
+		나는 늘 여기서 널 기다리고 있을 테니까
+		행운을 빌어줘요
+		웃음을 보여줘요
+		눈물은 흘리지 않을게, 굿바이
+		뒤돌아 서지마요
+		쉼없이 달려가요
+		노래가 멈추지 않도록
+		수많은 이야기
+		끝없는 모험만이
+		그대와 함께이길-
+		안녕 고마웠어
+		짧았던 너와 나의 계절
+		끝은 또 하나의 시작
+		잔뜩 배낭을 멘
+		작은 어깨를 두드린다
+		이젠 떠나야 할 시간
+		숨가쁜 시간의 강을 건너
+		엇갈린 축의 바람이 분다
+		오 그대 작은 별이 되기를
+		망설였던 나의 서툰 노래 이젠 할 수 있어
+		행운을 빌어줘요
+		웃음을 보여줘요
+		눈물은 흘리지 않을게, 굿바이
+		뒤돌아 서지마요
+		쉼없이 달려가요
+		노래가 멈추지 않도록
+		수많은 이야기
+		끝없는 모험만이
+		그대와 함께이길
+		"행운을 빌어요"
+		빛나기 시작한 별
+		세차게 부는 바람
+		눈물은 흘리지 않을게, 굿바이
+		오랜 시간이 흘러
+		쓰러질 듯 벅찬 날
+		이 서툰 노래가 닿기를
+		긴 여행의 날들
+		끝없는 행운만이
+		그대와 함께이길
+	</div>
+	<br>
+	<hr>
+	<br>
+</body>
+</html>
