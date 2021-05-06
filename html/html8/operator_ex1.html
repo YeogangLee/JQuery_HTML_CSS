@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>+</title>
+	<script type="text/javascript">
+		var str1 = "hello";
+		var str2;
+		str2 = "javascript";
+		var str3, str4;
+		
+		//t.제일 앞에는 " " 그냥 공백이 먹히지 않는다.
+		document.write("&nbsp" + str1 + "<br>");
+		document.write(str2);
+		document.write("<hr>");
+		
+		str3 = str1 + " " + str2;
+		document.write(str3);
+		document.write("<hr>");
+		
+		str4 = 30 + 9;		//39
+		document.write(str4);
+		document.write("<br>");
+		str4 = 30 + "9";	//309
+		document.write(str4);
+		str4 = 10 + 20 + "9";		//309
+		document.write("<br>");
+		document.write(str4);
+		str4 = 10 + 20 + "9" + 1;	//3091
+		document.write("<br>");
+		document.write(str4);
+		str4 = 10 + 20 + "9" + (1 + 9);	//30910
+		document.write("<br>");
+		document.write(str4);
+		
+		
+		
+	</script>
+	
+</script>
+</head>
+<body>
+		
+</body>
+</html>

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Insert title here</title>
+	<style type="text/css"></style>
+	<!-- 내부 자바 스크립트 -->
+	<script type="text/javascript">
+		document.write("hello");
+		document.write("<br>");
+	</script>
+	<!-- 외부 자바스크립트, 선생님은 body아래보다 위에 적는 걸 선호 -->
+	<script src="js_test.js"></script>
+</head>
+<body>
+	<!-- 인라인 자바 스크립트 -->
+	<input type="text" onclick="alert('^^')" on>
+</body>
+<!-- script를 body이후에 사용: body 모두 읽고 script 읽겠다 -->
+<script type="text/javascript">
+	document.write("world");
+</script>
+<!-- 외부 자바스크립트 -->
+<script src="js_test.js">
+	document.write("안 나오는 구역");
+</script>
+</html>

@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>HTML 요소 찾기</title>
+	<script type="text/javascript">
+		function proc() {
+			document.getElementById("temp");
+			var ele = document.getElementById("temp");
+			ele.style.color = "red";
+		}
+	</script>
+</head>
+<body>
+<!-- 	color="blue" ? -->
+	<h1 id="temp" style="color: blue">내 이름은 홍길동</h1>
+	<button type="button" onclick="proc()">색바꾸기</button>
+</body>
+</html>
