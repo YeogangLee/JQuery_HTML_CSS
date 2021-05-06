@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>CSS Position 연습</title>
+	<style type="text/css">
+/*
+		p, div {
+			width: 100px;
+			height: 50px;
+		}
+		#block1 {
+			background-color: aqua;
+		}
+		#block2 {
+			background-color: gray;
+			/* 개발자 도구에서 해보기 */
+			/* position: static; */
+			/* relative - 원래 위치를 기준으로 이동 */ 
+/* 			position: relative;
+			top: 100px;
+			left: 200px;
+		}
+		#block3 {
+			background-color: olive;
+		}
+ */
+		.block1, .block2, .block3 {
+			width: 100px;
+			height: 50px;
+		}
+		.block1 {
+			background-color: aqua;
+		}
+		.block2 {
+			background-color: gray;
+		}
+		.block3 {
+			background-color: olive;
+		}
+		#divRel div {
+			position: relative;
+			/* left: 100px;
+			top: 50px; */
+		}
+		#divAbs {
+			position: relative;
+		}
+		#divAbs div {
+			position: absolute;
+			left: 100px;
+			top: 50px;
+		}
+		#divFix {
+			position: fixed;
+			right: 100px;
+			bottom: 50px;
+		}
+	</style>
+</head>
+<body>
+	<div>
+<!-- 	<p id="block1">블럭1</p>
+		<div id="block2">블럭2</div>
+		<p id="block3">블럭3</p> -->
+
+		<h3>기본위치 - position: static; </h3>
+		<p class="block1">블럭1</p>
+		<div class="block2">블럭2</div>
+		<p class="block3">블럭3</p>		
+	</div>
+	<hr>
+	
+	<div id="divRel">
+		<h3>위치1 - position: relative; </h3>
+		<p class="block1">블럭1</p>
+		<div class="block2">블럭2</div>
+		<p class="block3">블럭3</p>		
+	</div>
+	<hr>
+	
+	<div id="divAbs">
+		<h3>위치2 - position: absolute; </h3>
+		<p class="block1">블럭1</p>
+		<div class="block2">블럭2</div>
+		<p class="block3">블럭3</p>		
+	</div>
+	<hr>
+	
+	<div id="divFix">
+		<h3>위치2 - position: fixed; </h3>
+		<p class="block1">블럭1</p>
+		<div class="block2">블럭2</div>
+		<p class="block3">블럭3</p>		
+	</div>
+</body>
+</html>

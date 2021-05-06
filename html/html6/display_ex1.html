@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>display 속성</title>
+	<style type="text/css">
+		li {
+			display: inline;
+			border: solid red 1px;
+			background-color: yellow;
+			padding: 5px 10px;
+		}
+		a {
+			text-decoration: none;
+			color: black;
+			/* font-family: "맑은 고딕"; */
+			/* 크롬으로 보면 자동 적용 */
+		}
+	</style>
+</head>
+<body>
+	<ul class="menubar">
+		<!-- 한꺼번에 href 속성 부여
+			 shift + alt + a, 토글처럼 on/off 사용 -->
+		<li><a href="#">홈으로</a></li>
+		<li><a href="#">회사 소개</a></li>
+		<li><a href="#">제품 소개</a></li>
+		<li><a href="#">질문과 대답</a></li>
+		<li><a href="#">연락처</a></li>
+	</ul>
+	<hr>
+	<h2>display:none</h2>
+	<div>
+		대한사람 대한으로 길이 보전하세
+		<p style="display: none">동해물과 백두산이 마르고 닳도록 하느님이 보우하사 우리나라 만세</p>
+		대한사람 대한으로 길이 보전하세
+	</div>
+	<!-- inline-block을 지정하면 height 지정 가능 -->
+	<h2>display: inline-block</h2>
+	<div>
+		대한사람 대한으로 길이 보전하세
+		<p style="display: inline-block">동해물과 백두산이 마르고 닳도록 하느님이 보우하사 우리나라 만세</p>
+		대한사람 대한으로 길이 보전하세
+	</div>
+	
+	
+	
+</body>
+</html>

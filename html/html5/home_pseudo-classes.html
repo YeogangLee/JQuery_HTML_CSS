@@ -23,6 +23,8 @@
 		td {
 			border: solid red 2px;
 		}
+		/* td:nth-child(2n) - 컬럼 */ 
+		/* tr:nth-child(2n) - 행 */
 		tr:nth-child(2n) {
 			background-color: #98ff98;
 		}
@@ -31,6 +33,7 @@
 <body>
 	<table>
 		<tr>
+			<!-- 제목이 아니므로 사실 th태그를 쓸 필요가 없다 -> td태그 사용 -->
 			<th>알라딘</th>
 			<th>임꺽정</th>
 			<th>개나리</th>
