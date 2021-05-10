@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Insert title here</title>
+	<script type="text/javascript">
+		//일반 함수
+		function showMsg(year, month) {
+			alert("hallo! " + year);
+			alert(month);
+		}
+		//원래 호출: showMsg(2021);
+		//무명 함수 호출: 함수 원형 통째로 호출
+		(function (year) {
+			alert("무명 " + year);
+		})(2021);
+		
+		//무명함수: 이름이 없는 함수
+		function (month) {
+			alert("hallo! " + year);
+		}		
+		
+		function calculate() {
+			var num1 = document.getElementById("input1").value;
+			var num2 = document.getElementById("input2").value;
+			var result = parseInt(num1) + parseInt(num2);
+			//형변환을 이용한 방법: result = Number(num1) + Number(num2);
+			document.getElementById("result").innerHTML = (parseInt(num1) + parseInt(num2));
+			
+			document.getElementById("spInput1").innerHTML = num1;
+			document.getElementById("spInput2").innerHTML = num2;
+			document.getElementById("spResult").innerHTML = result;
+		}
+		
+	</script>
+</head>
+<body>
+	<!-- 파라미터로 문자열을 줄 때는 큰 따옴표나 작은 따옴표로 묶어줘야 한다.
+		 onclick=""에서 큰 따옴표를 썼으므로 파라미터에는 작은 따옴표 ''사용 -->
+	<button type="button" onclick="showMsg('문자열');">클릭</button>
+	<hr>
+	<h1>덧셈 계산기</h1>
+	첫 번째 정수 : <input type="text" id="input1"><br>
+	두 번째 정수 : <input type="text" id="input2"><br>
+	<br>
+	결과 : <input type="text" id="result"><br>
+	<button type="button" onclick="calculate()">계산</button>
+	<br>
+	<p>첫 번째 값 : <span id="spInput1"></span></p>
+	<p>두 번째 값 : <span id="spInput2"></span></p>
+	<p>결과 : <span id="spResult"></span></p>
+</body>
+</html>

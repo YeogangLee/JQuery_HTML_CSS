@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Insert title here</title>
+	<script type="text/javascript">
+	
+		var score = prompt("점수를 입력하세요.");
+		
+// 		var grade = "";
+// 		var calc = parseInt(score/10);
+// 		var calc = Math.floor(score/10);
+		
+// 		if(calc == 9 || score == 100){
+// 			grade = 'A';
+// 		}else if(calc == 8){
+// 			grade = 'B';
+// 		}else if(calc == 7){
+// 			grade = 'C';
+// 		}else if(calc == 6){
+// 			grade = 'D';
+// 		}else if(calc <= 5){
+// 			grade = 'F';
+// 		}else {
+// 			grade = "잘못된 점수 입력";
+// 		}
+		
+		var grade2 = "";
+		var calc2 = parseInt(score/10);
+// 		var calc2 = Math.floor(score/10);
+		switch (calc2){
+		//다음 구간까지 포함한다면 한 번에 써주기 !!
+		case 10:
+		case 9:
+			grade2 = 'A';
+			break;
+		case 8:
+			grade2 = 'B';
+			break;
+		case 7:
+			grade2 = 'C';
+			break;
+		case 6:
+			grade2 = 'D';
+			break;
+		case 5:
+		case 4:
+		case 3:
+		case 2:
+		case 1:
+		case 0:
+			grade2 = 'F';
+			break;
+		default:
+			//
+// 			return;
+		}
+		document.write("입력하신 점수는 " + grade2 + "학점입니다.");
+
+	</script>
+</head>
+<body>
+	
+</body>
+</html>

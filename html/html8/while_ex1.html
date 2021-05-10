@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Insert title here</title>
+	<script type="text/javascript">
+	
+		//다음을 while문으로 출력
+// 		document.write("카운터 : 0");
+// 		document.write("카운터 : 1");
+// 					...
+// 		document.write("카운터 : 9");
+
+		var i = 0;
+		while(i < 10) {
+			document.write("카운터 : " + i + "<br>");
+			i++;
+		}
+		document.write("<hr>");
+		
+		var flag = true;
+		i = 0;
+		while(flag){
+			document.write("카운터 : " + i + "<br>");
+			i++;
+			
+			if(i == 10){
+				flag = false;
+			}
+		}
+		
+		document.write("<hr>");
+		
+		i = 0;
+		do {
+			document.write("카운터 : " + i + "<br>");
+			i++;
+		}while(i<10);
+		
+		document.write("<hr>");
+		
+		/*
+			1. 1부터 10까지의 합을 구하는 프로그램을 작성
+			2. 1부터 200까지의 짝수의 합을 구하는 프로그램을 작성(continue 이용)
+		*/
+
+		//1.
+		var sum = 0;
+		for(var i=1; i<=10; i++){
+			sum += i;
+		}
+		document.write("1부터 10까지의 합 : " + sum + "<br>");
+		
+		//2.
+		var sum2 = 0;
+		for(var i=1; i<=200; i++){
+			if(i%2 != 0) {
+				continue;
+			}
+			sum2 += i;
+		}
+		document.write("1부터 200까지의 짝수의 합 : " + sum2 + "<br>");
+
+		//1번 응용
+		function plus() {
+			var sum = 0;
+			for(var i=1; i<=10; i++){
+				sum += i;
+			}
+			document.getElementById("spanTag").innerHTML = sum;
+		}
+		
+		//2번 응용
+		function plus2() {
+			var sum2 = 0;
+			for(var i=1; i<=200; i++){
+				//방법1. if문 사용
+// 				if(i%2 == 0) {
+// 					sum2 += i;
+// 				}
+				
+				//방법2. if문 + continue 사용1
+// 				if(i%2 == 0) {
+// 					sum2 += i;
+// 				}else {
+// 					continue;
+// 				}
+				
+				//방법3. if문 + continue 사용2
+				if(i%2 != 0) {
+					continue;
+				}
+				sum2 += i;
+				
+				//cf. if(0)은 언제나 거짓, 수행X, 이외의 모든 값은 실행된다.
+			}
+			document.getElementById("pTag").innerHTML = sum2;
+		}
+		
+		document.write("1부터 10까지의 합 : ");
+		document.write("<button onclick='plus();'>수행</button>&ensp;");
+		document.write("<span id='spanTag'></span><br>");
+		
+		document.write("1부터 200까지 짝수의 합 : ");
+		document.write("<button onclick='plus2();'>수행</button>");
+		document.write("<p id='pTag'></p>");
+		
+		
+	</script>
+</head>
+<body>
+		
+</body>
+</html>

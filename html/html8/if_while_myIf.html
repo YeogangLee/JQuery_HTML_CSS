@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Insert title here</title>
+	<script type="text/javascript">
+	
+		var num1 = prompt("첫 번째 숫자를 입력하세요.");
+		var opr = prompt("연산자를 입력하세요.","+,-,*,/,% 중 하나");
+		var num2 = prompt("두 번째 숫자를 입력하세요.");
+		
+		//수정시 매우 편리한 기능: 바꿀 내용 블럭으로 잡고 + ctrl + F로 바꾸기replace
+		var result = val1 + opr + val2 + " = ";
+		if(opr == "+"){
+			result += (parseInt(num1) + parseInt(num2));
+		}else if(opr == "-"){
+			result += (parseInt(num1) - parseInt(num2));
+		}else if(opr == "*"){
+			result += (parseInt(num1) * parseInt(num2));
+		}else if(opr == "/"){
+			result += (parseInt(num1) / parseInt(num2));
+		}else if(opr == "%"){
+			result += (parseInt(num1) % parseInt(num2));
+		}else {
+// 			alert("연산자 입력이 잘못되었습니다.");
+// 			return;
+			//원래 이 방식이기는 한데, 여기서는 문제 발생
+			//해결 - result에 alert할 메세지 내용, 그대로 문자열 대입
+			result = "연산자 입력이 잘못되었습니다.";
+		}
+		document.write(result);
+		
+		//변수로 담아 처리할 때의 편리함
+		//document.getElementById("temp").innerHTML = result;
+		//alert(result);
+
+	</script>
+</head>
+<body>
+	
+</body>
+</html>

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Insert title here</title>
+	<script type="text/javascript">
+	
+		//현재 시간을 갖고 와서 영어로 인사 메세지(alert)
+		//12시 이전이면 굿모닝, 18시 이전이면 굿애프터눈, 그 외는 굿이브닝
+		//Guten Morgen, Guten Tag, Guten Abend, Gute Nacht
+		
+		/* if문 사용  */
+		//현재 시각
+		var currHour = new Date().getHours();
+		
+		var msg = "";
+		if(currHour < 12){
+// 			alert("Good morning~");
+			msg = "Good morning~"
+		}else if(currHour < 18) {
+// 			alert("Good afternoon~");
+			msg = "Good afternoon~"
+		}else {
+// 			alert("Good evening~");
+			msg = "Good evening~"
+		}
+		
+// 		alert(msg);
+		document.write(msg);
+		
+		/* switch문  */
+		var grade = prompt("학점을 입력하세요.", "A~F 사이의 문자로 입력");
+
+		switch(grade){
+		case 'A':
+			alert("참 잘했어요.");
+			break;
+		case 'B':
+			alert("B만큼 잘했어요.");
+			break;
+		case 'C':
+			alert("C만큼 잘했어요.");
+			break;
+		case 'D':
+			alert("D만큼 잘했어요.");
+			break;
+		case 'F':
+			alert("재수강 하세요.");
+			break;
+		default:
+			alert("올바른 입력이 아닙니다.(입력값: " + grade + "");
+			break;
+		}
+				
+	</script>
+</head>
+<body>
+	
+</body>
+</html>

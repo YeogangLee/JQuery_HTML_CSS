@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Insert title here</title>
+	<script type="text/javascript">
+	/*
+		1. 1부터 10까지의 합을 구하는 프로그램을 작성
+		2. 1부터 200까지의 짝수의 합을 구하는 프로그램을 작성(continue 이용)
+	*/
+		//1.
+		document.write("<h1>1. 1부터 10까지의 합</h1>");
+		var sum = 0;
+		for(var i=1; i<=10; i++){
+			sum += i;
+		}
+		document.write("1부터 10까지의 합 : " + sum + "<br>");
+		
+		//1번 응용
+		function plus() {
+			var sum = 0;
+			for(var i=1; i<=10; i++){
+				sum += i;
+			}
+			document.getElementById("spanTag").innerHTML = sum;
+		}
+		document.write("1부터 10까지의 합 : ");
+		document.write("<button onclick='plus();'>수행</button>&ensp;");
+		document.write("<span id='spanTag'></span><br>");
+		
+		//2.
+		document.write("<h2>2. 1부터 200까지의 짝수의 합</h2>");
+		var sum2 = 0;
+		for(var i=1; i<=200; i++){
+			if(i%2 != 0) {
+				continue;
+			}
+			sum2 += i;
+		}
+		document.write("1부터 200까지의 짝수의 합 : " + sum2 + "<br>");
+		
+		//2번 응용
+		function plus2() {
+			var sum2 = 0;
+			for(var i=1; i<=200; i++){
+				//방법1. if문 사용
+// 				if(i%2 == 0) {
+// 					sum2 += i;
+// 				}
+				
+				//방법2. if문 + continue 사용1
+// 				if(i%2 == 0) {
+// 					sum2 += i;
+// 				}else {
+// 					continue;
+// 				}
+				
+				//방법3. if문 + continue 사용2
+				if(i%2 != 0) {
+					continue;
+				}
+				sum2 += i;
+				
+				//cf. if(0)은 언제나 거짓, 수행X, 이외의 모든 값은 실행된다.
+			}
+			document.getElementById("pTag").innerHTML = sum2;
+		}
+		document.write("1부터 200까지 짝수의 합 : ");
+		document.write("<button onclick='plus2();'>수행</button>");
+		document.write("<p id='pTag'></p>");
+		
+		/*
+		3. 사용자가 입력한 값을 계속 더하고, 사용자가 0을 입력하면 그때까지 누적된 값을 출력하는 프로그램을 작성하시오.
+		4. 다중 for문을 이용해서 1~ 10 까지 중  i와 k의 더한 합이 3의 배수일때만 출력 continue를 이용
+		5. 1~100 까지 중 2의 배수이면서 3의 배수인것만 출력
+		6. 두 수를 입력(prompt) 두수의 합이 100이상 일 때만 출력, continue를 이용 , 두수 모두 0 이 입력되면 종료
+		*/
+		
+		//3.
+		document.write("<h3>3. 사용자 입력 누적 계산</h3>");
+		var sum = 0;
+		function plus3() {
+			//변수 선언이 안에서 이루어지면, 함수 호출마다 초기화 아닌가 -> 그래서 sum은 함수 밖에서 선언
+			var num = Number(document.getElementById("sumInput3").value);
+			
+			//while문으로 조건을 주면, 1번만 수행하는 게 아닌, 무한 루프 
+			if(num != 0){
+				sum += num;
+			}else {
+				document.getElementById("spanTag4").innerHTML = sum;	
+			}
+		}
+		document.write("덧셈할 수 입력 : <input type='text' id=sumInput3>");
+		document.write("<button onclick='plus3();'>제출</button>&ensp;");
+		document.write("<span id='spanTag4'></span><br>");
+		
+		//4.
+		document.write("<h4>4. 다중 for문</h4>");
+		document.write("<p>다중 for문을 이용해서 1~ 10 까지 중  i와 k의 더한 합이 3의 배수일때만 출력 continue를 이용</p>");
+		document.write("i + k = (i+k)<br><br>");
+		for(var i=1; i<=10; i++){
+			for(var k=1; k<=10; k++){
+				if((i+k)%3==0){
+					document.write(i+" + "+k+" = "+(i+k)+"&ensp;&ensp;&ensp;&ensp;");
+				}else {
+					continue;
+				}
+			}
+			document.write("<br>");
+		}
+		document.write("<hr>");
+
+		//5.
+		//1~100 까지 중 2의 배수이면서 3의 배수인것만 출력
+		document.write("<h5>5. 2의배수이면서 3의배수</h5>");
+		for(var i=1; i<=100; i++){
+			if((i%2==0) && (i%3==0)){
+				document.write(i+" ");				
+			}
+		}
+		
+		//6.
+		//두 수를 입력(prompt) 두수의 합이 100이상 일 때만 출력, continue를 이용 , 두수 모두 0 이 입력되면 종료
+		document.write("<h6>6. 합이 100 이상일 때만 출력 </h6>");
+		document.write("<p id='pId6'></p>");
+		
+		var value1, value2;		
+		do{
+			value1 = prompt("정수 값 입력", "종료를 원할시 0 입력");
+			value2 = prompt("정수 값 입력", "종료를 원할시 0 입력");
+		}while((Number(value1) && Number(value2)) && (value1+value2 < 100));
+// 		var value1 = prompt("정수 값 입력", "종료를 원할시 0 입력");
+// 		var value2 = prompt("정수 값 입력", "종료를 원할시 0 입력");
+
+		var sum = parseInt(value1) + parseInt(value2); //정수 + 정수		
+		if(sum != 0) {
+			document.getElementById("pId6").innerHTML = sum;
+		}
+		
+	</script>
+</head>
+<body>
+	
+</body>
+</html>

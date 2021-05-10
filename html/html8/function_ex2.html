@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Insert title here</title>
+	<script>
+		function calculate(a, b) {
+			return a + b;
+		}
+		
+		//화면이 로딩되면서 calculate를 호출
+		window.onload = function(){
+			var result = calculate(10, 20);
+// 			alert(result);
+			//함수가 어디까지 실행되는지 확인할 때 alert(), console.log() 등 사용
+			concole.log(document.getElementById("tmp"));
+			concole.log(document.getElementById("tmp").innerHTML);
+			document.getElementById("tmp").innerHTML = result;
+		}
+		
+	</script>
+</head>
+<body>
+	<p id="tmp">
+	
+	</p>
+</body>
+</html>

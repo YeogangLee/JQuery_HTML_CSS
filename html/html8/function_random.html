@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Insert title here</title>
+	<script type="text/javascript">
+		function makeRandom() {
+			//한 자리 숫자 5개를 랜덤으로 생성해서 textarea에 넣어주기
+			//Math.random() 사용
+			//Math.random() : 0 ~ 0.99999
+			//Math.random() * 10 : 0 ~ 9.9999			
+// 			parseInt(Math.random() * 10); //0 ~ 9
+
+			for(var i=0; i<5; i++){
+				var val = parseInt(Math.random() * 10);
+				console.log(val);
+				
+// 				var tmp = document.getElementById("result").innerHTML;
+// 				document.getElementById("result").innerHTML = tmp + val;
+// 				if(i == 0){
+// 					document.getElementById("result").innerHTML += val; //콤마를 앞에 넣기, 그러면 제일 앞에 ,같이 출력					
+// 				}else if(i == 4) {						
+// 					document.getElementById("result").innerHTML += ", " + val + "\n"; //콤마를 앞에 넣기, 그러면 제일 앞에 ,같이 출력					
+// 				}else {
+// 					document.getElementById("result").innerHTML += ", " + val; //콤마를 앞에 넣기, 그러면 제일 앞에 ,같이 출력										
+// 				}
+				
+				//textarea에서 줄바꿈 하기
+				//콘솔창에 입력: document.getElementById("result").innerHTML - 숫자 막 나온다
+				//콘솔창에 입력: document.getElementById("result").value 	- 1<br>2
+				
+				//innerHTML은 안 먹히고, 개행문자가
+				//콘솔창에 입력: document.getElementById("result").innerHTML - 1\n2
+				//value는 먹힌다.
+				//콘솔창에 입력: document.getElementById("result").value		 - 1\n3
+				
+				
+				//반복이 싫어서 코드 고치기
+				
+				if(i > 0){
+					document.getElementById("result").innerHTML += ", ";					
+				}
+				document.getElementById("result").innerHTML += val;
+				
+			}//for문 끝
+			document.getElementById("result").innerHTML += "\n";	
+			
+		}
+		function closeWindow(){
+			confirm("현자 창을 닫으시겠어요~?");
+			console.log(result);
+
+			if(result) {
+				alert("창을 어떻게 닫지?");
+			}
+			
+// 			if(!result) {
+// 				return;
+// 			}
+			if(!confirm("저장하시겠습니까?")) {
+				return;
+			}
+			//~ 취소 버튼을 눌렀을시 진행되지 않는 부분
+			alert("저장되었습니다.");
+			
+		}
+	</script>
+</head>
+<body>
+	<button type="button" onclick="makeRandom()">시작</button>
+	<hr color="blue">
+	<h1>출력 위치</h1>
+	<textarea rows="10" cols="" id="result"></textarea>
+	<hr>
+	<button type="button" onclick="closeWindow()"></button>
+</body>
+</html>
