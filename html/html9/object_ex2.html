@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>생성자를 이용한 객체 생성</title>
+	<script type="text/javascript">
+	
+// 		MemberVO.java
+// 		MemberVO vo = new MemberVO("test01", "홍길동");
+	
+		function Car(model, speed){
+			//객체의 속성
+			this.model = model;
+			this.speed = speed;
+			color = "white"; //기본값 설정
+			
+			//객체의 메서드
+			this.break_ = function(){
+				this.speed -= 10;
+			}
+			this.accel = function(){
+				this.speed += 10;
+			}
+			
+		}
+		
+// 		var myCar = new Car();
+		var myCar = new Car("morning", 200);
+		
+		//객체 표시 방법
+// 		myCar.model;
+// 		myCar["model"];
+		
+		
+		
+		
+		document.write("모델, 속도 : " + myCar.model + ", " + myCar.speed);
+		document.write("<br>");
+// 		document.getElementById("result").value = myCar.speed;
+						
+		function break_(){
+			myCar.break_();
+			document.getElementById("result").innerHTML = myCar.speed;
+		}
+		
+		function accel(){
+			myCar.accel();
+			document.getElementById("result").innerHTML = myCar.speed;
+		
+			//기존에 없던 속성을 추가하여 정의할 수 있음
+			myCar.turbo = true;
+			//기존에 없던 함수를 추가하여 정의할 수 있음
+			myCar.showModel = function(){
+				//함수 정의 부분에서는, myCar.model보다는 this.model이 더 좋은 코드
+				alert("모델은 " + this.model + "입니다.");
+			}
+			
+			myCar.showModel();
+			
+			console.log("delete 수행 전: " + myCar.turbo);
+			//속성 삭제
+			delete myCar.turbo;
+			console.log("delete 수행 후: " + myCar.turbo);
+		}
+	</script>
+		
+</head>
+<body>
+	<button type="button" onclick="break_();">브레이크</button>
+	<button type="button" onclick="accel();">엑셀</button>
+	<p>자동차 속도 : <span id="result"></span></p>
+</body>
+</html>

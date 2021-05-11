@@ -80,19 +80,23 @@
 		document.write("<h3>3. 사용자 입력 누적 계산</h3>");
 		var sum = 0;
 		function plus3() {
+// 			document.getElementById("spanTag4").value = "";
+// 			document.getElementById("spanTag4").innerHTML = "";
+			
 			//변수 선언이 안에서 이루어지면, 함수 호출마다 초기화 아닌가 -> 그래서 sum은 함수 밖에서 선언
+// 			var num = Number(document.getElementById("sumInput3").innerHTML);
 			var num = Number(document.getElementById("sumInput3").value);
 			
 			//while문으로 조건을 주면, 1번만 수행하는 게 아닌, 무한 루프 
 			if(num != 0){
 				sum += num;
 			}else {
-				document.getElementById("spanTag4").innerHTML = sum;	
+				document.getElementById("spanTag4").innerHTML = "= "+sum;	
 			}
 		}
-		document.write("덧셈할 수 입력 : <input type='text' id=sumInput3>");
-		document.write("<button onclick='plus3();'>제출</button>&ensp;");
-		document.write("<span id='spanTag4'></span><br>");
+		document.write("덧셈할 수 입력 : <input type='text' id='sumInput3'>");
+		document.write("<button type='button' onclick='plus3();'>+</button>&ensp;");
+		document.write("<span id='spanTag4'>=</span><br>");
 		
 		//4.
 		document.write("<h4>4. 다중 for문</h4>");
@@ -109,6 +113,27 @@
 			document.write("<br>");
 		}
 		document.write("<hr>");
+		
+		document.write("<p></p>");
+		
+		/*
+		- <textarea> 태그를 사용해서 4번을 풀었다면
+		disabled를 적용하거나 한 게 아니니까 사용자 커서 입력이 다 먹힌다
+		마우스커서로 입력을 먹히게 하면 버튼이 제대로 작동X
+		콘솔에서 innerHTML을 이용해 textarea값을 찍어본다면 출력되지 않은 값이 다 보인다
+		
+		처음에는 동일하게 두 코드 다 ""로 초기화 되어 있다.
+		document.getElementById("output1").value
+		document.getElementById("output1").innerHTML
+		
+		사용자 입력을 위해 만들어진 tag이므로 textarea는 적합하지 않고,
+		그래도 사용한다면 value 속성과 함께 사용하는 것이 적절
+		
+		p태그 사용
+		함수를 실행할 때마다 같은 결과가 반복되는 게 싫다면
+		-> 함수 내부 제일 상단에서 초기화 시키기
+		document.getElementById("output1").innerHTML = "";
+ 		*/
 
 		//5.
 		//1~100 까지 중 2의 배수이면서 3의 배수인것만 출력
@@ -124,13 +149,11 @@
 		document.write("<h6>6. 합이 100 이상일 때만 출력 </h6>");
 		document.write("<p id='pId6'></p>");
 		
-		var value1, value2;		
+		var value1, value2;
 		do{
-			value1 = prompt("정수 값 입력", "종료를 원할시 0 입력");
-			value2 = prompt("정수 값 입력", "종료를 원할시 0 입력");
-		}while((Number(value1) && Number(value2)) && (value1+value2 < 100));
-// 		var value1 = prompt("정수 값 입력", "종료를 원할시 0 입력");
-// 		var value2 = prompt("정수 값 입력", "종료를 원할시 0 입력");
+			value1 = prompt("정수1 값 입력", "종료를 원할시 0 입력");
+			value2 = prompt("정수2 값 입력", "종료를 원할시 0 입력");
+		}while((Number(value1) || Number(value2)) && (Number(value1)+Number(value2) < 100));
 
 		var sum = parseInt(value1) + parseInt(value2); //정수 + 정수		
 		if(sum != 0) {
