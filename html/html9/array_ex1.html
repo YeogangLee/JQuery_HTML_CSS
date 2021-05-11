@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Insert title here</title>
+	<script type="text/javascript">
+		function printArray(pArr) {
+			//'[사과 배 포도]'
+			document.write("[");
+			for(var i=0; i<pArr.length; i++){
+				document.write(pArr[i] + " ");
+			}
+			document.write("]");
+			document.write("<br>");
+			//['사과 배 포도 ']
+		}
+
+		var arr1 = ["사과", "배", "포도", "복숭아", "망고"];
+		var arr2 = new Array("홍", "길", "동");
+		var arr3 = new Array();
+		arr3[0] = "그";
+		arr3[1] = "만";
+		arr3[2] = "조";
+		arr3[3] = "슈";
+		
+		//함수 선언 전에 함수 호출시 에러
+		printArray(arr1);
+		printArray(arr2);
+		printArray(arr3);
+		
+		//arr1.indexOf("망고"); // 4
+		//arr1.indexOf("수박"); //-1, 없는 값의 인덱스는 -1을 반환
+		
+	</script>
+</head>
+<body>
+		
+</body>
+</html>
