@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Number Guess</title>
+	<script type="text/javascript">
+		//Math.random(): 0부터 1미만
+		//Math.random() * 10: 0부터 10미만
+		//Math.random() * 10 + 1 : 1부터 11미만
+		//
+		var comNumber = parseInt(Math.random() * 10) + 1;
+// 		var comNumber = Math.floor(Math.random() * 10) + 1;) //동일
+
+		function guessNumber(){
+			var userNumber = document.getElementById("number").value;
+
+			var result = "";
+			if(userNumber == comNumber){
+				result = "정답입니다.";
+			}else {
+				if(userNumber > comNumber){
+					result = "더 작은 숫자입니다.";					
+				}else {
+					result = "더 큰 숫자입니다.";
+				}
+			}
+			
+			document.getElementById("result").innerHTML = result;
+		}
+	</script>
+</head>
+<body>
+	<h1>Number Guess</h1>
+	<p>1부터 10 사이의 숫자 입력</p>
+	<input type="text" id="number">
+	<button type="button" onclick="guessNumber();">확인</button>
+	<p id="result"></p>
+</body>
+</html>

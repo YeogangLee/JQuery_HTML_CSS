@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Insert title here</title>
+	<script type="text/javascript">
+// 		var arr = ["홍길동", "아이유"];
+		
+		var flag = true;
+		var arr = new Array();
+		while(true){
+			var val = prompt("이름 입력", "홍길동");
+			if(val == null) flag = false;
+			arr.push(val);
+		}
+		for(var i=0; i<arr.length; i++){
+			document.write(arr[i]);
+			if(i != arr.length-1){ //가장 마지막 요소가 아니면 -출력
+	//			document.write("-");
+				document.write(", ");
+			}
+		}
+	</script>
+</head>
+<body>
+	
+</body>
+</html>

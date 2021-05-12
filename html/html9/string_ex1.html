@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Insert title here</title>
+	<script type="text/javascript">
+		var str = "우리나라 대한민국 좋은나라";
+		document.write(str);
+		
+		function changeText() {
+			document.getElementById("divId1").innerHTML = "";
+			
+			//p 요소 안의 내용을 변환해서 div 요소에 넣기
+			var str2 = document.getElementById("divId1").innerHTML; //" One,Two,Three,Four,Five "
+			str2 = str2.trim(); //"One,Two,Three,Four,Five" : 문자열
+			
+			var arr = str2.split(","); //["One","Two","Three","Four","Five"] : 배열
+			
+			var html = "";
+			for(var i=0; i<arr.length; i++){
+// 				arr[i] //arr[0] -> "One" : 문자열 
+// 				arr[i].toLowerCase(); // "one" : 문자열
+// 				var tmp = (i+1)+"-"+arr[i].toLowerCase(); //"1-one" : 문자열
+				
+				html += ((i+1)+"-"+arr[i].toLowerCase() + "<br>");
+				
+// 				document.getElementById("divId1").innerHTML += tmp + "<br>";
+			}
+			document.getElementById("divId1").innerHTML = html;
+			//document.write()작업이 for문 안에서 여러 번 반복되는 것보다는, 밖에 있는 게 깔끔하다
+		}
+		
+		
+		
+	</script>
+</head>
+<body>
+	<p id="pId1"> One,Two,Three,Four,Five </p>
+	<button type="button" onclick="changeText();">변환하기 >>></button> 
+	<div id="divId1">
+<!-- 	1-one -->
+<!-- 	2-two -->
+<!-- 	3-three -->
+<!-- 	4-four -->
+<!-- 	5-five		 -->
+	</div>
+</body>
+</html>

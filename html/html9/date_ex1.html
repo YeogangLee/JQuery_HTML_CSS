@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Insert title here</title>
+	<script type="text/javascript">
+		function procTime() {
+			var currDate = new Date(); //Date 객체
+			
+			console.log(currDate.getTime());
+			
+			//7일 뒤 날짜 계산
+			//=> 일자 * 24 * 60 * 60 * 1000
+			
+			//7일에 대한 ms
+			var afterTime = currDate.getTime() + (7 * 24 * 60 * 60 * 1000);
+			var afterDate = new Date(afterTime);
+			
+			document.getElementById("spTimeCurr").innerHTML = currDate;			
+			document.getElementById("spTimeAfterD7").innerHTML = afterDate;
+			
+// 			var inputTime = 7;
+			
+// 			var toMs = inputTime * 24 * 60 * 60 * 1000;   
+// 			currDate = currDate / 24 / 60 / 60 / 1000;
+			
+// 			console.log(currDate + toMs);
+			
+// 			document.getElementById("spTimeAfterD7").innerHTML = currDate + toMs;
+
+			
+		}
+	</script>
+</head>
+<body>
+	<button type="button" onclick="procTime();"></button>
+	<p>현재 시각은 <span id="spTimeCurr"></span>입니다.</p>
+	<p>7일 후 시각은 <span id="spTimeAfterD7"></span>입니다.</p>
+</body>
+</html>
