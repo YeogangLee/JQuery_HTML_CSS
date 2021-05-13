@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Insert title here</title>
+	<script type="text/javascript"> 
+		function changeImg() {
+			var src = document.getElementById("imgId1").src;
+			console.log(src);
+			
+			var srcOff = "file:///D:/A_TeachingMaterial/5.JQuery/workspace/HtmlPj/WebContent/images/sw_off.png";
+			var srcOn = "file:///D:/A_TeachingMaterial/5.JQuery/workspace/HtmlPj/WebContent/images/sw_on.png";
+			
+			if(src == srcOff) {
+				document.getElementById("imgId1").src = srcOn; 
+			}else if(src == srcOn){
+				document.getElementById("imgId1").src = srcOff;
+			}
+		}	
+	</script>
+</head>
+<body>
+	<img id="imgId1" src="../../images/sw_off.png" width="100" height="100" onclick="changeImg();"> 
+</body>
+</html>

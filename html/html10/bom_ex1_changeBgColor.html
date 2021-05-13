@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Insert title here</title>
+	<script type="text/javascript">
+	
+		var idInterval;
+		function changeBgColor() {
+			idInterval = setInterval(changeBgColor1, 1000);
+		}
+		
+		function changeBgColor1(){
+			//case 2) RGB로 다양한 색 이용하기
+			var r = parseInt(Math.random() * 256); //0~255
+			var g = parseInt(Math.random() * 256); //0~255
+			var b = parseInt(Math.random() * 256); //0~255
+			document.getElementById("bId").style.backgroundColor = "rgb("+r+","+g+","+b+")";
+		}
+		
+	</script>
+</head>
+<body id="bId">
+	<button type="button" onclick="changeBgColor();">색 변경</button>
+</body>
+</html>
