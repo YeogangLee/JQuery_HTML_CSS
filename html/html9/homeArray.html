@@ -38,6 +38,18 @@
 		//Object.values() 사용하지 않고 write()를 사용할 때도 콤마, 출력X
 // 		document.write("arrName : " + arrName + "<br>");
 // 		document.write("arrCopy : " + arrCopy + "<br>");
+
+		//배열 출력할 때
+		//홍길동,아이유 가 아닌
+		//홍길동, 아이유 로 표시하는 방법
+		//홍길동-아이유
+		var arr = ["홍길동", "아이유"];
+		for(var i=0; i<arr.length; i++){
+			document.write(arr[i]);
+			if(i != arr.length-1){ //가장 마지막 요소가 아니면 -출력
+				document.write("-");
+			}
+		}
 		
 		//2.
 		//중복되지 않는 수 입력받기: do {}while();
@@ -59,7 +71,15 @@
 		);
 		
 		function procSort() {
-			num.sort(function(a, b){return a-b;});
+// 			num.sort(function(a, b){return a-b;});
+			num.sort(function(a, b){
+					//a, b 값 확인하기, 버튼을 누르면 정렬 과정이 콘솔에 출력된다
+// 					console.log(">> a   : " + a);
+// 					console.log(">> b   : " + b);
+// 					console.log(">> a-b : " + (a - b));
+					return a - b;
+				}
+			);
 			document.getElementById("divId3").innerHTML = "오름차순 정렬 : " + num + "<br>"; 
 			
 			num.sort(function(a, b){return b-a;});

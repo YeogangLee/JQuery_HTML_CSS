@@ -7,6 +7,8 @@
 		var user1 = prompt("첫 번째 사람의 가위바위보를 입력하세요.");
 		var user2 = prompt("두 번째 사람의 가위바위보를 입력하세요.");
 		
+		arr = ["가위", "바위", "보"];
+		
 		var user1Idx = arr.indexOf(user1);
 		var user2Idx = arr.indexOf(user2);
 		
@@ -40,9 +42,13 @@
 			}	
 		}
 		
- 		document.write(result);
+ 		document.write(result + "<br>");
 		document.write("사용자1 : " + user1 + "<br>");
 		document.write("사용자2 : " + user2 + "<br>");
+		
+		console.log(result);
+		console.log(user1);
+		console.log(user2);
 		
 	</script>
 </head>
