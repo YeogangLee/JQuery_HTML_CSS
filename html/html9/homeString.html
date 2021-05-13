@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Insert title here</title>
+	<script type="text/javascript">
+		/*
+		 주민등록번호를 입력 받아 생년월일과 성별을 출력하는 프로그램을 작성하시오.(입력은 prompt로 입력받는다.)
+		 예) 주민등록번호를 110326-4432618로 입력 받은 경우
+		 생일 : 2011년 3월 26일
+		 성별 : 여자
+		 나이 : 10살
+		
+			021014-3222222
+			000606-4666666
+			991117-1777777
+			981102-2888888
+		*/
+		var str = prompt("주민등록번호 입력", "990101-1111111");
+		
+		document.write("<p id='pId1'></p>");
+		document.write("<p id='pId2'></p>");
+		document.write("<p id='pId3'></p>");
+		
+		//생일
+		var birthY = parseInt(str.substr(0,2));
+		var birthM = parseInt(str.substr(2,2));
+		var birthD = parseInt(str.substr(4,2));
+		var gender = Number(str.substr(7,1));
+		
+		console.log(birthY);
+		console.log(birthM);
+		console.log(birthD);
+
+		if(birthY <= (new Date().getFullYear() - 2000) && gender >= 3){
+			birthY += 2000; 
+		}else if(gender <= 2) {
+			birthY += 1900;
+		}
+		console.log(birthY);
+		
+		document.getElementById("pId1").innerHTML = "생일 : " + birthY + "년 " + birthM +"월 " + birthD + "일";
+		
+		//성별
+		console.log(str.substr(7,1));
+		
+		if(gender%2==0 && gender < 5){
+			document.getElementById("pId2").innerHTML = "성별 : 여자";
+		}else if(gender%2==1 && gender < 5){
+			document.getElementById("pId2").innerHTML = "성별 : 남자";
+		}else {
+			document.getElementById("pId2").innerHTML = "성별 : 잘못된 숫자 입력";
+		}
+				
+		//나이
+// 		var currDate = new Date();
+// 		console.log(parseInt(currDate.getTime() / 1000 / 60 / 60 / 24 / 30 / 12));
+		
+		var age = new Date().getFullYear() - birthY;
+		console.log("age : " + age);
+		
+		document.getElementById("pId3").innerHTML = "나이 : "+ age +"살";
+		
+	</script>
+</head>
+<body>
+</body>
+</html>
