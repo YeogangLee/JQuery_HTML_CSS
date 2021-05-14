@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>주민번호 예제</title>
+	
+	<script type="text/javascript">
+		
+		function test(){
+			var num = document.getElementById("ssnum").value;
+			
+			var year = num.substr(0, 2);
+			var month = num.substr(2, 2);
+			var day = num.substr(4, 2);
+			
+			var a = num.charAt(7); // 1,2,3,4
+			
+			// 성별 표기
+			var strGender = "";
+			if(a == 1 || a == 3){
+				strGender = "남자";
+			}else if(a == 2 || a == 4){
+				strGender = "여자";
+			}else{
+				strGender = "미확인생물체";
+			}
+			document.getElementById("gender").innerHTML = strGender;
+			
+			// 나이 표기
+			var strAge = "";
+			var currYear = new Date().getFullYear(); // 2021
+			
+			if(a == 1 || a == 2){
+				strAge = currYear - (1900 + Number(year)) + 1;
+				// 2021 - (1900 + 83 + 1)
+			}else if(a == 3 || a == 4){
+				strAge = currYear - (2000 + Number(year)) + 1;
+				//(2021 - 1983 = 38) + 1 ==> 39 나이
+			}else{
+				strAge = "알수없음";
+			}
+			document.getElementById("age").innerHTML = strAge;
+			
+			// 생년월일 표기
+			var strYear = "";
+			if(a == 1 || a == 2){
+				strYear = "19" + year;
+			}else if(a == 3 || a == 4){
+				strYear = "20" + year;
+			}else{
+				strYear = "알수없음";
+			}
+			document.getElementById("birth").innerHTML = strYear + "년" +month + "월" + day + "일";
+			
+		}
+		
+		function proc(){
+			var jumin = document.getElementById("jumin").value;
+			// 830614-1234567
+			// 8306141234567
+			
+			jumin = jumin.trim();
+			jumin = jumin.replace("-", ""); // 8306141234567
+			
+			var year = jumin.substr(0, 2);
+			var month = jumin.substr(2, 2);
+			var day = jumin.substr(4, 2);
+			
+			var key = jumin.charAt(6);
+			
+			// 성별
+			var strGender = "";
+			switch(key){
+			case "1":
+			case "3":
+				strGender = "남자";
+				break;
+			case "2":
+			case "4":
+				strGender = "여자";
+				break;
+			default:
+				strGender = "알수없음";
+			}
+			
+			document.getElementById("gender").innerHTML = strGender;
+			
+			// 생일
+			if(key == "1" || key == "2"){
+				// 1900년도 태생
+				year = "19" + year; // 1983
+			}else if(key == "3" || key == "4"){
+				// 2000년도 태생
+				year = "20" + year; // 2083
+			}else{
+				// 몰라
+				year = "??" + year; // ??83
+			}
+			
+			document.getElementById("birth").innerHTML = year + "년" + month + "월" + day + "일";
+			
+			// 나이
+			if(key == "1" || key == "2" || key == "3" || key == "4") {
+				document.getElementById("age").innerHTML = new Date().getFullYear() - parseInt(year) + 1;
+			}else{
+				document.getElementById("age").innerHTML = "알수없음";
+			}
+			
+			
+		}
+		
+		function checkJumin(){
+			var jumin = document.getElementById("jumin").value;
+			// 123456-1234567
+			jumin = jumin.replace("-", "");
+			// 012345 6789(10)(11)(12)
+			// 234567 8923  4   5
+			
+			var sum = 0;
+			
+			// 1. A*2 + B*3 + ... + H*9 + I*2 + ... + L*5 의 총합을 구한다
+			for(var i=0 ; i<jumin.length-1 ; i++){
+				if(i < 8) {
+					sum += ( jumin.charAt(i) * (i+2) );
+				} else {
+					sum += ( jumin.charAt(i) * (i-6) );
+				}
+			}
+			
+			// 2. 1번의 합을 11로 나눈 나머지를 구한다.
+			var tmp = sum%11;
+			
+			// 3. 11에서 2번의 결과를 뺀다
+			var tmp2 = 11 - tmp;
+			
+			// 4. 3번의 결과가 0~9이면 값 그대로, 10이면 0, 11이면 1
+			var tmp3 = 0;
+			if(tmp2 == 10) {
+				tmp3 = 0;
+			}else if(tmp2 == 11) {
+				tmp3 = 1;
+			}else{
+				tmp3 = tmp2;
+			}
+			
+			// 5. 4번의 결과와 M자리의 값이 같으면 맞는 번호이다.
+			var result = "";
+// 			if(tmp3 == jumin.charAt(jumin.length-1)) {
+			if(tmp3 == jumin.charAt(12)) {
+				result = "유효한 번호 입니다.";
+			}else{
+				result = "유효하지 않은 번호 입니다.";
+			}
+			document.getElementById("result").innerHTML = result;
+			
+		}
+		
+	</script>
+	
+</head>
+<body>
+	
+	<div>
+<!-- 		<input type="text" id="ssnum"> -->
+		<input type="text" id="jumin">
+		<button type="button" onclick="checkJumin()">유효성</button>
+		<button type="button" onclick="proc()">클릭</button>
+		<p id="result"></p>
+		<p>생일 : <span id="birth"> </span></p>
+		<p>성별 : <span id="gender"> </span></p>
+		<p>나이 : <span id="age"> </span></p>
+		
+		
+	</div>
+</body>
+</html>

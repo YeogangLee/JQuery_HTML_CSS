@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Insert title here</title>
+	<script type="text/javascript">
+	
+	//string_ex2
+	
+		var jumin = document.getElementById("jumin").value;
+		
+		jumin = jumin.replace("-", "");
+		// 012345 6789(10)(11)(12)
+		// 234567 8923  4   5
+		
+		var sum = 0;
+		//1. A*2 + B*3 + ... + H*9 + I*2 + ... + L*5 의 총합을 구한다.
+		for(var i=0; i<jumin.length-1; i++){
+			if(i < 8) {
+				sum += ( jumin.charAt(i) * (i+2) );			
+			}else {
+				sum += ( jumin.charAt(i) * (i-6) );				
+			}
+		}
+		
+		//2. 1번의 합을 11로 나눈 나머지를 구한다
+		var tmp = sum%11;
+		
+		//3. 11에서 2번의 결과를 뺀다.
+		var tmp2 = 11-tmp;
+		
+		//4. 3번의 결과가 0~9이면 값 그대로, 10이면 0, 11이면 1
+		var tmp3 = 0;
+		if(tmp2 == 10) {
+			tmp3 = 0;
+		}else if(tmp2 == 11) {
+			tmp3 = 1;
+		}else {
+			tmp3 = tmp2;
+		}
+
+		//5. 4번의 결과와 M자리의 값이 같으면 맞는 번호이다.
+		var result = "";
+// 		if(tmp3 == jumin.charAt(12)) {
+		if(tmp3 == jumin.charAt(jumin.length-1)) {
+			result = "유효한 번호입니다.";
+		}else {
+			result = "유효하지 않은 번호입니다.";
+		}
+		document.getElementById("result").innerHTML = result;
+		
+	</script>
+</head>
+<body>
+	<div>
+		<p id="jumin"></p>
+		<p id="result"></p>		
+	</div>
+</body>
+</html>
