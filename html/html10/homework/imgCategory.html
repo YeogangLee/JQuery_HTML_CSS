@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Insert title here</title>
+	<script type="text/javascript">
+		function showImg(obj) {
+			var arrLi = document.getElementsByClassName("box")[1].getElementsByTagName("li");
+			
+			for(var i=0; i<arrLi.length; i++) {
+				while(arrLi[i].children[0] != null) {
+					arrLi[i].removeChild(arrLi[i].children[0]);
+				}
+			}
+			
+			var eleImg = document.createElement("img");
+			console.log(obj.title);
+			eleImg.src = "../../../images/" + obj.title;
+			console.log(obj.innerHTML);
+			eleImg.alt = obj.innerHTML;
+			eleImg.width = "100";  //기본단위는 px
+			eleImg.height = "100"; //기본단위는 px
+			eleImg.style.borderRadius = "50%";
+			
+			obj.appendChild(eleImg);			
+		}
+	</script>
+</head>
+<body>
+	<div class="box"></div>
+	<div class="box">
+		<ul>
+			<li onclick="showImg(this);" title="pro-wireless-headset-gallery-1.webp">컴퓨터1</li>
+			<li onclick="showImg(this);" title="shoes.jpg">신발2</li>
+			<li onclick="showImg(this);" title="tiger.jpg">호랑이</li>
+			<li onclick="showImg(this);" title="peppertones.jpg">cloud03</li>
+			<li onclick="showImg(this);" title="coffee.jpg">coffee1</li>
+		</ul>
+	</div>
+</body>
+</html>
