@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Insert title here</title>
+	<script type="text/javascript">
+		function showListImg() {
+			
+			var ele = document.createElement("br"); //어차피 요소라고 메서드명에서 말했으므로, "태그내부이름"만 매개변수로 넣어준다.
+			document.getElementById("button").appendChild(ele);
+			
+			var strImg = "../../images/";
+			var arrImg = ["pro-wireless-headset-gallery-1.webp", "shoes.jpg", "tiger.jpg", "peppertones.jpg", "coffee.jpg"];
+			
+			var uList = document.getElementsByTagName("ul")[0];
+			for(var i=0; i<5; i++){
+				var imgList = uList.getElementsByTagName("li")[i];
+				var eleImg = document.createElement("img"); //<img> 생성
+				
+				eleImg.src = strImg + arrImg[i];
+				eleImg.width = "100";
+				eleImg.height = "100";
+				eleImg.style.borderRadius = "50%";
+				imgList.appendChild(eleImg);
+			}
+		}
+	</script>
+</head>
+<body>
+	<button id="button" type="button" onclick="showListImg();">실행</button>
+	<br>
+	<ul id="ulId">
+		<li title="pro-wireless-headset-gallery-1.webp">컴퓨터1</li>
+		<li>신발2</li>
+		<li>호랑이</li>
+		<li>cloud03</li>
+		<li>coffee1</li>
+	</ul>
+</body>
+</html>

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Insert title here</title>
+	<script type="text/javascript">
+		function changeSwitch() {
+// 			document.getElementsByTagName("img")[0]; //<img>
+			var imgUrl = document.getElementsByTagName("img")[0].src; //<img>
+			
+			if(imgUrl.indexOf("_off.png") > - 1) {
+				// '~_off.png' 인 경우
+				imgUrl = imgUrl.replace("_off.png", "_on.png");
+				
+			}else if(imgUrl.indexOf("_on.png") > - 1) {
+				// '~_on.png' 인 경우
+				imgUrl = imgUrl.replace("_on.png", "_off.png");
+			}
+			
+			document.getElementsByTagName("img")[0].src = imgUrl;
+			
+		}
+		
+		function changeSwitch1(obj) {
+			console.log(obj); //<img>
+// 			obj.src //이미지를 전역변수로 쓰지 않고, src속성을 이용 가능
+			console.log(obj.src);
+			
+			//아래에는 changeSwitch()처럼 작업
+			var arr = ["sw_off.png", "sw_on.png"]; //값이 0번이면 1번으로 변경, 1번이면 0번으로 변경
+			var strSrc = obj.src;
+			if(obj.src.indexOf(arr[0]) > -1) { //"sw_off.png"인 경우
+				strSrc = strSrc.replace(arr[0], arr[1]);
+			}else {
+				strSrc = strSrc.replace(arr[1], arr[0]);
+			}			
+			obj.src = strSrc;
+		}
+	</script>
+</head>
+<body>
+	<img alt="스위치" src="../../images/sw_off.png" onclick="changeSwitch()">	
+	<hr id="tmp">	<!-- onclick의 on이라는 키워드 -> 무언가를 갖고 있다, 매개변수의 this는 <img> -->
+	<img alt="스위치" src="../../images/sw_off.png" onclick="changeSwitch1(this)">
+</body>
+</html>

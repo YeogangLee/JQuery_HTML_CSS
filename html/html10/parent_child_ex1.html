@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>DOM 트리 순회</title>
+</head>
+<body>
+	<h1>
+		메뉴
+	</h1>
+	<p>
+		오늘도 저희 매장을 찾아주셔서 감사합니다.
+	</p>
+	<ul>
+		<li id="tmp1">커피<!-- kaffee -->
+			<ul>
+				<li>아메리카노</li>
+				<li>카페라떼</li>
+				<li>카푸치노</li>
+			</ul>
+		</li>
+		<li>Not커피
+			<ul>
+				<li>레몬에이드</li>
+				<li>콜라</li>
+			</ul>
+		</li>
+	</ul>
+	<button type="button" onclick="proc();">클릭</button>
+	<div id="result">
+		<!-- 레몬에이드, 콜라 -->
+	</div>
+	<script type="text/javascript">
+		function proc() {
+			var list = document.getElementsByTagName("ul")[0];
+// 			var subList = list.getElementByTagName("ul")[0];
+			var notCoffeeList = list.getElementsByTagName("ul")[1];
+// 			var arrItem = subList.getElementsByTagName("li");
+			var arrItem = notCoffeeList.getElementsByTagName("li");
+
+			var strHTML = "";
+			for(var i=0; i<arrItem.length; i++){
+				//arrItem[i];
+// 				console.log("================");
+// 				console.log(i+" : "+arrItem[i]); // <li>레몬에이드</li> 					
+// 				console.log("value: "+arrItem[i].value); // <li value="">이렇게 사용하지 않기 때문에 X
+// 				console.log("innerHTML: "+arrItem[i].innerHTML); // O
+// 				console.log("children: "+arrItem[i].children); //하위 요소 리턴 ==> li의 하위요소가 없어서 X
+// 				console.log("childNodes: "+arrItem[i].childNodes); //하위 노드 리턴 ==> "레몬에이드" 텍스트 노드 리턴
+// 				console.log("childNodes[0]: "+arrItem[i].childNodes[0]); //하위 노드 리턴 ==> "레몬에이드" 텍스트 노드 리턴
+				
+				/*
+				================
+				parent_child_ex1.html:41 0 : [object HTMLLIElement]
+				parent_child_ex1.html:42 value: 0
+				parent_child_ex1.html:43 innerHTML: 아메리카노
+				parent_child_ex1.html:44 children: [object HTMLCollection]
+				parent_child_ex1.html:45 childNodes: [object NodeList]
+				parent_child_ex1.html:40 ================
+				*/
+
+				console.log("================");
+				console.log(arrItem[i]); // <li>레몬에이드</li>			
+// 				console.log("value: "+arrItem[i].value); // <li value="">이렇게 사용하지 않기 때문에 X
+				console.log("innerHTML: "+arrItem[i].innerHTML); // O
+// 				console.log(arrItem[i].children); //하위 요소 리턴 ==> li의 하위요소가 없어서 X
+				console.log(arrItem[i].childNodes); //하위 노드 목록 리턴
+				console.log(arrItem[i].childNodes[0]); //하위 노드 목록의 0번째 노드 리턴 ==> "레몬에이드" 텍스트 노드 리턴
+				
+				//텍스트 노드에서 텍스트 가지고 오기 : 3개 결과 비교
+				console.log(arrItem[i].childNodes[0].data);
+				//data        : 텍스트를 들고 오기에 가장 적합
+// 				console.log(arrItem[i].childNodes[0].nodeValue);
+				//nodeValue   : data와 결과는 같으나, 텍스트 외의 속성 등 다른 값들도 포함하고 있음
+// 				console.log(arrItem[i].childNodes[0].textContent);
+				//textContent : 지금 파일에서는 되지만, 하위 노드들의 텍스트 또한 다 가지고 와서 적절X
+				
+				//끝에 콤마 출력X 방법1
+// 				if(i > 0) {
+// 					strHTML += ", ";
+// 				}
+// 				strHTML += arrItem[i].childNodes[0].data;
+
+				//이상해
+				//끝에 콤마 출력X 방법2
+// 				strHTML = arrItem[i].childNodes[0].data;
+				
+			}//for
+			
+			//끝에 콤마 출력X 방법2
+// 			strHTML += strHTML.substr(0, strHTML.length-2);
+			
+			document.getElementById("result").innerHTML = strHTML;
+		}
+	</script>
+</body>
+</html>

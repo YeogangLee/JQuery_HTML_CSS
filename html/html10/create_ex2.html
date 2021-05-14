@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Insert title here</title>
+	<script type="text/javascript">
+		function addText() {
+			//텍스트 노드 생성
+			var msg = "무궁화 꽃이 피었습니다.";
+			var node = document.createTextNode(msg);
+// 				     = document.createTextNode("무궁화 꽃이 피었습니다.");
+			
+			document.getElementById("target").appendChild(node);
+			
+			//요소(element) 생성
+			var ele = document.createElement("br"); //어차피 요소라고 메서드명에서 말했으므로, "태그내부이름"만 매개변수로 넣어준다.
+			document.getElementById("target").appendChild(ele);
+			
+			var strImg = "../../images/";
+			var arrImg = [strImg+"coffee.jpg"];
+			//요소들의 속성 값 이용
+			var eleImg = document.createElement("img"); //<img> 생성
+			//<img src="~"> 로 바꾸기
+			eleImg.src = arrImg[0];
+			eleImg.height = "50";
+			document.getElementById("target").appendChild(eleImg);
+			
+		}
+		
+		function addImgAll(){
+			var arrList = document.getElementsByClassName("box")[0].getElementsByTagName("li");
+			
+			for(var i=0; i<arrList.length; i++){
+				var item = arrList[i];
+				console.log(item.title);
+				
+				//아래는 2줄은 같은 코드
+				//요소 선택
+// 				console.log(item.childNodes[0].data); // <li>의 textNode.data = text
+				//노드 선택
+				console.log(item.firstChild.data); // <li>의 textNode.data = text
+				
+				var objImg = document.createElement("img");
+				objImg.alt = item.childNodes[0].data; //<li>의 텍스트 노드
+				objImg.src = "../../images/" + item.title;
+				objImg.width = "100"; //기본단위는 px
+				objImg.height = "100"; //기본단위는 px
+				objImg.style.borderRadius = "50%";
+// 				objImg.class = circle; //속성에 클래스를 이런 식으로 지정할 수는 없다.. 되는 방법은 다음에
+
+// 				arrList[i].appendChild(objImg);
+				item.appendChild(objImg);
+			}
+		}
+	</script>
+</head>
+<body>
+	<div id="target" style="border: solid 1px; width:290px;" onclick="addText();">
+		클릭하세요.
+		<br>
+	</div>
+	<hr>
+	<div class="box">
+		<button type="button" onclick="addImgAll();">실행</button>
+		<br>
+		<ul>
+			<li title="pro-wireless-headset-gallery-1.webp">컴퓨터1</li>
+			<li title="shoes.jpg">신발2</li>
+			<li title="tiger.jpg">호랑이</li>
+			<li title="peppertones.jpg">cloud03</li>
+			<li title="coffee.jpg">coffee1</li>
+		</ul>
+	</div>
+	<hr>
+	<div>
+		<ul>
+			<li onclick="showImg();" title="pro-wireless-headset-gallery-1.webp">컴퓨터1</li>
+			<li onclick="showImg();" title="shoes.jpg">신발2</li>
+			<li onclick="showImg();" title="tiger.jpg">호랑이</li>
+			<li onclick="showImg();" title="peppertones.jpg">cloud03</li>
+			<li onclick="showImg();" title="coffee.jpg">coffee1</li>
+		</ul>
+	</div>
+	<hr>
+	<div>
+	</div>
+</body>
+</html>

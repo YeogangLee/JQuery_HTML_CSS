@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Insert title here</title>
+	<script type="text/javascript">
+		function removeElement() {
+			var parentEle = document.getElementById("target");
+			var childEle = document.getElementById("p2");
+		
+			//같은 결과
+// 			parentEle.removeChild(childEle);
+// 			parentEle.removeChild(parentEle.children[1]);
+
+			console.log(parentEle.children.length);
+
+			//parentEle 아래의 모든 자식 요소 삭제 removeChild()
+			while(parentEle.children[0] != null) {
+				parentEle.removeChild(parentEle.children[0]);
+			}
+			
+		}
+	</script>
+</head>
+<body>
+	<div id="target">
+		<p>첫 번째 단락</p>
+		<p id="p2">두 번째 단락</p>
+		<p>세 번째 단락</p>
+		<p>네 번째 단락</p>
+		<p>다섯 번째 단락</p>
+	</div>	
+	<button type="button" onclick="removeElement();">클릭</button>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+

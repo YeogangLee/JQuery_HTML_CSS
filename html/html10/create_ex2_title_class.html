@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Insert title here</title>
+	<script type="text/javascript">
+		function showListImg2() {
+			var arrLi = document.getElementsByClassName("box")[0].getElementsByTagName("li");
+			
+			for(var i=0; i<arrLi.length; i++){
+				var item = arrLi[i];
+				console.log(item.title);
+				
+				var eleImg = document.createElement("img");
+				eleImg.src = "../../images/" + item.title;
+				/*
+					i	[idx]
+					0	 1
+					1	 3
+					2	 5
+					3	 7
+					4	 9
+				*/
+				//ul에 class="box" 적용, 아래 2줄 같은 결과
+// 				eleImg.alt = document.getElementsByClassName("box")[0].childNodes[i*2+1].childNodes[0].data;
+// 				eleImg.alt = document.getElementsByClassName("box")[0].children[i].childNodes[0].data;
+				
+				//div에 class="box" 적용, 아래 2줄 같은 결과 
+				eleImg.alt = document.getElementsByClassName("box")[0].getElementsByTagName("ul")[0].childNodes[i*2+1].childNodes[0].data;
+// 				eleImg.alt = document.getElementsByClassName("box")[0].getElementsByTagName("li")[i].childNodes[0].data;
+				
+				eleImg.width = "100";
+				eleImg.height = "100";
+				eleImg.style.borderRadius = "50%";
+				
+				item.appendChild(eleImg);
+			}
+		}
+		
+		function showImg(obj) {
+			var arrLi = document.getElementsByClassName("box")[1].getElementsByTagName("li");
+			
+			for(var i=0; i<arrLi.length; i++) {
+				while(arrLi[i].children[0] != null) {
+					arrLi[i].removeChild(arrLi[i].children[0]);
+				}
+			}
+			
+			var eleImg = document.createElement("img");
+			console.log(obj.title);
+			eleImg.src = "../../images/" + obj.title;
+			console.log(obj.innerHTML);
+			eleImg.alt = obj.innerHTML;
+			eleImg.width = "100";  //기본단위는 px
+			eleImg.height = "100"; //기본단위는 px
+			eleImg.style.borderRadius = "50%";
+			
+			obj.appendChild(eleImg);			
+		}
+	</script>
+</head>
+<body>
+	<div class="box">
+	<button id="button" type="button" onclick="showListImg2();">실행</button>
+	<br>
+	<ul>
+		<li title="pro-wireless-headset-gallery-1.webp">컴퓨터1</li>
+		<li title="shoes.jpg">신발2</li>
+		<li title="tiger.jpg">호랑이</li>
+		<li title="peppertones.jpg">cloud03</li>
+		<li title="coffee.jpg">coffee1</li>
+	</ul>
+	</div>
+	<hr>
+	<div class="box">
+		<ul>
+			<li onclick="showImg(this);" title="pro-wireless-headset-gallery-1.webp">컴퓨터1</li>
+			<li onclick="showImg(this);" title="shoes.jpg">신발2</li>
+			<li onclick="showImg(this);" title="tiger.jpg">호랑이</li>
+			<li onclick="showImg(this);" title="peppertones.jpg">cloud03</li>
+			<li onclick="showImg(this);" title="coffee.jpg">coffee1</li>
+		</ul>
+	</div>
+	<hr>
+	<div>
+	</div>
+</body>
+</html>
