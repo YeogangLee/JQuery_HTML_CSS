@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Insert title here</title>
+	<style type="text/css">
+		div.left {
+			float: left; width: calc(50% - 30px); text-algin: right;
+			margin-bottom: 10px;
+		}
+		div.center {
+			float: left; width: 60px; text-algin: center;
+			height: 250px; display: flex; align-items: center;
+			/*
+				display: flex;
+				align-items: center;
+				
+				-> div안에 요소를 넣고, 세로로 중앙 정렬하기
+				
+				구글에 찾아보면 이 방법 말고도 다른 방법들이 있다 ...
+				position을 쓴다던가 ..				
+			*/
+		}
+		div.right {
+			float: right; width: calc(50% - 30px); text-algin: left;
+		}
+		div.bottom {
+			clear: both; 
+		}
+		div button {
+			
+		} 
+		
+	</style>
+	<script type="text/javascript">
+		
+	</script>
+</head>
+<body>
+	<h1>select객체 예제</h1>
+	<div class="left">
+		<select>
+		</select>
+	</div>
+	<div class="center">
+		<div>
+			<button type="button" onclick="moveSelected(this);">&gt;</button>
+			<button type="button" onclick="moveAll(this);">&gt;&gt;</button>
+			<button type="button" onclick="moveSelected(this);">&lt;</button>
+			<button type="button" onclick="moveAll(this);">&lt;&lt;</button>
+		</div>
+	</div>
+	<div class="right">
+		<select>
+		</select>
+	</div>
+	<div class="bottom">
+		
+	</div>
+</body>

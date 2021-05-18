@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>select객체 예제</title>
+	<script type="text/javascript">
+		/*
+		
+		> document.getElementById("sel1")
+		< <select id=​"sel1" multiple=​"multiple" size=​"10">​…​</select>​
+		
+		> document.getElementById("sel1").options
+		< HTMLOptionsCollection(3) [option, option, option, selectedIndex: 1]
+		
+		> document.getElementById("sel1").options.selectedIndex
+		< 1
+		
+		select태그의 options를 이용하면, 제일 상위에 위치한 option태그의 index 1개만 조회 가능
+		2개를 선택했으면, 그 2개 중 더 위에 위치한(index가 작은) option태그의 index번호 1개만 조회된다.
+		
+		=> option태그의 selected를 이용해서, select태그 내부의 모든 option태그 하나씩 읽어오기 
+		
+		
+		콘솔 창에
+		document.getElementById("sel1") 이거로 찍으면 .찍고 메서드가 안 뜬다
+		
+		<option>이 가질 수 있는 메서드를 보려면 아래처럼 찍는다
+		
+		> document.getElementsByTagName("option")
+		< HTMLCollection(6) [option, option, option, option, option, option]
+		
+		> document.getElementsByTagName("option")[0]
+		< <option value="1">1</option>
+		
+		> document.getElementsByTagName("option")[0].selected
+		< false
+		
+		^^...
+		
+		*/
+		
+		//사용자에게 숫자 입력받기
+		function addOption() {
+			var sel1 = document.getElementById("sel1");
+			var num = parseInt(document.getElementsByTagName("input")[0].value);
+			var arrOption = document.getElementsByTagName("option");
+			
+			//입력된 숫자 중복 검사
+			var i=0;
+			var flag = false;
+			while(i < arrOption.length) {
+				if(parseInt(arrOption[i].value) == num) {
+					document.getElementsByTagName("p")[0].innerHTML = "중복되는 숫자는 추가할 수 없습니다.";
+					flag = false;
+					break;
+				}
+				i++;
+				flag = true;
+			}
+			
+			//입력된 숫자가 중복이 아니라면 왼쪽 select에 숫자 추가(option태그 추가)
+			while(flag) {
+				document.getElementsByTagName("p")[0].innerHTML = ""; //p태그 중복 안내 메시지 지우기
+				
+				var opt = document.createElement("option");
+	 			opt.value = num;
+	 			sel1.appendChild(opt);
+				
+	 			//option 태그 뒤에 들어가야 할 텍스트 값
+	 			var nodeNum = document.createTextNode(num);
+	 			sel1[sel1.length-1].appendChild(nodeNum);
+			
+	 			flag = false;
+			}
+		}
+		
+		//select의 선택된 option들만 이동
+		function moveSelected(pFrom) {
+// 			console.log(pFrom);
+
+			var from = "";
+			var to = "";
+			
+			//숫자가 들어올 select(to), 제거될 select(from) 설정 
+			if(pFrom.childNodes[0].data === ">") {
+				from = document.getElementById("sel1");
+				to = document.getElementById("sel2");
+			}else if(pFrom.childNodes[0].data === "<") {
+				from = document.getElementById("sel2");
+				to = document.getElementById("sel1");
+			}
+			
+			var idx = 0;
+			var arrValue = new Array();
+			
+			//from의 선택된 option태그들을 배열로 만들기
+			var option = from.children;
+			for(var i=0; i<option.length; i++){				
+				if(option[i].selected == true) {
+					arrValue[idx++] = option[i].value;
+				}
+			}
+			
+// 			console.log(JSON.stringify(arrValue));
+			
+			//to에 위의 배열 이용해서 option태그 추가
+			for(var i=0; i<arrValue.length; i++) {
+				var opt = document.createElement("option");
+				opt.value = arrValue[i];
+				to.appendChild(opt); //from
+				
+				//option 태그 뒤에 들어가야 할 텍스트 값
+				var nodeNum = document.createTextNode(arrValue[i]);
+				to[to.length-1].appendChild(nodeNum);
+			}
+			
+			//from의 이동된 option태그들 삭제 - for문
+			for(var i=0; i<option.length; i++){
+				for(var j=0; j<arrValue.length; j++){
+					if(parseInt(option[i].value) == parseInt(arrValue[j])){
+						from.removeChild(option[i]);							
+					}
+				}			
+			}
+			
+			//p태그 중복 안내 메시지 지우기
+			document.getElementsByTagName("p")[0].innerHTML = "";
+			
+			//from의 이동된 option태그들 삭제 - while문
+// 			var i=0;
+// 			while(i < option.length) {
+// 				if(option[i].selected == true) {
+// 					from.removeChild(option[i]);
+// 				}
+// 				i++;
+// 			}
+		}
+		
+		//select 내부의 모든 option 이동 
+		function moveAll(pFrom) {
+// 			console.log(pFrom);
+
+			var from = "";
+			var to = "";
+			
+			//숫자가 들어올 select(to), 제거될 select(from) 설정 
+			if(pFrom.childNodes[0].data === ">>") {
+				from = document.getElementById("sel1");
+				to = document.getElementById("sel2");
+			}else if(pFrom.childNodes[0].data === "<<") {
+				from = document.getElementById("sel2");
+				to = document.getElementById("sel1");
+			}
+			
+			//to에 from의 모든 자식 option태그들을 추가
+			var option = from.children;
+			for(var i=0; i<option.length; i++) {
+				var opt = document.createElement("option");
+				opt.value = option[i].value;
+				to.appendChild(opt);
+				
+				//option 태그 뒤에 들어가야 할 텍스트 값
+				var nodeNum = document.createTextNode(option[i].value);
+				to[to.length-1].appendChild(nodeNum);
+			}
+			
+			//from의 모든 자식 option태그들 삭제
+			while(option[0] != null) {
+				from.removeChild(option[0]);
+			}
+			
+			//p태그 중복 안내 메시지 지우기
+			document.getElementsByTagName("p")[0].innerHTML = "";
+		}
+	</script>
+	<style type="text/css">
+		body {
+			margin: 0;
+		}
+		h1 {
+			text-align: center;
+			width: 100%;
+		}
+		select {
+			width: 10%;
+			float: left;
+			font-size: 20px;
+		}
+		#sel1 {
+			margin-left: calc((100% - 10% - 10% - 5%) / 2);
+		}
+		#sel2 {
+			margin-right: calc((100% - 10% - 10% - 5%) / 2);
+		}
+		div {
+			float: left;
+			margin: 0 1%;
+			width: 3%;
+		}
+		div:last-child {
+			clear: both;
+			margin: 0 0;
+			width: 100%;
+			float: left;
+		}
+  		button {
+  			width: 100%;
+  			height: 3vh; 
+  			float: left;
+			padding: 0;
+  		}
+  		p {
+  			margin: 0;
+  			width: 100%;
+  			text-align: center;
+  			clear: both;
+  			height: 7vh;
+  			line-height: 7vh;
+  			font-size: 17px;  			
+  		}
+ 		input { 
+ 			float: left;
+ 			clear: both;
+ 			margin-right: 0.5%;
+ 			margin-left: calc((100% - 5% - 5% - 0.5% - 1%) / 2);
+ 			width: 5%;
+ 			height: 2.5vh;
+ 			font-size: 20px;
+ 		}
+  		#addButton {
+  			width: 5%;
+  			float: left;
+  			margin-right: calc((100% - 5% - 5% - 0.5% - 1%) / 2);
+  		}  		
+	</style>
+</head>
+<body>
+	<h1>select객체 예제</h1>
+	<form>
+		<select id="sel1" multiple="multiple" size="10">
+			<option value="1">1</option>
+		    <option value="7">7</option>
+		    <option value="8">8</option>
+		</select>
+		<div>
+			<br>
+			<br>
+			<button type="button" onclick="moveSelected(this);">&gt;</button>
+			<br>
+			<br>
+			<button type="button" onclick="moveAll(this);">&gt;&gt;</button>
+			<br>
+			<br>
+			<button type="button" onclick="moveSelected(this);">&lt;</button>
+			<br>
+			<br>
+			<button type="button" onclick="moveAll(this);">&lt;&lt;</button>
+		</div>
+		<select id="sel2" multiple="multiple" size="10">
+		    <option value="2">2</option>
+		    <option value="6">6</option>
+			<option value="10">10</option>
+		</select>
+		<p></p>
+		<div>
+			<input type="text">
+			<button id="addButton" type="button" onclick="addOption();">추가하기</button>
+		</div>
+	</form>
+</body>
+</html>

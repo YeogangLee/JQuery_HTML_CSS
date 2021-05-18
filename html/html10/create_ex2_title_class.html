@@ -4,7 +4,7 @@
 	<meta charset="UTF-8">
 	<title>Insert title here</title>
 	<script type="text/javascript">
-		function showListImg2() {
+		function showListImg() {
 			var arrLi = document.getElementsByClassName("box")[0].getElementsByTagName("li");
 			
 			for(var i=0; i<arrLi.length; i++){
@@ -49,7 +49,7 @@
 			var eleImg = document.createElement("img");
 			console.log(obj.title);
 			eleImg.src = "../../images/" + obj.title;
-			console.log(obj.innerHTML);
+			console.log(obj.innerHTML); 
 			eleImg.alt = obj.innerHTML;
 			eleImg.width = "100";  //기본단위는 px
 			eleImg.height = "100"; //기본단위는 px
@@ -61,7 +61,7 @@
 </head>
 <body>
 	<div class="box">
-	<button id="button" type="button" onclick="showListImg2();">실행</button>
+	<button id="button" type="button" onclick="showListImg();">실행</button>
 	<br>
 	<ul>
 		<li title="pro-wireless-headset-gallery-1.webp">컴퓨터1</li>

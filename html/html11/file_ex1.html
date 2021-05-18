@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>File 요소 사용하기</title>
+	<script type="text/javascript">
+		function getFileInfo() {
+			var obj = document.getElementById("attachFile"); //<input type="file" ...>
+			var fileList = obj.files; //FileList {length: 0}
+			
+			if(fileList == null || fileList.length == 0) {
+				alert("선택된 파일이 없습니다.");
+				return;
+			}
+			
+			var file = fileList[0]; //File {name: "movie.html", ...}
+			console.log(file);
+			
+			var str = 
+				"변경 일시: " + file.lastModifiedDate
+				+ "\n파일명: " + file.name
+				+ "\n파일 크기: " + file.size
+				+ "\n파일 유형: " + file.type;
+			
+			document.getElementById("result1").value = str;
+		}
+		
+		function readFile() {
+
+			var fileList = document.getElementById("attachFile").files;
+
+			if(fileList == null || fileList.length == 0) {
+				alert("선택된 파일이 없습니다.");
+				return;
+			}
+			
+			var file = fileList[0];
+			var reader = new FileReader();
+			reader.readAsText(file); //reader의 result에 file을 read해서 세팅
+// 			reader.onload = proc;	 //이렇게 사용할 수도 있지만, 한 번만 사용할 거기 때문에, 따로 함수를 만들지 않고 바로
+			reader.onload = function() {
+				document.getElementById("result2").value = reader.result;
+			};
+			
+		}
+		
+	</script>
+</head>
+<body>
+	<input type="file" id="attachFile" name="attachFile">
+	<br>
+	<button type="button" onclick="getFileInfo();">파일 정보</button>
+	<button type="button" onclick="readFile();">파일 읽기</button>
+	<br>
+	<textarea id="result1" rows="10" cols="50"></textarea>
+	<textarea id="result2" rows="10" cols="50"></textarea>
+</body>
+</html>

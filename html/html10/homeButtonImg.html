@@ -8,9 +8,12 @@
 			var src = document.getElementById("imgId1").src;
 			console.log(src);
 			
-			var srcOff = "file:///D:/A_TeachingMaterial/5.JQuery/workspace/HtmlPj/WebContent/images/sw_off.png";
-			var srcOn = "file:///D:/A_TeachingMaterial/5.JQuery/workspace/HtmlPj/WebContent/images/sw_on.png";
+// 			var srcOff = "file:///D:/A_TeachingMaterial/5.JQuery/workspace/HtmlPj/WebContent/images/sw_off.png";
+// 			var srcOn = "file:///D:/A_TeachingMaterial/5.JQuery/workspace/HtmlPj/WebContent/images/sw_on.png";
 			
+			var srcOff = "file://sem-pc/%EA%B3%B5%EC%9C%A0%ED%8F%B4%EB%8D%94/HTML/11.%EA%B3%BC%EC%A0%9C%EC%A0%9C%EC%B6%9C%EC%9A%A9/20210514/%EC%9D%B4%EC%97%AC%EA%B0%95/images/sw_off.png";
+			var srcOn = "file://sem-pc/%EA%B3%B5%EC%9C%A0%ED%8F%B4%EB%8D%94/HTML/11.%EA%B3%BC%EC%A0%9C%EC%A0%9C%EC%B6%9C%EC%9A%A9/20210514/%EC%9D%B4%EC%97%AC%EA%B0%95/images/sw_on.png";
+
 			if(src == srcOff) {
 				document.getElementById("imgId1").src = srcOn; 
 			}else if(src == srcOn){
@@ -20,6 +23,7 @@
 	</script>
 </head>
 <body>
-	<img id="imgId1" src="../../images/sw_off.png" width="100" height="100" onclick="changeImg();"> 
+<!-- 	<img id="imgId1" src="../../images/sw_off.png" width="100" height="100" onclick="changeImg();">  -->
+	<img id="imgId1" src="images/sw_off.png" width="100" height="100" onclick="changeImg();"> 
 </body>
 </html>

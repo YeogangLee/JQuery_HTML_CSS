@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>select객체 예제</title>
+	<style type="text/css">
+		body {
+			margin: 0;
+		}
+		h1 {
+			text-align: center;
+			width: 100%;
+		}
+		select {
+			width: 10%;
+			float: left;
+			font-size: 20px;
+		}
+		#sel1 {
+			margin-left: calc((100% - 10% - 10% - 5%) / 2);
+		}
+		#sel2 {
+			margin-right: calc((100% - 10% - 10% - 5%) / 2);
+		}
+		div {
+			float: left;
+			margin: 0 1%;
+			width: 3%;
+		}
+		div:last-child {
+			clear: both;
+			margin: 0 0;
+			width: 100%;
+			float: left;
+		}
+  		button {
+  			width: 100%;
+  			height: 3vh; 
+  			float: left;
+			padding: 0;
+  		}
+  		p {
+  			margin: 0;
+  			width: 100%;
+  			text-align: center;
+  			clear: both;
+  			height: 7vh;
+  			line-height: 7vh;
+  			font-size: 17px;  			
+  		}
+ 		input { 
+ 			float: left;
+ 			clear: both;
+ 			margin-right: 0.5%;
+			margin-left: calc((100% - 5% - 0.5% - 5% - 0.5% - 5% - 0.5% - 5% - 1%) / 2);
+ 			width: 5%;
+ 			height: 2.5vh;
+ 			font-size: 20px;
+ 		}
+  		#add {
+  			width: 5%;
+  			float: left;
+  			margin-right: 0.5%;
+  		}
+  		#sort {
+  			width: 5%;
+  			float: left;
+  			margin-right: 0.5%;
+  		}
+  		#reset {
+  			width: 5%;
+  			float: left;
+  			margin-right: calc((100% - 5% - 0.5% - 5% - 0.5% - 5% - 0.5% - 5% - 1%) / 2);
+  		}  		
+	</style>
+	<script type="text/javascript">
+	
+		//텍스트박스로 사용자에게 숫자 입력받기
+		function addOption() {
+			//텍스트 박스에 focus 남겨두기
+			document.getElementsByTagName("input")[0].focus();
+			
+			var sel1 = document.getElementById("sel1");
+			var num = parseInt(document.getElementsByTagName("input")[0].value);
+			var arrOption = document.getElementsByTagName("option");
+			
+			if(num == "" || num / 1 != num) {
+				alert("0, 공백, 문자는 입력 금지");
+				document.getElementsByTagName("input")[0].value = "";
+				return;
+			}else {
+				if(sel1.length != 0) {
+					//입력된 숫자 중복 검사
+					var i=0;
+					var flag = false;
+					while(i < arrOption.length) {
+						if(parseInt(arrOption[i].value) == num) {
+							document.getElementsByTagName("p")[0].innerHTML = "중복되는 숫자는 추가할 수 없습니다.";
+							flag = false;
+							break;
+						}
+						i++;
+						flag = true;
+					}
+					
+					//입력된 숫자가 중복이 아니라면 왼쪽 select에 숫자 추가(option태그 추가)
+					while(flag) {
+						document.getElementsByTagName("p")[0].innerHTML = ""; //p태그 중복 안내 메시지 지우기
+						
+						var opt = document.createElement("option");
+			 			opt.value = num;
+			 			sel1.appendChild(opt);
+						
+			 			//option 태그 뒤에 들어가야 할 텍스트 값
+			 			var nodeNum = document.createTextNode(num);
+			 			sel1[sel1.length-1].appendChild(nodeNum);
+					
+			 			flag = false;
+					}
+				}else {
+					document.getElementsByTagName("p")[0].innerHTML = ""; //p태그 중복 안내 메시지 지우기
+					
+					var opt = document.createElement("option");
+		 			opt.value = num;
+		 			sel1.appendChild(opt);
+					
+		 			//option 태그 뒤에 들어가야 할 텍스트 값
+		 			var nodeNum = document.createTextNode(num);
+		 			sel1[sel1.length-1].appendChild(nodeNum);
+				
+		 			flag = false;
+				}
+				
+			}
+			document.getElementsByTagName("input")[0].value = "";
+		}
+		
+		//select의 선택된 option들만 이동
+		function moveSelected(pFrom) {
+// 			console.log(pFrom);
+
+			var from = "";
+			var to = "";
+			var direction = "";
+			
+			//숫자가 들어올 select(to), 제거될 select(from) 설정 
+			if(pFrom.childNodes[0].data === ">") {
+				from = document.getElementById("sel1");
+				to = document.getElementById("sel2");
+				direction = "오른쪽";	
+			}else if(pFrom.childNodes[0].data === "<") {
+				from = document.getElementById("sel2");
+				to = document.getElementById("sel1");
+				direction = "왼쪽";
+			}
+			
+			var idx = 0;
+			var arrValue = new Array();
+			
+			//from의 선택된 option태그들을 배열로 만들기
+			var option = from.children;
+			for(var i=0; i<option.length; i++){				
+				if(option[i].selected == true) {
+					arrValue[idx++] = option[i].value;
+				}
+			}
+			
+// 			console.log(JSON.stringify(arrValue));
+			
+			//to에 위의 배열 이용해서 option태그 추가
+			for(var i=0; i<arrValue.length; i++) {
+				var opt = document.createElement("option");
+				opt.value = arrValue[i];
+				to.appendChild(opt); //from
+				
+				//option 태그 뒤에 들어가야 할 텍스트 값
+				var nodeNum = document.createTextNode(arrValue[i]);
+				to[to.length-1].appendChild(nodeNum);
+			}
+			
+			//from의 이동된 option태그들 삭제 - for문
+			for(var i=0; i<option.length; i++){
+				for(var j=0; j<arrValue.length; j++){
+					if(parseInt(option[i].value) == parseInt(arrValue[j])){
+						from.removeChild(option[i]);							
+					}
+				}			
+			}
+			
+			//p태그 중복 안내 메시지 지우기
+			document.getElementsByTagName("p")[0].innerHTML = "";
+			
+			if(arrValue.length != 0) {
+				alert(arrValue + "을" + direction + "박스로 옮겼습니다.");
+			}else {
+				alert(direction + "으로 옮길 데이터가 없습니다.");
+			}
+		}
+		
+		//select 내부의 모든 option 이동 
+		function moveAll(pFrom) {
+// 			console.log(pFrom);
+
+			var from = "";
+			var to = "";
+			var direction = "";
+			//숫자가 들어올 select(to), 제거될 select(from) 설정 
+			if(pFrom.childNodes[0].data === ">>") {
+				from = document.getElementById("sel1");
+				to = document.getElementById("sel2");
+				direction = "오른쪽";
+			}else if(pFrom.childNodes[0].data === "<<") {
+				from = document.getElementById("sel2");
+				to = document.getElementById("sel1");
+				direction = "왼쪽";
+			}
+			
+			var idx = 0;
+			var arrValue = new Array();
+			
+			//from의 모든 option태그들을 배열로 만들기
+			var option = from.children;
+			for(var i=0; i<option.length; i++){
+				arrValue[idx++] = option[i].value;
+			}
+			
+			//to에 from의 모든 자식 option태그들을 추가
+			var option = from.children;
+			for(var i=0; i<option.length; i++) {
+				var opt = document.createElement("option");
+				opt.value = option[i].value;
+				to.appendChild(opt);
+				
+				//option 태그 뒤에 들어가야 할 텍스트 값
+				var nodeNum = document.createTextNode(option[i].value);
+				to[to.length-1].appendChild(nodeNum);
+			}
+			
+			//from의 모든 자식 option태그들 삭제
+			while(option[0] != null) {
+				from.removeChild(option[0]);
+			}
+			
+			//p태그 중복 안내 메시지 지우기
+			document.getElementsByTagName("p")[0].innerHTML = "";
+			
+			if(arrValue.length != 0) {
+				alert(arrValue + "을" + direction + "박스로 옮겼습니다.");
+			}else {
+				alert(direction + "으로 옮길 데이터가 없습니다.");
+			}
+		}
+		
+		function resetSelect() {
+			var sel1 = document.getElementById("sel1");
+			var sel2 = document.getElementById("sel2");
+			
+			while(sel1.children[0] != null) {
+				sel1.removeChild(sel1.children[0]);
+			}
+			while(sel2.children[0] != null) {
+				sel2.removeChild(sel2.children[0]);
+			}
+		}
+		
+		function sortOption() {
+			var arrSel1 =  document.getElementById("sel1").children;
+			var arrSel2 =  document.getElementById("sel2").children;
+			var tmp = 0;
+			
+			for (var i = 0; i < arrSel1.length-1; i++) {
+				for (var j = 0; j < arrSel1.length-1; j++) {
+					if (parseInt(arrSel1[j].value) > parseInt(arrSel1[j + 1].value)) {
+						tmp = parseInt(arrSel1[j].value);
+						arrSel1[j].value = parseInt(arrSel1[j + 1].value);
+						arrSel1[j + 1].value = tmp;
+						
+						tmp = arrSel1[j].childNodes[0].data;
+						arrSel1[j].childNodes[0].data = parseInt(arrSel1[j + 1].childNodes[0].data);
+						arrSel1[j+1].childNodes[0].data = tmp;
+					}
+				}
+			}
+			
+			for (var i = 0; i < arrSel2.length-1; i++) {
+				for (var j = 0; j < arrSel2.length-1; j++) {
+					if (parseInt(arrSel2[j].value) > parseInt(arrSel2[j + 1].value)) {
+						tmp = parseInt(arrSel2[j].value);
+						arrSel2[j].value = parseInt(arrSel2[j + 1].value);
+						arrSel2[j + 1].value = tmp;
+						
+						tmp = arrSel2[j].childNodes[0].data;
+						arrSel2[j].childNodes[0].data = parseInt(arrSel2[j + 1].childNodes[0].data);
+						arrSel2[j+1].childNodes[0].data = tmp;
+					}
+				}
+			}
+		}
+	</script>
+</head>
+<body>
+	<h1>select객체 예제</h1>
+	<form>
+		<select id="sel1" multiple="multiple" size="10">
+<!-- 			<option value="1">1</option> -->
+<!-- 		    <option value="7">7</option> -->
+<!-- 		    <option value="8">8</option> -->
+		</select>
+		<div>
+			<br>
+			<br>
+			<button type="button" onclick="moveSelected(this);">&gt;</button>
+			<br>
+			<br>
+			<button type="button" onclick="moveAll(this);">&gt;&gt;</button>
+			<br>
+			<br>
+			<button type="button" onclick="moveSelected(this);">&lt;</button>
+			<br>
+			<br>
+			<button type="button" onclick="moveAll(this);">&lt;&lt;</button>
+		</div>
+		<select id="sel2" multiple="multiple" size="10">
+<!-- 		    <option value="2">2</option> -->
+<!-- 		    <option value="6">6</option> -->
+<!-- 			<option value="10">10</option> -->
+		</select>
+		<p></p>
+		<div>
+			<input type="text" autofocus>
+			<button id="add" type="button" onclick="addOption();">추가하기</button>
+			<button id="sort" type="button" onclick="sortOption();">정렬하기</button>
+			<button id="reset" type="button" onclick="resetSelect();">초기화</button>
+		</div>
+	</form>
+</body>
+</html>

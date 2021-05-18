@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Insert title here</title>
+	<style type="text/css">
+		div {
+			background-color: lightgray;
+			padding: 20px;
+			margin-bottom: 20px;
+		}
+		button {
+			background-color: blue;
+			color: white;
+		}
+		#result2 {
+			border: 3px dashed orange;
+			width: calc(100% - 6px);
+		}
+		textarea {
+			width: 100%;
+		}
+	</style>
+	<script type="text/javascript">
+		function readFile() {
+			//dataURL방식으로 이미지 불러오기, result에 저 이미지가 담긴다, reader.result 이용
+
+			//파일 객체 사용 방식
+			var obj = document.getElementById("attachFile"); //<input type="file" ...>
+			var fileList = obj.files; //FileList {length: 0}
+			
+			if(fileList == null || fileList.length == 0) {
+				alert("선택된 파일이 없습니다.");
+				return;
+			}
+			
+			//파일 리스트 중 0번째 인덱스의 파일객체
+			var file = fileList[0]; //File {name: "movie.html", ...}
+			console.log(file);
+			
+			var str =
+				"파일명: " + file.name
+				+ "\n파일크기: " + file.size
+				+ "\n파일종류: " + file.type
+				+ "\n변경날짜: " +  file.lastModifiedDate;
+			
+			document.getElementById("result2").value = str;
+			
+			
+			//파일리더 객체 사용 방식
+			fileList = document.getElementById("attachFile").files;
+
+			if(fileList == null || fileList.length == 0) {
+				alert("선택된 파일이 없습니다.");
+				return;
+			}
+			
+			//파일 리더 객체
+			var file2 = fileList[0];
+			var reader = new FileReader();
+			
+			console.log("file2.type: " + file2.type);
+// 			if(file2.type = "text/html"){
+// 				reader.readAsText(file2);
+// 				reader.onload = function() {
+// 					document.getElementById("result1").value = reader.result;
+// 				};
+// 			}
+// 			else if(file2.type = "image/jpeg") {
+
+			var img = document.getElementsByTagName("textarea")[0].nextElementSibling;
+	
+			if(file2.type == "image/jpeg") {
+				reader.readAsDataURL(file2);
+				reader.onload = function() {
+					document.getElementsByTagName("textarea")[0].nextElementSibling.src = reader.result;
+					document.getElementsByTagName("textarea")[0].style.display = "none";
+				};
+			}else {
+				reader.readAsText(file2);
+				reader.onload = function() {
+					document.getElementsByTagName("textarea")[0].nextElementSibling.style.display = "none";
+					document.getElementsByTagName("textarea")[0].style.display = "block";
+					document.getElementById("result1").value = reader.result;
+				};	
+			}
+		}
+	</script>
+</head>
+<body>
+	<div>
+		<input type="file" id="attachFile" name="attachFile">
+		<button type="button" onclick="readFile();">읽기</button>
+	</div>
+	<div>
+		<h1>결과 출력(FileReader객체)</h1>
+		<p>이미지 파일일 경우에는 DataURL 형식으로, 아닌 경우 Text형식으로</p>
+		<textarea id="result1" rows="10"></textarea>
+		<img style="display: none">
+	</div>
+	<div>
+		<h1>파일 정보(File객체)</h1>
+		<p>이미지 파일을 읽은 경우에 이미지가 표시된다. 다른 파일을 읽었을 경우 이미지가 표시되지 않는다.</p>
+		<textarea id="result2" rows="10"></textarea>
+	</div>	
+</body>
+</html>

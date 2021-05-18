@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>프로필</title>
+	<script type="text/javascript">
+		function showText() {
+			document.getElementsByTagName("textarea")[0].value = "";
+			
+			var input = document.getElementsByTagName("input");
+			var label = document.getElementsByTagName("label");
+			var strTextarea = "";
+						
+			//이름 가져오기 <input type="text">
+			strTextarea += input[0].value + "씨!\n";
+			
+			//성별 가져오기 <input type="radio">
+			var gender = "";
+			var male = document.getElementById("maleId").checked; 
+			var female = document.getElementById("femaleId").checked;
+			
+			if(male || female) {
+				if(male) {
+					gender = label[2].innerHTML.substr(0,1);
+				}else if(female) {
+					gender = label[3].innerHTML.substr(0,1);
+				}				
+				strTextarea += ("당신은 " + gender + "자이고,\n");
+			}else {
+				strTextarea += ("당신은 성별을 알 수 없고,\n");
+			}
+			
+			//취미 가져오기 <input type="textbox">
+			var hobby = "";
+			console.log("hobby : " + hobby);
+
+			//<input><label></label> => 형제 요소로 값을 들고올 수 있다.
+			var i=3; //취미 부분 시작인 "여행"의 체크박스 index=3, 레이블 index=4 
+			while(i < input.length) {
+				if(input[i].checked = true) {
+					hobby += label[i+1].innerHTML.substr(1,label[i+1].innerHTML.length) + ", ";
+				}
+				i++;
+			}
+			console.log("hobby : " + hobby);
+			hobby = hobby.substr(0, hobby.length-2); //문자열 제일 마지막 콤마 제거
+			
+			strTextarea += ("취미는 " + hobby +"이군요!");
+			
+			document.getElementsByTagName("textarea")[0].value = strTextarea;
+		}
+		
+		//작성 중단
+		function print() {
+			var strResult = "";
+			
+			var userName = document.getElementById("userName").value;
+			var gender = document.getElementsByName("gender");
+			
+			//실무에서 value는 DB값에 실제 저장되는 값이라,
+			//"남자", "여자" 이렇게 저장되는 경우는 잘 없고
+			//1, g2 등등 ... 코드값으로 저장된다.
+			
+			strResult += userName + "씨!";
+		}
+	</script>
+	<style type="text/css">
+		* {
+			font-size: 20px;
+		}
+		form {
+			width: 40%;
+			margin: 0 30%;
+			margin-top: 5vh;
+		}
+		input {
+			margin-bottom: 2vh;
+		}
+		input:first-child {
+			width: 30%;
+			height: 2.5vh;
+		}
+		button {
+			margin-bottom: 2vh;			
+		}
+		textarea {
+			width: 40%;
+			margin: 0 30%;
+			overflow: auto;
+		}
+	</style>
+</head>
+<body>
+	<form>
+		<label for="name">이 름 : </label>
+		<input type="text" id="userName">
+		<br>
+		<label for="gender">성 별 : </label>
+		<input type="radio" name="gender" id="maleId" required><label for="maleId">남</label>
+		<input type="radio" name="gender" id="femaleId" required><label for="femaleId">여</label>
+		<br>
+		취 미 : 
+		<!-- 각 input태그에 name속성을 부여하면 getElementsByName("")으로 input태그 전부를 가져올 수 있다. -->
+		<input type="checkbox" name="hobby" id="hobby1"><label for="hobby1"> 여행</label>
+	    <input type="checkbox" name="hobby" id="hobby2"><label for="hobby2"> 독서</label>
+	    <input type="checkbox" name="hobby" id="hobby3"><label for="hobby3"> 영화 감상</label>
+	    <input type="checkbox" name="hobby" id="hobby4"><label for="hobby4"> 음악 감상</label>
+	    <input type="checkbox" name="hobby" id="hobby5"><label for="hobby5"> 바둑</label>
+	    <input type="checkbox" name="hobby" id="hobby6"><label for="hobby6"> 장기</label>
+	    <input type="checkbox" name="hobby" id="hobby7"><label for="hobby7"> 등산</label>
+	    <input type="checkbox" name="hobby" id="hobby8"><label for="hobby8"> 낚시</label>
+	    <br>&ensp;&ensp;&ensp;&ensp;&nbsp;&nbsp;
+	    <input type="checkbox" name="hobby" id="hobby9"><label for="hobby9"> 산책</label>
+	    <input type="checkbox" name="hobby" id="hobby10"><label for="hobby10"> 외국어</label>
+		<br><br>
+		<button type="button" onclick="showText();">결과출력</button>
+	</form>
+	<textarea rows="10" readonly></textarea>
+</body>
+</html>

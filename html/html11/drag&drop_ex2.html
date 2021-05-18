@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Insert title here</title>
+	<style type="text/css">
+		div {
+			border: 1px solid pink;
+			height: 40vh;
+		}
+		img {
+			height: 70px;
+		}
+	</style>
+	<script type="text/javascript">
+		
+		function allowDrop(ev, obj) {
+			console.log(ev);
+			ev.preventDefault(); //기본 동작을 막는 함수
+		}
+		
+		function drop(ev) {
+			ev.preventDefault(); //기본 동작을 막는 함수
+	
+			var eleId = ev.dataTransfer.getData("text");
+			var ele1 = document.getElementById(eleId);
+			
+			document.getElementById("tmpDiv").appendChild(targetObj);
+			
+			targetObj = null; //단, 전역변수 사용시, 사용이 끝나고 값 초기화 시켜주기
+		}
+		
+		var targetObj;
+		function drag(ev) {
+			targetObj = ev.target;
+		}
+		
+	</script>
+</head>
+<body>
+	<p>원하는 물건을 끌어서 옮기세요.</p>
+	<div id="tmpDiv" ondragover="allowDrop(event, this);" ondrop="drop(event);"></div>
+	<img id="img1" src="../../images/1917.jpg" alt="1917" draggable="true" ondragstart="drag(event)">
+	<img id="img2" src="../../images/arrival.jpg" alt="arrival" draggable="true" ondragstart="drag(event)">
+	<img id="img3" src="../../images/Dresden-Germany-above-the-Elbe-River.21.jpg" alt="elbe" draggable="true" ondragstart="drag(event)">
+	<img id="img4" src="../../images/pro-wireless-headset-gallery-1.webp" alt="headset" draggable="true" ondragstart="drag(event)">
+	
+	<!-- drag()에서 하는 일이 적으니, 간단하게 태그에 직접 작성 가능 -->
+	<img id="img5" src="../../images/lion.jfif" alt="lion" draggable="true" ondragstart="targetObj = this">
+</body>
+</html>

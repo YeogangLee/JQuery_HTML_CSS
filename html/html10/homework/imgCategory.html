@@ -2,10 +2,16 @@
 <html>
 <head>
 	<meta charset="UTF-8">
-	<title>Insert title here</title>
+	<title>이미지 카테고리</title>
 	<script type="text/javascript">
 		function showImg(obj) {
-			var arrLi = document.getElementsByClassName("box")[1].getElementsByTagName("li");
+			
+			//기존 이미지 삭제
+
+			//var arrLi = document.getElementsByClassName("box")[1].getElementsByTagName("li");
+			var arrLi = obj.parentElement.getElementsByTagName("li");
+			//box라고 클래스 네임으로 찾지 않고, li의 부모 요소로도 찾을 수 있다.
+			//여기 함수에서 파라미터 obj로 li를 받았기 때문에 가능
 			
 			for(var i=0; i<arrLi.length; i++) {
 				while(arrLi[i].children[0] != null) {
@@ -13,10 +19,34 @@
 				}
 			}
 			
+			/*
+				arrLi[i].removeChild()
+				
+				document.getElementById("list") //<ul id="list">
+				.getElementByTagName("li")		//<li>배열
+				
+				for(var i=0; i<items.length; i++) {
+					var imgs = items[i].getElementsByTagName("img");
+					
+					for(var j=0; j<imgs.length; j++) {
+						imgs[j].remove();
+					}
+				}
+				
+			*/
+			
+			
 			var eleImg = document.createElement("img");
-			console.log(obj.title);
+// 			console.log(obj.title);
 			eleImg.src = "../../../images/" + obj.title;
-			console.log(obj.innerHTML);
+			
+			//obj.innerHTML //"컴퓨터1"
+			//= document.getElementsByTagName("li")[5].innerHTML
+			//= document.getElementsByTagName("li")[5].innerText
+			//= document.getElementsByTagName("li")[5].childNodes[0].data
+			//= document.getElementsByTagName("li")[5].firstChild.data		//노드
+			
+// 			console.log(obj.innerHTML);
 			eleImg.alt = obj.innerHTML;
 			eleImg.width = "100";  //기본단위는 px
 			eleImg.height = "100"; //기본단위는 px

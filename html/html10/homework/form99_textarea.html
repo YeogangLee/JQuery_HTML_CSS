@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>구구단</title>
+	<script type="text/javascript">
+		function print99() {
+			document.getElementsByTagName("textarea")[0].value = "";
+			
+			var strTextarea = document.getElementsByTagName("textarea")[0].value;
+			
+			var num = parseInt(document.getElementsByTagName("input")[0].value);
+			
+			if(num / 1 != num) {
+				strTextarea = "올바른 숫자가 아닙니다.";
+			}else {
+				strTextarea = num + "단\n\n";
+				
+				for(var i = 1; i <= 9; i++) {
+					var result = num * i;
+					strTextarea += (num + " * " + i + " = " + result + "\n");
+				}
+			}
+			
+			document.getElementsByTagName("textarea")[0].value = strTextarea;
+		}
+	</script>
+	<style type="text/css">
+		* {
+			font-size: 20px;
+		}
+		body {
+			margin: 0;
+		}
+		form {
+			padding-top: 2vh;
+			margin: 0 calc((100% - 6%) / 2);
+			overflow: auto;
+		}
+		input {
+			width: 20%;
+		}
+		button {
+			height: 4vh;
+		}
+		textarea {
+			width: 8%;
+			margin: 0 calc((100% - 8.3%) / 2); 
+		}
+	</style>
+</head>
+<body>
+	<form>
+		<input type="text">단
+		<button type="button" onclick="print99();">출력</button>
+	</form>
+	<br>
+	<textarea rows="12" readonly></textarea>
+</body>
+</html>

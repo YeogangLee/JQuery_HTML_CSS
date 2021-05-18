@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Insert title here</title>
+	<style type="text/css">
+		div {
+			height: 100px;
+			border: 1px solid;
+		}
+		img {
+			height: 50px;
+		}
+	</style>
+	<script type="text/javascript">
+	
+		function allowDrop(ev, obj) {
+			console.log(ev);
+			
+			/*
+			allowDrop(ev)		//ondragover="allowDrop(event);"
+			allowDrop(ev, obj)	//ondragover="allowDrop(event, this);"
+			
+			ev.target;			//= <div> = this
+			이벤트 적용 대상인 target
+			= 함수 호출시 파라미터 this			
+			
+			콘솔에서 ev.target값 확인 가능, dataTransfer 객체도 확인 가능
+			*/
+			
+			ev.preventDefault(); //기본 동작을 막는 함수
+			
+		}
+		
+		function drop(ev) {
+			ev.preventDefault(); //기본 동작을 막는 함수
+			
+			//방법1.
+			//추가할 img태그가 하나일 때는 문제가 없겠지만 ... 여러 개일 때는 이상해진다. -> 방법2 사용
+// 			var ele1 = document.getElementById("tmpImg");
+// 			var ele2 = document.getElementById("tmpDiv");
+// 			ele2.appendChild(ele1);
+
+			//방법2.
+			//dataTransfer 객체 이용
+			var eleId = ev.dataTransfer.getData("text");
+			var ele1 = document.getElementById(eleId);
+// 			var ele2 = document.getElementById("tmpDiv");
+// 			ele2.appendChild(ele1);
+			
+			//var ele2 부분 한 줄로 바꾸기
+// 			document.getElementById("tmpDiv").appendChild(ele1);
+
+			//전역변수 targetObj 이용 방법
+			document.getElementById("tmpDiv").appendChild(targetObj);
+			
+			targetObj = null; //단, 전역변수 사용시, 사용이 끝나고 값 초기화 시켜주기
+		}
+		var targetObj;
+		function drag(ev) {
+// 			ev.dataTransfer.setData("text", ev.target.id); //ev.target = <img>
+
+			targetObj = ev.target;
+		}
+	</script>
+</head>
+<body>
+	<!-- 파라미터: event 키워드 예약어 -->
+	<div id="tmpDiv" ondragover="allowDrop(event, this);" ondrop="drop(event);"></div>
+	<hr>
+	<!-- css는 기본단위가 px이라, 숫자 값 뒤에 사용하지 않는다 -->
+	<!-- 사용할 수는 있는데, css validation 검사에서 걸린다. -->
+
+	<!-- 방법1) id사용 -->
+<!--<img id="tmpImg" alt="커피" src="../../images/coffee.jpg" height="50" draggable="true"> -->
+
+	<!-- 방법2) dataTransfer 객체 사용 -->
+	<img id="drag1" alt="커피" src="../../images/coffee.jpg" height="50" draggable="true" ondragstart="drag(event)">
+	<img id="drag2" alt="커피" src="../../images/dresden-elbe1.jpg" height="50" draggable="true" ondragstart="drag(event)">
+	<img id="drag3" alt="커피" src="../../images/dresden-elbe2.jpg" height="50" draggable="true" ondragstart="drag(event)">
+	<img id="drag4" alt="커피" src="../../images/Dresden-Germany-above-the-Elbe-River.21.jpg" height="50" draggable="true" ondragstart="drag(event)">
+		
+</body>
+</html>
