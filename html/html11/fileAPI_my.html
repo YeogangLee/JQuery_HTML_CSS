@@ -23,8 +23,7 @@
 	</style>
 	<script type="text/javascript">
 		function readFile() {
-			//dataURL방식으로 이미지 불러오기, result에 저 이미지가 담긴다, reader.result 이용
-
+			
 			//파일 객체 사용 방식
 			var obj = document.getElementById("attachFile"); //<input type="file" ...>
 			var fileList = obj.files; //FileList {length: 0}
@@ -58,32 +57,38 @@
 			//파일 리더 객체
 			var file2 = fileList[0];
 			var reader = new FileReader();
+			var img = document.getElementsByTagName("textarea")[0].nextElementSibling;
 			
 			console.log("file2.type: " + file2.type);
-// 			if(file2.type = "text/html"){
-// 				reader.readAsText(file2);
-// 				reader.onload = function() {
-// 					document.getElementById("result1").value = reader.result;
-// 				};
-// 			}
-// 			else if(file2.type = "image/jpeg") {
-
-			var img = document.getElementsByTagName("textarea")[0].nextElementSibling;
-	
-			if(file2.type == "image/jpeg") {
-				reader.readAsDataURL(file2);
-				reader.onload = function() {
-					document.getElementsByTagName("textarea")[0].nextElementSibling.src = reader.result;
-					document.getElementsByTagName("textarea")[0].style.display = "none";
-				};
-			}else {
+			if(file2.type == "text/html"){
 				reader.readAsText(file2);
 				reader.onload = function() {
-					document.getElementsByTagName("textarea")[0].nextElementSibling.style.display = "none";
-					document.getElementsByTagName("textarea")[0].style.display = "block";
 					document.getElementById("result1").value = reader.result;
-				};	
+// 					img.style.display = "hidden";
+				};
 			}
+// 			if(file2.type == "image/jpeg") {
+			if(file2.type.match('image/jpeg')) {
+
+	
+// 			if(file2.type == "image/jpeg") {
+				reader.readAsDataURL(file2);
+				reader.onload = function() {
+					img.style.height = "300px";
+					img.src = reader.result;
+					document.getElementById("result1").value = "";
+// 					img.style.display = "hidden";
+// 					document.getElementsByTagName("textarea")[0].style.display = "hidden";
+				};
+			}
+// 			else {
+// 				reader.readAsText(file2);
+// 				reader.onload = function() {
+// 					img.style.display = "none";
+// // 					document.getElementsByTagName("textarea")[0].style.display = "block";
+// 					document.getElementById("result1").value = reader.result;
+// 				};	
+// 			}
 		}
 	</script>
 </head>
@@ -96,7 +101,7 @@
 		<h1>결과 출력(FileReader객체)</h1>
 		<p>이미지 파일일 경우에는 DataURL 형식으로, 아닌 경우 Text형식으로</p>
 		<textarea id="result1" rows="10"></textarea>
-		<img style="display: none">
+		<img style="display: hidden">
 	</div>
 	<div>
 		<h1>파일 정보(File객체)</h1>
