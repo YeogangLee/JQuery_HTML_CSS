@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Insert title here</title>
+	<script type="text/javascript" src="../../js/lib/jquery-3.6.0.js"></script>
+	<script type="text/javascript">
+	
+		//기존의 onload 방법1
+		function init() {
+			document.getElementsByTagName("body")[0].style.backgroundColor = 'lightgray';		
+			document.getElementsByTagName("body")[0].style.color = 'purple';		
+		}
+		
+		function changeColor() {
+// 			document.getElementsByTagName("body")
+// 			$("body")
+			//==> <body> 요소를 가지고 옴(return)
+			$("body").css("color", "green");
+			//==> document.getElementsByTagName("body")[0].style.color = 'green';
+		}
+		
+		/*
+			$(document) ==> document를 JQ객체로 변환
+			그래서 Jquery에서 제공하는 속성, 함수를 사용할 수 있도록
+		*/
+		
+// 		document.getElementsByTagName("body")[0].onload = function() {}
+// 		==> body의 onload 같은 방법2 - $(document) 이용
+		$(document).ready(function(){
+			alert("준비 fertig!");
+			$("body").css("color","green");
+		});
+		
+		
+		
+		
+	</script>
+</head>
+<body onload="init()" onclick="changeColor();">
+	하이 JQUERY~
+</body>
+</html>

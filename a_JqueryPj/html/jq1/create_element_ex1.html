@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Insert title here</title>
+	<script type="text/javascript" src="../../js/lib/jquery-3.6.0.js"></script>
+	<script type="text/javascript">
+	
+		$(document).ready(function(){
+			
+			//div 클릭 이벤트 부여
+// 			$("div").click(name);		//함수를 따로 만드는 방식
+			$("div").click(function() {	//함수를 따로 만들지 않는 방식
+				alert(1);	
+// 				1) 요소 생성 방법
+// 				document.createElement("p");
+// 				$("<p>짜잔~</p>")
+
+				var ele = $('<p class="sample">여기</p>');	//jQuery 객체를 생성
+				$("body").append(ele);						//body에 추가
+				
+				$("<h1>헤더</h1>").appendTo("body");
+				
+				
+				<
+			});
+			
+		});	
+		
+		var idx = 0;
+		function addInput() {
+			$("<input>", {		//중괄호 - 속성값 지정
+				"id" : "userName" + idx
+				,"name" : "userName"
+				,"value" : "홍길동"
+				,"click" : function() {
+					alert(0);
+					//글자색 변경
+					$(this).css("color", "red");
+				}
+			}).appendTo("#temp");
+			
+			idx++;
+		}
+		
+// 		function name() {
+			
+// 		}
+		
+	</script>
+</head>
+<body>
+	<div>클릭</div>
+	<p class="sample">여기</p>
+	<input type="text" name="userName" value="홍길동" onclick="alert(1);">
+	<hr>
+	<button type="button" onclick="addInput();">클릭</button>
+	<div id="temp"></div>
+	<hr>
+	
+</body>
+</html>

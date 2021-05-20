@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Insert title here</title>
+	<script type="text/javascript" src="../../js/lib/jquery-3.6.0.js"></script>
+	<script type="text/javascript">
+	
+		//jQuery로 이벤트 넣기
+		//문서가 로드가 다 되고나서, 요소들에게 event 넣기
+		
+		//문서가 준비되면
+		$(document).ready(function() {
+			//h2 요소들에게 클릭 이벤트 부여
+			
+// 			1) javascript 방식
+// 			document.getElementById("tmp").onclick = function(){}; //1개의 요소에만 이벤트 부여
+			
+// 			2) jQuery 방식 - 여러 요소에 이벤트 부여 가능
+			$("h2").click(function() {
+				//alert(1);
+				$(this).hide();
+// 				hide()메서드는 jQuery 메서드이기 때문에
+// 				this.hide() 이렇게 작성하면 적용되지 않는다.
+//				꼭 $붙이고, 괄호()열고 $(this)
+			});
+			
+		});
+	</script>
+</head>
+<body>
+	<h2>클릭하면 사라져요1</h2>
+	<h2>클릭하면 사라져요2</h2>
+	<h2>클릭하면 사라져요3</h2>
+	<h2>클릭하면 사라져요4</h2>
+	<h2>클릭하면 사라져요5</h2>
+	<h2>클릭하면 사라져요6</h2>
+	<h2>클릭하면 사라져요7</h2>
+	<h2>클릭하면 사라져요8</h2>
+	<h2>클릭하면 사라져요9</h2>
+</body>
+</html>
