@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Insert title here</title>
+	<script type="text/javascript" src="../../js/lib/jquery-3.6.0.js"></script>
+	<style type="text/css">
+		img {
+			height: 100px;
+		}
+		img:last-child {
+			height: 200px;
+		}
+	</style>
+	<script type="text/javascript">	
+		$(function() {
+			//4) 속성 선택자1
+			//title 속성을 가진 p요소의 배경색 변경
+			//type 속성이 password인 요소의 테두리 변경
+				
+			$("p[title]").css("background-color", "yellow");
+			$("[type='password']").css("border", "2px solid pink");
+			
+			//5) 속성 선택자2
+			//숙제
+			//selector_ex2_tulips_home.html
+		});
+		
+		
+	
+	</script>
+	
+	
+</head>
+<body>
+	<div id="div4">
+		<p>일반 문단입니다.</p>
+		<p title="보이냐~">타이틀이 있는 문단입니다.</p>
+		회원ID: <input type="text">
+		<br>
+		비밀번호: <input type="password">
+		<hr>
+		<br>
+	</div>	
+	<div id="div5">
+		<a href="http://www.ddit.or.kr">(재)대덕인재개발원</a><br>
+		<a href="mailto:power2c@ddit.or.kr">메일 보내기</a><br>
+		<br>
+		<span>Some images:</span>
+		<div id="Tulips">
+		<img src="../../images/Tulips.jpg" id="img1" alt="튤립1">
+		<img src="../../images/Tulips.jpg" id="little">
+		<img src="../../images/Tulips.jpg" id="little-bear" alt="튤립3">
+		<img src="../../images/Tulips.jpg" title="name">
+		<img src="../../images/Tulips.jpg" title="named" alt="튤립5">
+		<img src="../../images/Tulips.jpg">
+		<img src="../../images/coffee2.png">
+		</div>
+		<p id="someP">이곳은 id속성이 someP인 &lt;p&gt;태그입니다.</p>
+		<br>
+		Text: <input type="text">
+		<br><br>		
+		<button type="submit" value="Submit">Submit</button>
+		<input type="button" value="클릭~~">
+	</div>
+</body>
+</html>

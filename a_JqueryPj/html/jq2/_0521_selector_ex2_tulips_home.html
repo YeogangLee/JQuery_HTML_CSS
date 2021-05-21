@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Insert title here</title>
+	<script type="text/javascript" src="../../js/lib/jquery-3.6.0.js"></script>
+	<style type="text/css">
+		img {
+			height: 100px;
+		}
+		img:last-child {
+			height: 200px;
+		}
+	</style>
+	<script type="text/javascript">
+		//5) 속성 선택자2
+		//숙제
+		/*
+			type이 button인 input 요소와 href가 'mailto'로 시작하는 a 요소의 배경색 노란색으로 변경
+			href가 'power2c'를 포함하는 모든 a 요소의 밑줄 없음
+			img 요소 중 id 가 'img1'인 것 제외하고 테두리 색 파랑
+			src가 'png'로 끝나는 img 요소의 테두리 색 초록
+			alt 속성을 갖는 이미지 요소의 테두리 두께 5px
+			title이 'named' 단어를 포함하는 img 요소 두 줄 테두리
+			id가 'little'이거나 'little-'로 시작하는 img 요소 점선 테두리
+			type이 'text'인 input 요소의 테두리 변경
+		*/
+		
+// 		$(function(){});
+		$(document).ready(function(){
+			//07-10
+			$(":button, [href='mailto']").css("background-color", "yellow");
+			
+			$("[href*='power2c']").css("text-decoration", "none");
+			
+			$("img[alt]").css("border", "5px solid pink");
+
+			$("img[id!='img1']").css("border", "10px solid blue");
+			
+			$("img[src$='.png']").css("border", "10px solid green");
+			
+			$("img[title*='named']").css("border","10px double salmon");
+			
+			$("img[id|='little']").css("border", "10px dashed black");
+			
+			$(":text").css("border", "7px solid orange");
+			
+		});
+		
+	</script>
+</head>
+<body>
+	<div id="div5">
+		<a href="http://www.ddit.or.kr">(재)대덕인재개발원</a><br>
+		<a href="mailto:power2c@ddit.or.kr">메일 보내기</a><br>
+		<br>
+		<span>Some images:</span>
+		<div id="Tulips">
+		<img src="../../images/Tulips.jpg" id="img1" alt="튤립1">
+		<img src="../../images/Tulips.jpg" id="little">
+		<img src="../../images/Tulips.jpg" id="little-bear" alt="튤립3">
+		<img src="../../images/Tulips.jpg" title="name">
+		<img src="../../images/Tulips.jpg" title="named" alt="튤립5">
+		<img src="../../images/Tulips.jpg">
+		<img src="../../images/coffee2.png">
+		</div>
+		<p id="someP">이곳은 id속성이 someP인 &lt;p&gt;태그입니다.</p>
+		<br>
+		Text: <input type="text">
+		<br><br>		
+		<button type="submit" value="Submit">Submit</button>
+		<input type="button" value="클릭~~">
+	</div>
+</body>
+</html>

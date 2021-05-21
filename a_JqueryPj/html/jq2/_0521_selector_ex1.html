@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Insert title here</title>
+	<script type="text/javascript" src="../../js/lib/jquery-3.6.0.js"></script>
+	<style type="text/css">
+		div {
+			border: 1px solid;
+		}
+	</style>
+	<script type="text/javascript">
+		
+	</script>
+</head>
+<body>
+	<h1 id="first">1번째</h1>
+	<div>DIV태그</div>
+	<p>P태그</p>
+	<h3>H3태그</h3>
+	
+	<h1>2번째</h1>
+	<h3>2번째의 H3태그</h3>
+	
+	<h1>3번째</h1>
+	<div>
+		<h3>3번째의 H3태그</h3>
+		<!-- 
+			$("h1 + h3").css("color", "red")
+			> h1 바로 아래의 h3
+		 -->
+		<div>
+			<span>
+				<h4>div > div > p > h4</h4>
+			</span>
+<!--
+			<p>태그로 <h1>태그들을 감싸면, 태그가 씹힌다
+			
+			<p>
+				<h4>div > div > p > h4</h4>
+			</p> 이렇게 작성했어도
+			
+			<p></p>
+				<h4>div > div > p > h4</h4>
+			<p></p> 콘솔로 확인했을 때의 모습
+-->	
+		</div>
+	</div>
+	
+	<h1>4번째</h1>
+	
+	<h1 id="fifth">5번째</h1>
+	<h3>5번째 h1 이후의 h3</h3>
+	
+	<h1>6번째</h1>
+	<p>P태그</p>
+	<h3>6번째 h3</h3>
+	
+	<h1>7번째</h1>
+	
+	<h1>8번째</h1>
+	<h1>9번째</h1>
+</body>
+</html>
