@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Insert title here</title>
+	<script type="text/javascript" src="../../js/lib/jquery-3.6.0.js"></script>
+	<style type="text/css">
+		img {
+			width: 170px;
+			height: 170px;
+			margin-right: 5px;			
+		}
+	</style>
+	<script type="text/javascript">
+/*
+		$(document).ready(function(){
+// 			var img = document.getElementsByTagName("img");
+
+// 			$("img1").
+
+			var imgRoot = "../../images/";
+			var imgList = $("#div1")[0].children;
+		
+			var hideImg1 = false;
+			var hideImg2 = false;
+			var hideImg3 = false;
+			$("img[alt='튤립1']").on({
+				
+// 				mouseover : function(){
+// 					imgList[0].src = imgRoot + "1917.jpg";
+// 				}
+				mouseover : function(e){
+					e.target.src = imgRoot + "1917.jpg";
+				}
+				,mouseout : function(){
+					imgList[0].src = imgRoot + "Tulips.jpg";
+				}
+				,dblclick : function(){
+					$(this).hide();
+					hideImg1 = true;
+				}	
+				
+			});
+			
+			$("img[alt='튤립2']").on({
+				
+				mouseover : function(){
+					imgList[1].src = imgRoot + "arrival.jpg";
+				}
+				,mouseout : function(){
+					imgList[1].src = imgRoot + "Tulips.jpg";
+				}
+				,dblclick : function(){
+					$(this).hide();
+					hideImg2 = true;
+				}		
+				
+			});
+			
+			$("img[alt='튤립3']").on({
+				
+				mouseover : function(){
+					imgList[2].src = imgRoot + "pro-wireless-headset-gallery-1.webp";
+				}
+				,mouseout : function(){
+					imgList[2].src = imgRoot + "Tulips.jpg";
+				}
+				,dblclick : function(){
+					$(this).hide();
+					hideImg3 = true;
+				}		
+				
+			});
+			
+			
+			$("button").click(function(){
+				$("img[alt='튤립1']").show();
+				$("img[alt='튤립2']").show();
+				$("img[alt='튤립3']").show();
+			});
+			
+		});
+		
+// 		function isHided(){
+// 			if(hideImg1 == true && hideImg2 == true  && hideImg3 == true) {
+// //	 			if($("img[alt='튤립1']").hide() == true && $("img[alt='튤립2']").hide() == true && $("img[alt='튤립3']").hide() == true){
+// 					$("button").show();
+// 				}else {
+// 					$("button").hide();
+// 				}
+// 		}
+
+*/
+	</script>
+</head>
+<body>
+	<div id="div1">
+		<img id="img1" src="../../images/Tulips.jpg" alt="튤립1">
+		<img id="img2" src="../../images/Tulips.jpg" alt="튤립2">
+		<img id="img3" src="../../images/Tulips.jpg" alt="튤립3">
+	</div>
+	<button type="button" style="display: none;">보이기</button>
+</body>
+<script type="text/javascript">
+
+	var orgSrc = ""; //원본 이미지 src
+	$("img").mouseover(function(e){
+		// this ==> <img> 객체
+		// e ==> event 객체
+		// e.target ==> <img> 객체, 일반 js 객체
+		
+		//mouseout 이벤트에서 사용하기 위해 전역변수로 세팅		
+		orgSrc = e.target.src;
+// 		<=> this.src = "~"; 
+		e.target.src = "../../images/fox_family.jfif";
+		
+	});
+	
+	$("img").mouseout(function(e){
+		this.src = orgSrc;
+	});
+	
+	var hiddenCnt = 0;
+	$("img").dblclick(function(e){
+		$(this).hide();
+		//이미지가 다 숨겨졌으면 버튼이 보이게
+		//전부 숨겨졌는지 확인하는 방법
+		var imgCnt = $("img").length;
+		
+		//방법1.
+		$("img").each(function(idx, item){
+			if($(item).css("display") == "none"){
+				hiddenCnt++;
+			}
+		});
+		
+		//방법2.
+// 		hiddenCnt = $('img[style="display: none;"]').length;
+		
+		//콘솔에 이렇게 치면, 숨겨진 이미지가 나온다.
+		//인라인 스타일로 작성한 것과 정확해야 나온다, 띄어쓰기 하나라도 다르면 출력X
+// 		$('img[style="display: none;"]')
+
+
+		//이미지가 전부 숨김 상태이면
+		if(imgCnt == hiddenCnt) {
+			$("button").show();			
+		}
+	});
+	
+	$("button").click(function(){
+		$(this).hide();
+		$("img").show();
+	});
+
+</script>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
