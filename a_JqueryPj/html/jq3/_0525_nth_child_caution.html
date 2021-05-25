@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Insert title here</title>
+	<style type="text/css">
+		
+		/* 
+		p:nth-child(순서)
+		요소:nth-child(순서)
+
+		p태그들만 있을 때 적용된다.		
+		nth-child는 body의 모든 자식 요소를 대상으로 하기 때문에
+		p태그 중간에 태그 삽입시, 지정해둔 순서가 바뀐다. */
+		p:nth-child(2) {
+  			background: red;
+		}
+		
+		/* 그래서 2번째에 삽입된 div에 스타일을 적용하려면
+		기존의 p처럼 똑같이 적용시켜주면 된다. */
+		div:nth-child(2) {
+			background: green;
+	 	}
+	
+	 	/* p들 중에, 순서를 지정하고 싶다면
+	 	요소:nth-of-type(순서) */
+		p:nth-of-type(2) {
+ 			background: red;
+	 	} 	      
+	 	
+	</style>
+	<script type="text/javascript">
+	</script>
+</head>
+<body>
+	<p>The first paragraph.</p>
+	<div>ddddd</div>
+	<p>The second paragraph.</p>
+	<p>The third paragraph.</p>
+	<p>The fourth paragraph.</p>
+</body>
+</html>

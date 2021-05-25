@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Insert title here</title>
+	<script type="text/javascript">
+	/*
+		chapter. jQuery 이벤트event
+		
+		- 이벤트 객체 e, function(e)
+		e.target = 해당 요소 ex. <p>요소 = this
+		
+		- this찍기
+		  console.log(this)  ==> <p id=​"tmp" style=​"background-color:​ yellow;​">​이벤트​</p>​
+		  console.log($(this)) ==> jQuery.fn.init [p#tmp]
+		  ------
+		
+		- on() 메서드 : jQuery로 이벤트를 연결하는 가장 기본적인 방법
+		ex.
+		$("#log").on({ mousemove : function(e){ } });    //on사용 - 이벤트를 여러 개 주고 싶을 때
+		$("#log").mousemove(function(e){ });                //on사용X
+		
+		on() / off() ** : 선택한 요소에 여러 이벤트를 넣을 때(on), 지울 때(off)
+		
+		
+		- 마우스 이벤트
+		click
+		mouseover
+		mouseout
+		mouseleave
+		mousedown
+		dblclick
+		
+		- 이벤트 객체 메서드
+		preventDefault()
+		
+		- .not() 메서드
+		$("img").not("#img1")
+		$("img[id!='img1']")
+		
+		- alert()내부에는 ',' 사용X + 전부 +로 이어준다.
+		alert(
+		    "type: " + e.type + "\n" +
+		    "target: " + e.target + "\n" );
+	*/
+	</script>
+</head>
+<body>
+	
+</body>
+</html>

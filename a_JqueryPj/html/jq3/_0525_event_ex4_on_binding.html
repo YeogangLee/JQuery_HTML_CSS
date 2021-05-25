@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>이벤트 바인딩 - on 사용하기</title>
+	<script type="text/javascript" src="../../js/lib/jquery-3.6.0.js"></script>
+	<style type="text/css">
+		.intro {
+			font-size: 1.5em;
+			color: red;
+		}
+		p {
+			height: 40px;
+		}
+	</style>
+	<script type="text/javascript">
+		$(document).ready(function(){
+			
+			//기존 방식
+// 			$("p").mouseover(function(){
+// 			});
+			
+			$("#ex1 p").on("mouseover", function(){
+				//<p class="intro">
+				this.className = "intro";				
+			});
+			
+			$("#ex1 p").on("mouseout", function(){
+				this.className = "";
+			});
+			
+			$("#tmp").on({
+				mouseover: function(){
+					$(this).css("background-color", "lightblue");
+				}
+				, mouseout: function(){
+					$(this).css("background-color", "lightgray");
+				}
+				, click: function(){
+					$(this).css("background-color", "yellow");
+				}
+				
+			});
+			
+			$("h3").click(function(){
+				alert(1);
+			});
+			$("h3").on("mouseover", function(){
+				$(this).css("background-color", "pink");
+			});
+			
+			/*================================================*/
+			
+			$("button").click(function(){
+				$("#ex3 p").trigger("myEvent", "홍길동");
+				//p요소에 'myEvent'라는 이벤트 발생, 수행
+			});
+			
+			$("#ex3 p").on("myEvent", function(e, name){
+				$(this).text(name + "씨 안녕하세요~");
+			});
+			
+			
+		});	// ready()
+				
+		function addElement() {
+			$("<h3>새로운 요소</h3>").appendTo("body");	
+		}
+		
+		
+		
+	</script>
+</head>
+<body>
+	<div id="ex1">
+		<p>마우스를 올려보세요.</p>
+		<p>마우스를 올려보세요.</p>
+		<p>마우스를 올려보세요.</p>
+		<p id="tmp">마우스를 올려보세요.</p>
+		<hr>
+		<h3>기존 요소</h3>
+		<button type="button" onclick="addElement();">요소 추가</button>
+	</div>
+	<div id="ex3">
+		<button type="button">p태그 트리거</button>
+		<p>p태그입니다.</p>
+	</div>
+</body>
+</html>

@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Insert title here</title>
+	<script type="text/javascript" src="../../js/lib/jquery-3.6.0.js"></script>
+	<style type="text/css">
+	</style>
+	<script type="text/javascript">
+		$(document).ready(function(){
+			
+			//p태그에 클릭 이벤트 추가, event 객체라는 걸 나타내기 위해 파라미터명 e
+			$("p").click(function(e){
+// 				this // ==> <p>요소
+			
+				console.log(e);			// ==> event객체		
+				console.log(e.type);	// ==> click
+				console.log(e.target);	// ==> <p>요소 : <p>JQUERY 이벤트를 배워봅시다</p>
+										//단순히 스트링이 아니라  본문에서 객체를 가리키기 때문에,
+										//콘솔에서 마우스를 대면 페이지에서 색으로 범위가 잡힌다
+				console.log("this찍기");
+				console.log(this);
+				console.log($(this));
+				console.log("------");
+				/*
+				- this찍기
+				console.log(this)	 ==> <p id=​"tmp" style=​"background-color:​ yellow;​">​이벤트​</p>​
+				console.log($(this)) ==> jQuery.fn.init [p#tmp]
+				------
+				*/
+				console.log(e.button);
+				
+				console.log(e.pageX);
+				console.log(e.pageY);
+				console.log(e.screenX);
+				console.log(e.screenY);
+			});
+			
+// 			$("p#tmp"): id는 어차피 유일하니, 아래처럼 id만 작성해도 무방
+			$("#tmp").mouseenter(function(){
+				$(this).css("background-color", "yellow");	
+			});
+			
+			$("#tmp").mouseleave(function(){
+				$(this).css("background-color", "lightgray");
+			});
+			
+			//on()을 사용하는 다양한 방법
+			//1.'on({})'으로 이벤트 여러 개 부여
+			$("#tmpON").on({
+				mouseenter : function(){
+					$(this).css("background-color", "orange");
+					$(this).css("font-weight", "bold");
+				}
+				, mouseleave : function(){
+					$(this).css("background-color", "gray");
+					$(this).css("font-weight", "normal"); //font-weight: none이 아니라 normal
+				}
+				
+			});
+			
+			//click(), on()등의 이벤트 메서드 내부에서 사용되는 파라미터들은
+			//기본적으로 자료형이 이벤트객체인 것 같다.
+			$("#div1").on({
+				//mousedown
+				//: The mousedown event occurs when the left mouse button is pressed down over the selected element.
+				mousedown : function(e){
+// 					console.log(e);
+
+					alert(
+						"type: " + e.type + "\n" +
+						"target: " + e.target + "\n" +
+						"pageX: " + e.pageX + "\n" +
+						"pageY: " + e.pageY + "\n" +
+						"screenX: " + e.screenX + "\n" +
+						"screenY: " + e.screenY + "\n" +
+						"button: " + e.button + "\n"
+						
+						//이벤트객체e의 button 속성
+						//0: 좌클릭, 1: 중간클릭, 2: 우클릭
+					);
+				}
+			});
+			
+			$("#bt1").on({
+				mousedown : function(e){
+					alert(
+						"type: " + e.type + "\n" +
+						"target: " + e.target + "\n" +
+						"pageX: " + e.pageX + "\n" +
+						"pageY: " + e.pageY + "\n" +
+						"screenX: " + e.screenX + "\n" +
+						"screenY: " + e.screenY + "\n" +
+						"button: " + e.button + "\n"
+					);
+				}
+			});
+			
+// 			$("#log").on({
+// 				mousemove : function(e){
+// 					$(this).html("pageX: " + e.pageX + "pageY: " + e.pageY + "screenX: " + e.screenX + "screenY: " + e.screenY);
+// 				}
+// 			});
+
+// 			<=>
+			$("#log").mousemove(function(e){
+				$(this).html("pageX: " + e.pageX + "pageY: " + e.pageY + "screenX: " + e.screenX + "screenY: " + e.screenY);
+			});
+			
+			//프로그래머스: 여기서 자바스크립트 공부하세요 ..
+			//신입 중에 잘하는 사람 한 둘 ... 데려와서 교육시키면 되니까, 꾸준히 하는 사람을 찾는다.
+			//책임감, 성실도, 적극성
+			//얼만큼 하느냐에 따라 앞날이 바뀔 것 ..
+		});
+	
+	</script>
+</head>
+<body>
+	<p>JQUERY 이벤트를 배워봅시다</p>
+	<p id="tmp">이벤트</p>
+	<p id="tmpON">on이벤트</p>
+	<div id="div1" style="width: 200px; height: 200px; background-color: yellow;"></div>
+	<br>
+	<button type="button" id="bt1">버튼</button>
+	<br><br>
+	<div id="log" style="height: 50px;"></div>
+</body>
+</html>

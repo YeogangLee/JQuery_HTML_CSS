@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Insert title here</title>
+	<script type="text/javascript" src="../../js/lib/jquery-3.6.0.js"></script>
+	<style type="text/css">
+	
+/* 		stopPropagation() 예제1 */
+		div:first-child {
+			border: 2px solid red;
+			height: 100px;
+			background-color: lightgray;
+		}
+		div:first-child > p {
+			border: 2px solid green;
+			height: 50px;
+			margin: 20px;
+			background-color: green;
+		}		
+		p > span {
+			border: 2px solid blue;
+			background-color: blue;
+		}
+		
+/* 		stopPropagation() 예제2 */
+		div > span {
+			background-color: yellow;
+			width: 140px;
+			height: 60px;
+		    margin-left: 30px;
+		    
+			/* 사용하는 영역만 잡히는 span의 특성을 없애기 위해 */
+/*  		    display: inline-block; */
+ 		    display: block;		
+
+			/* span 내부에 button 태그를 사용할 것이기 때문에 */
+		    text-align: center; 
+		}
+		span > button {
+			width: 100px;
+			height: 30px;
+			margin: 15px 20px;
+		}
+		
+		div ~  div {
+			background-color: pink;
+			height: 160px;
+			overflow: auto;
+		}		
+		
+	</style>
+	<script type="text/javascript">
+		$(document).ready(function(){ //문서가 로드되면(준비가 되면)
+		
+			/* stopPropagation() 예제1 */
+			
+			// <div>, <p>, <span> : click event
+			$("body:first-child").click(function(){
+				alert("div입니다.");
+			});
+			
+			$("p").click(function(e){
+				alert("p입니다.");
+				e.stopPropagation();
+			});
+			
+			$("body > span").click(function(e){
+				alert("span입니다.");
+				
+				//부모 요소의 클릭 이벤트 실행되지 않게 하기
+				e.stopPropagation(); // 이벤트 버블링 막기
+			});
+			
+			//h1 클릭 이벤트
+			$("h1").click(function(){
+				$(this).css("background-color", "green");
+			});
+			
+			//h1의 span 클릭 이벤트
+			$("h1 span").click(function(e){
+				$(this).css("background-color", "red");
+				e.stopPropagation();
+			});
+
+			/*================================================*/
+			/* stopPropagation() 예제2 */
+			
+			$("span > button").click(function(e){
+				$(this).css("border", "2px solid blue");
+				e.stopPropagation();
+			});
+			
+			$("div > span").click(function(e){
+				$(this).css("border", "2px solid red");
+				e.stopPropagation();
+			});
+			
+			$("div ~ div").click(function(e){
+				$(this).css("border", "3px solid orange");
+				document.getElementsByTagName("div")[1].childNodes[0].data = "Hello~";
+				
+				//"Hello~" 글자 추가
+				// 1) 글자만 추가
+// 				$(this).append("Hello~");
+			
+				// 2) HTML방식 p요소 추가: <p>Hello~</p>
+// 				$(this).appendTo("<p>Hello~</p>");
+				
+				// 3) p요소 추가 : p요소를 생성 후 추가
+// 				$("<p>").appendTo(this);
+				$("<p>").text("Hello~").appendTo(this);
+// 				$("<p>").html("Hello~").appendTo(this);
+				//?
+				
+			});
+			
+			$("div:first-child").click(function(e){
+				$(this).css("border", "3px solid orange");
+				document.getElementById("div1").childNodes[0].data = "Hello~";
+				
+			});
+			
+			$("body > a").click(function(e){
+				var year = prompt("태어난 연도 4자리", "1999");
+				if(year != null){
+					var age = new Date().getFullYear() - year + 1;
+				}else {
+					alert("입력된 값이 잘못되었습니다.");
+					e.preventDefault();
+					return;
+				}
+								
+				if(parseInt(age) < 20) {
+					alert(age + "살은 이용가능합니다.");
+					e.preventDefault();
+				}else {
+					alert(age + "살은 이용 불가능합니다.");
+				}
+				
+			});
+			
+			/*================================================*/
+			
+			$("div, span, button, a").click(function(){
+				
+			/* div, span, button, a 요소에 모두 click이벤트를 적용해야 한다면 사용
+			      각각의 요소를 구분지을 수 있는 방법이 있다. 그건 각자 찾아보시길 ... 
+			      어제 예제 참고: _0524_event_ex1_button.html
+			*/				
+			});
+			
+			
+		});
+	</script>
+</head>
+<body>
+	<div>div영역
+		<p>p영역
+			<span>span영역</span>
+		</p>
+	</div>
+	<h1>큰 제목 안에  <span>작은 영역</span>이 있다.</h1>
+	<div>
+		<span>
+			<button type="button">클릭하세요.</button>
+		</span>
+	</div>
+	<br>
+	<hr color="red">
+	<br>
+	<a href="http://www.daum.net">Daum사이트 가기</a>
+</body>
+</html>

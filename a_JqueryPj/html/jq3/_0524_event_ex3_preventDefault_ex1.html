@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>EVENT 객체의 preventDefault 메소드</title>
+	<script type="text/javascript" src="../../js/lib/jquery-3.6.0.js"></script>
+	<style type="text/css">
+	</style>
+	<script type="text/javascript">
+		$(function(){
+			$("body > a[href*='www.naver.com']").click(function(e){
+				alert(1);
+				
+				//기본 동작 막기
+				e.preventDefault();	//a태그의 링크 동작 막기
+			});
+			$("a[href*='www.daum.net']").click(function(){
+				alert(2); 		//함수가 호출이 안돼서 기본 동작이 막힌건지,
+								//호출이 정상적으로 되어서 기본 동작이 막힌건지,
+								//확인하기 위해 alert()사용
+				
+				//기본 동작 막기
+				return false;	//a태그의 링크 동작 막기
+								//e를  사용하지 않으므로 click 이벤트 function의 파라미터e 삭제  
+			});
+			
+			//$("#link")
+			$("p a[id='link']").click(function(e){
+				var age = prompt("나이 입력", "21");
+				if(parseInt(age) < 15) {
+// 					alert("15세 미만 이용 불가");
+					e.preventDefault();
+// 					return false;
+				}				
+			});
+		});
+	</script>
+</head>
+<body>
+	<h3>EVENT 객체의 preventDefault 메소드</h3>
+	<p>사용법: e.preventDefault();</p>
+	<hr>
+	<a href="http://www.naver.com" target="_blank">네이버로 이동</a>
+	<a href="http://www.daum.net" target="_blank">다음으로 이동</a>
+	<p>
+		<a id="link" href="http://www.naver.com">네이버</a>로 이동
+	</p>
+	
+</body>
+</html>

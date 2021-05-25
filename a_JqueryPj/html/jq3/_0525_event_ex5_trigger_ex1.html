@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>trigger(), triggerHandler() 사용하기</title>
+	<script type="text/javascript" src="../../js/lib/jquery-3.6.0.js"></script>
+	<style type="text/css">
+	</style>
+	<script type="text/javascript">
+		//이때도 포커스가 왔어요 글자 떠야하는데 안 뜬다
+		function myTrigger() {
+			$("input").trigger("focus");
+		}
+		function myTriggerHandler() {
+			$("input").triggerHandler("focus");
+		}
+		//input 요소에 포커스가 온 경우
+		function proc3() {
+			//$()에서도 html태그를 통으로 사용할 수 있나보다.
+			$("<span>포커스가 왔어요~~~</span>").appendTo("body")
+			.fadeOut(1000);
+			
+		}
+	</script>
+</head>
+<body>
+	<button type="button" onclick="myTrigger();">trigger</button>
+	<button type="button" onclick="myTriggerHandler();">triggerHandler</button>
+	<hr>
+	<input type="text" value="포커스의 변화" onclick="proc3();">
+</body>
+</html>
