@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Insert title here</title>
+	<script type="text/javascript" src="../../js/lib/jquery-3.6.0.js"></script>
+	<style type="text/css">
+		img {
+			width: 200px; height: 200px;
+		}
+	</style>
+	<script type="text/javascript">
+	
+		function eventImg(e, a) {
+			e.preventDefault();
+			
+			//카테고리 텍스트 접근
+// 			$("a")[0,1,2].childNodes[0].data
+
+			var category = ["jQuery교재", "JSP교재", "UML교재"];
+// 			console.log($("a")[0].childNodes[0].data);
+			console.log(a.childNodes[0].data);
+						
+			var name = $("a")[0].childNodes[0].data;
+			var name1 = $("a")[1].childNodes[0].data;
+			var name2 = $("a")[2].childNodes[0].data;
+			
+			console.log("a");
+// 			console.log(a);
+// 			console.log(a.href);
+			
+			if(name == category[0]) {
+				$("img").slideToggle();
+// 				console.log(0);
+// 				console.log($("a")[0].attr("href"));
+				
+// 				$("img").attr("src", a.href);
+				
+				
+			}else if(name1 == category[1]) {
+				$("img").fadeToggle();
+// 				console.log(1);
+// 				console.log($("a").attr("href"));
+				
+// 				$("img").attr("src", a.href);
+				
+				
+			}else if(name2 == category[2]) {
+				$("img").toggle();
+// 				console.log(2);
+// 				console.log($("a").attr("href"));
+				
+// // 				$("img").attr("src", $("a").attr("href"));
+// 				$("img").attr("src", a.href);
+				
+				
+			}else {
+				return;
+			}
+
+			
+		}
+		
+		
+	</script>
+</head>
+<body>
+	<h1>교재 목록</h1>
+	<ul>
+		<li><a href="../../images/coffee.jpg" onclick="eventImg(event,this); ">jQuery교재</a></li>
+		<li><a href="../../images/dresden-elbe1.jpg" onclick="eventImg(event,this);">JSP교재</a></li>
+		<li><a href="../../images/fox_family.jfif" onclick="eventImg(event,this);">UML교재</a></li>
+	</ul>
+	<hr style="border: 1px solid red">
+	<img src="../../images/Tulips.jpg" alt="튤립">
+</body>
+</html>

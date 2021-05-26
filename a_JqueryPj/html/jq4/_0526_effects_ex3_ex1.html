@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Insert title here</title>
+	<script type="text/javascript" src="../../js/lib/jquery-3.6.0.js"></script>
+	<style type="text/css">
+		img {
+			width: 200px; height: 200px;
+		}
+	</style>
+	<script type="text/javascript">
+// 		$("a").on({
+// 			mouseclick: function(e){
+// 				alert(1);
+// 				var imgSrc = $(this).href;
+// 				console.log(imgSrc);
+// 				document.getElementsByTagName("img")[0].src = "../../images/" + imgSrc;
+// 			}
+// 		});
+
+		$(document).ready(function(){
+			
+// 			console.log( $("img").attr("visibility") == "hidden" );
+// 			console.log( $("img").attr("visibility") == "visible" );
+			console.log( $("img").attr("display") == "none" );
+			
+			
+			//안보이게 지정
+// 			$("img").css("display", "none")
+			
+			//확인
+// 			$("img").attr("display") == "none"
+
+
+
+		});
+				
+		function eventImg(e, flag) {
+			e.preventDefault();
+			
+			
+			
+			if(flag == 1) {
+				$("img").slideToggle();
+				
+				
+			}else if(flag == 2) {
+				$("img").fadeToggle();
+				
+			}else if(flag == 3) {
+				$("img").toggle();
+				
+			}else {
+				return;
+			}
+			
+// 			if($("img").attr("display") != "none") {
+// // 				console.log(1);
+// // 				hideImg(e,flag);
+// 				$("img").css("display", "none");
+
+// 			}else {
+// // 				console.log(2);
+// // 				showImg(e,flag);
+// 				$("img").css("display", "");
+
+// 			}
+			
+		}
+		
+		function showImg(e, flag) {
+			e.preventDefault();
+			console.log(e);
+			
+			e.target.slideUp();
+			
+			if(flag == 1) {
+// 				$("img").slideUp();
+// 				e.target.slideUp();
+// 				$(e.target).slideUp();
+				
+			}else if(flag == 2) {
+				
+			}else if(flag == 3) {
+				
+			}else {
+				return;
+			}
+		}
+		
+		function hideImg(e, flag) {
+			e.preventDefault();
+			console.log(e);
+			
+			if(flag == 1) {
+				
+			}else if(flag == 2) {
+				
+			}else if(flag == 3) {
+				
+			}else {
+				return;
+			}
+		}
+		
+	</script>
+</head>
+<body>
+	<h1>교재 목록</h1>
+	<ul>
+		<li><a href="../../images/dresden-elbe1.jpg" onclick="eventImg(event,1); ">jQuery교재</a></li>
+		<li><a href="../../images/dresden-elbe2.jpg" onclick="eventImg(event,2);">JSP교재</a></li>
+		<li><a href="../../images/Dresden-Germany-above-the-Elbe-River.21.jpg" onclick="eventImg(event,3);">UML교재</a></li>
+	</ul>
+	<hr style="border: 1px solid red">
+	<img src="../../images/Tulips.jpg" alt="튤립">
+</body>
+</html>
