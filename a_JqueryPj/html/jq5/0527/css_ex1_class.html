@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Insert title here</title>
+	<script type="text/javascript" src="../../../js/lib/jquery-3.6.0.js"></script>
+	<style type="text/css">
+		.demo {
+			font-size: 1.5em;
+			color: red;
+			
+		
+		}
+	</style>
+	<script type="text/javascript">
+		$(document).ready(function(){
+			
+			//방법1) 이벤트 개수만큼 함수 생성 - 비효율적
+			//p태그에 마우스 오버 이벤트 바인딩
+			$("p").mouseover(function(){
+				//demo 클래스 추가
+				$(this).addClass("demo");
+			});
+			
+			$("p").mouseout(function(){
+				//demo 클래스 추가
+				$(this).removeClass("demo");
+			});
+			
+			
+			//방법2)
+// 			on메서드
+// 			+ "" 내부에 여러 이벤트 작성
+// 			+ toggleClass() 적용
+
+			//이벤트 2개에 같은 효과 적용
+			$("h3").on("mouseover mouseout", function(){
+				$(this).toggleClass("demo");
+				
+			});
+
+			
+			
+		});
+	</script>
+</head>
+<body>
+	<p>마우스를 올려보세요.</p>
+	<h3>마우스를 올려보세요.</h3>
+</body>
+</html>

@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Insert title here</title>
+	<script type="text/javascript" src="../../../js/lib/jquery-3.6.0.js"></script>
+	<script type="text/javascript">
+	
+		$(document).ready(function(){
+			
+			$("#all").click(function(){
+				
+				console.log($(this).prop("checked"));
+				
+				if($(this).prop("checked")) {
+					$(":checkbox").not(":checked").each(function(){
+// 						console.log($(this).val());
+						$(this).prop("checked", true);
+					});
+					
+				}else {
+					$(":checkbox:checked").each(function(){
+// 						console.log($(this).val());
+						$(this).prop("checked", false);
+					});
+				}
+			});
+			
+			var flag = false;
+			$(":checkbox:checked").each(function(){
+				
+				alert(1);
+				
+				if($(this).prop("checked")) {
+					flag = true;
+					
+					console(this.id);
+					console(flag);
+				}else {
+					flag = false;
+					
+					console(this.id);
+					console(flag);
+					return;
+				}				
+			});
+			
+			if(flag == true) {
+				$("#all").prop("checked", true);
+			}else {
+				$("#all").prop("checked", false);
+			}
+			
+		});
+		
+		
+// 		function checkAll(all) {
+// 			alert(1);
+// 			console.log($(this));
+// 			console.log($(this).prop("checked"));
+// 			console.log(all);
+// 		}
+		
+	</script>
+</head>
+<body>
+	<form>
+		체크박스(전체선택/해제) : <br>
+		<input type="checkbox" id="all">전체선택
+		<input type="checkbox" id="check1"><label for="check1">1</label>
+		<input type="checkbox" id="check2"><label for="check2">2</label>
+		<input type="checkbox" id="check3"><label for="check3">3</label>
+		<input type="checkbox" id="check4"><label for="check4">4</label>
+		<input type="checkbox" id="check5"><label for="check5">5</label>
+	</form>
+</body>
+</html>

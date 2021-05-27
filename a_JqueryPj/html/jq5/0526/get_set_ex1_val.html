@@ -3,7 +3,7 @@
 <head>
 	<meta charset="UTF-8">
 	<title>jQuery 요소 정보 - val()</title>
-	<script type="text/javascript" src="../../js/lib/jquery-3.6.0.js"></script>
+	<script type="text/javascript" src="../../../js/lib/jquery-3.6.0.js"></script>
 	<script>
 		function getInfo() {
 			var msg = "";
@@ -33,10 +33,31 @@
 // 			$("a").attr("href") //아까 예제, 이런식으로 사용
 
 			$("#job").val("A00");
-			$("#desc").val('hello world');
-			
-			
+			$("#desc").val('hello world');	
 		}
+		
+		/*
+			0527
+			오늘 배울 메서드: prop()
+			어제 배운 attr()과 비교
+			
+			//attr()
+			$("#genderM").attr("checked")
+			"checked"
+			$("#genderF").attr("checked")
+			undefined
+			
+			//prop()
+			$("#genderM").prop("checked")
+			true
+			$("#genderF").prop("checked")
+			false
+			
+			하지만 #genderF태그(input)에는 여전히 checked속성이 부여되어있지 않다.
+			
+			
+		
+		*/
 	</script>	
 </head>
 <body>

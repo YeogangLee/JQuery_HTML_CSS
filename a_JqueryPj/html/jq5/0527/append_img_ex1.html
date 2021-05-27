@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Insert title here</title>
+	<script type="text/javascript" src="../../../js/lib/jquery-3.6.0.js"></script>
+	<style type="text/css">
+		img {
+			height: 100px;
+		}
+	</style>
+	<script type="text/javascript">
+		$(document).ready(function(){
+			
+			$("p").click(function(){
+				var addObj = $("<img>");
+				var imgRoot = "../../../images/";
+				
+				
+				//이미지에 alt, src 속성 세팅
+				//방법1)
+// 				addObj.alt = this.innerHTML;
+// 				addObj.src = imgRoot + this.title;
+				
+				//방법2)
+				$(this).append(addObj);
+		
+				var str = this.title;
+				addObj.attr("alt", str);
+				addObj.attr("src", imgRoot + str);
+				
+				
+				console.log(addObj);
+				
+// 				$(this).append(addObj);
+// 				addObj.appendTo("p");
+				
+// 				(addObj).appendTo($(this));
+				
+			});
+			
+		});	
+	</script>
+</head>
+<body>
+	<p title="Tulips.jpg">튜울립</p>
+	<p title="Yellowflower.jpg">국화</p>
+	<p title="Sureflower.jpg">수레국화</p>
+	<p title="Blueflower.png">수국</p>
+</body>
+</html>

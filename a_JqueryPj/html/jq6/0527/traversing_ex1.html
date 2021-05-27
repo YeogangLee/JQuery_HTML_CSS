@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Insert title here</title>
+	<script type="text/javascript" src="../../../js/lib/jquery-3.6.0.js"></script>
+	<style type="text/css">
+		div {
+			border: 2px solid orange;
+		}
+	</style>
+	<script type="text/javascript">
+		$(function(){
+			
+			$("p").click(function(){
+				
+				var objParent = $(this).parent(); //<body> 또는 <div>
+				console.log(objParent);
+				
+				if(objParent.is("div")){
+					console.log(this);
+					console.log($(this));
+
+					$(this).append(ele);					
+					
+					var ele = this.clone();
+					$(this).css("color", "red");
+
+				}
+				
+			});	
+			
+			
+		});
+	</script>
+</head>
+<body>
+	<div>
+		<p>무궁화 꽃이 피었습니다</p>
+	</div>
+	<p>은주는 예쁘다~</p>
+	<div>
+		<p>사뿐이 즈려밟고 가시옵소서</p>
+	</div>
+</body>
+</html>

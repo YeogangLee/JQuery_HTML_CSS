@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Insert title here</title>
+	<script type="text/javascript" src="../../../js/lib/jquery-3.6.0.js"></script>
+	<style type="text/css">
+		img {
+			width: 200px; height: 200px;
+		}
+	</style>
+	<script type="text/javascript">
+	
+		function addTitle() {
+			//for문 사용
+			var objImgs = $("img");
+			for(var i=0; i<objImgs.length; i++) {
+				var objImg = objImgs[i]; // <img>
+				
+				console.log(objImg);	 //<img>요소
+				console.log(objImg.src); //img 소스 전체 경로 file:///D:/A_TeachingMaterial/~/images/Tulips.jpg
+				objImg.attr("title", "뭐시기");
+				
+				//파일명 찾기 1)
+				//제일 마지막 /찾은 후 /뒤 제거 -> 파일명 + 확장자
+				//제일 마지막 .찾은 후 .뒤 제거 -> 파일명
+				var idx = strSrc.lastIndexOf("/");	//6
+				var str = strSrc.substr(idx + 1);	//"coffee1.jfif"
+				
+				idx = str.lastIndexOf(".");			//7
+				fileName = str.substr(0, idx);		//"coffee1"
+				
+				//파일명 찾기 2) 파일명에 .이 포함된 파일
+				//: 배열길이 - 1 = 마지막 인덱스 번호 = 파일명(확장자 포함)에만 접근 가능
+				var arrSla = strSrc.split("/");				// => 배열: ["~", "~", "images", "coffee1.jfif"]
+				var fileFullName = arrSla[arrSla.length-1];	// arr[3] : "coffee1.jfif"
+				var arrDot = fileFullName.split(".");		// 배열: ["coffee","1","jfif"]
+				
+				for(var j=0; j<arrDot.length; j++) {
+					fileName += arrDot[j] + ".";
+				}
+				// fileName : "coffee.1."
+				
+				fileName = fileName.substr(0, fileName.length-1);
+				// fileName : "coffee.1"
+				
+				//title속성 - 마우스 올리면 tooltip이 보인다.
+				$(objImg).attr("title", fileName);
+			}
+						
+			
+			//each 사용
+			$("img").each(function(){
+				var imgName = $(this).attr("src");
+// 				console.log(imgName);
+				
+				name = imgName.substr(13);	//lastIndexOf('/') 대체 가능
+// 				console.log(name);
+
+				dot = name.indexOf('.');	//lastIndexOf('.') 사용 가능
+// 				console.log(dot);
+
+				name = name.substr(0, dot);
+				console.log(name);
+				
+				$(this).attr("title", name);	
+			});
+			
+		}
+		
+	</script>
+</head>
+<body>
+	<img alt="" src="../../../images/Tulips.jpg"> 	
+	<img alt="" src="../../../images/coffee.jpg"> 	
+	<img alt="" src="../../../images/Tulips.jpg"> 	
+	<img alt="" src="../../../images/coffee.jpg"> 	
+	<img alt="" src="../../../images/fox_family.jfif"> 	
+	<br>
+<!-- 	<img alt="" src="e.png" title="e"> -->
+	<button type="button" onclick="addTitle();">눌러보세요.</button> 	
+</body>
+</html>

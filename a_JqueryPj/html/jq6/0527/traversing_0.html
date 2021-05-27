@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Insert title here</title>
+	<script type="text/javascript" src="../../../js/lib/jquery-3.6.0.js"></script>
+	<style type="text/css"></style>
+	<script type="text/javascript">
+		$(function(){
+			
+			$("p", "#ex1").click(function(){
+				//div 안의 p인 경우에만 메세지 주기
+				var objParent = $(this).parent(); //<body> 또는 <div>
+				console.log(objParent);
+				
+				if(objParent.is("#ex1 div")){
+					alert("parents: div");
+				}
+				
+			});
+			
+			$("p", "#ex2").click(function(){
+				var objParent = $(this).parent();
+				
+				if(objParent.is("div") && $(this).children("p")) {
+					//p태그를 복사해서 넣어주기
+					//: 클릭한 그 요소를 복사
+					var objNew = $(this).clone();
+				
+					objParent.append(objNew);
+					objNew.css("color", "red");	
+					
+				}else {
+					//메세지 주기
+					alert("작업 대상X");
+				}
+				
+			});
+			
+		});
+	</script>
+</head>
+<body>
+	<div id="ex1">
+		<p>p태그1</p>
+		<div>
+			<p>p태그2</p>
+		</div>
+	</div>
+	<div id="ex2">
+		<div>
+			<p>무궁화 꽃이 피었습니다</p>
+		</div>
+		<p>은주는 예쁘다~</p>
+		<div>
+			<p>사뿐이 즈려밟고 가시옵소서</p>
+		</div>
+	</div>
+</body>
+</html>
