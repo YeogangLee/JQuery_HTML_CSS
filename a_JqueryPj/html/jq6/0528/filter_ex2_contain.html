@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Insert title here</title>
+	<script type="text/javascript" src="../../../js/lib/jquery-3.6.0.js"></script>
+	<style type="text/css">
+		div {
+			width: 500px;
+			height: 30px;
+			border: 1px solid green;
+			margin-bottom: 20px; 
+		}
+	</style>
+	<script type="text/javascript">
+		$(document).ready(function(){	
+			$("span:contains('jQuery')").css("border","2px solid blue");
+			$("span").not(":contains('jQuery')").css("border","1px solid red");
+// 			$("span:not(:contains('jQuery'))").css("border","2px solid red");
+
+			$("div:has(span)").css("border","4px solid green");
+			$("div:empty").css("border","2px solid orange");
+			$("div span").css({"color":"red", "font-weight":"bold"});
+			$("div:parent").css({"text-weight":"bold", "font-size":"1.5em"});
+			
+			/*
+				$(":visible")
+				jQuery.fn.init(17)
+				[html, body, div, div#demo, span, p, span, div, span, div, br, hr, p, p, p, button, button, prevObject: jQuery.fn.init(1)]
+			
+				$(":hidden")
+				jQuery.fn.init(7)
+				[head, meta, title, script, style, script, p, prevObject: jQuery.fn.init(1)]
+			*/	
+			
+			$(":enabled").css("border", "1px solid blue");
+			$(":disabled").css("border", "1px solid red");
+			
+			
+			/* form상태 예제 필터 - 체크한 값 가져오기 */
+			//여행
+			$("input", "#f2").eq(0).next().eq(0).text()
+			//input의 value에 label의 텍스트를 넣어도 된다.
+			
+			//이게 되면, value에 01,02 코드 넣어서
+			//바둑(01), 장기(02) 이런식으로 수정해보기
+			
+			
+			//hobbies를 그냥 문자열로 받으니 오류가 생기는 거 같다.
+			//자꾸 더해주기만 하니, 이상한 값도 더해진다
+			//조건문 넣어서 해봐도 원하는 방향이 아니다
+			
+			//배열로 받아야겠다
+			
+			var hobbies = "";
+			$("input", "#f2").click(function(){
+				if($(this).prop("checked")){
+					
+					var hobby = $(this).next().eq(0).text();
+					console.log(hobby);
+					
+// 					if(hobby == "undefined"){
+// 						hobby = "";
+// 					}
+				}else {
+					hobby = "";
+				}
+				
+				hobbies += hobby + ", "; 
+				
+			});
+			
+			$("button[value='Submit']").click(function(){
+				console.log(hobbies.length);
+				hobbies = hobbies.substr(0, hobbies.length-2);
+				
+				alert(hobbies);
+
+				$("p:last").text("");
+				$("p:last").append(hobbies);
+				$("p:last").css("display","inline");
+			});
+			
+				
+			
+			
+		});
+		
+	</script>
+</head>
+<body>
+	<div></div>
+	<div id="demo">헬로우~~<span>오늘도 즐겁게~열심히!</span></div>
+	<p>Hello jQuery!<span>Tak, jQuery!</span></p>
+	<div>jQuery!</div>
+	<span>쉬운 jQuery~~!</span>
+	<div></div>
+	<br><hr>
+	<p>보이는 문단</p>
+	<!-- 자리를 차지하는 애는 hidden -->
+	<p style="visibility: hidden;">숨겨진 문단</p>
+	<p style="display: none;">자리를 차지하지 못한 문단</p>
+	<p style="opacity: 0;">투명한 문단</p>
+	<input type="hidden" value="안보이지롱">
+	<div style="width: 0px; height: 0px;"></div>
+	<img style="width: 0px">
+	<br><hr><br>
+	<form>
+		<input type="text">
+		<br>
+		<input type="password">
+		<br>
+		<select name="disSelect" disabled><option>Option</option></select>
+		<br>
+		<textarea name="enTextarea" rows="10" cols="20">text</textarea>
+		<br>
+		<input type="button" value="확인" disabled>
+		<br>		
+	</form>
+	<br><hr><br>
+	<form id="f2">
+		<input type="checkbox" id="input1"><label for="input1">여행</label>
+		<input type="checkbox" id="input2"><label for="input2">장기</label>
+		<input type="checkbox" id="input3"><label for="input3">바둑</label>
+		<input type="checkbox" id="input4"><label for="input4">독서</label>
+		<input type="checkbox" id="input5"><label for="input5">낚시</label>
+		<input type="checkbox" id="input5"><label for="input5">산책</label>
+		<input type="checkbox" id="input5"><label for="input5">외국어</label>
+		<br><br>
+		<button type="button" value="Submit">전송</button>
+		<br><br>
+<!-- 		<span>선택 결과:</span><p></p> -->
+		<span>선택 결과 : </span><p></p>
+	</form>
+</body>
+</html>

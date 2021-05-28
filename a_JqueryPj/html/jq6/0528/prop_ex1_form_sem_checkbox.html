@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Insert title here</title>
+	<script type="text/javascript" src="../../../js/lib/jquery-3.6.0.js"></script>
+	<script type="text/javascript">
+		$(document).ready(function(){
+			
+			//$(":text")
+			$("input[type=text]").click(function(){
+				alert(0);
+			});
+						
+			$("#btnAttr").click(function(){
+				
+				var msg = "선택의 checked는 " + $("#tmp").attr("checked")
+						+ "\n성별의 checked는 " + $("[name=gender]:checked").attr("checked")
+						+ "\n성별의 val은 " + $("[name=gender]:checked").val()
+						+ "\n리스트의 selected는 " + $("#number").attr("selected")
+						+ "\ninput1의 readonly는 " + $("#input1").attr("readonly")
+						+ "\ninput2의 disabled는 " + $("#input2").attr("disabled")
+						+ "\n실행버튼의 disabled는 " + $("#btnSubmit").attr("disabled");
+				
+				alert(msg);
+				
+			});
+			
+			$("#btnProp").click(function(){
+				
+				var msg = "선택의 checked는 " + $("#tmp").prop("checked")
+						+ "\n성별의 checked는 " + $("[name=gender]:checked").prop("checked")
+						+ "\n성별의 val은 " + $("[name=gender]:checked").val()
+						+ "\n리스트의 selected는 " + $("#number").prop("selected")
+						+ "\ninput1의 readonly는 " + $("#input1").prop("readonly")
+						+ "\ninput2의 disabled는 " + $("#input2").prop("disabled")
+						+ "\n실행버튼의 disabled는 " + $("#btnSubmit").prop("disabled");
+				
+				alert(msg);
+				
+			});
+			
+			/* ------------------------------------------------------------------------------------------ */
+			/* 체크박스 */
+			
+			// 전체 체크박스 클릭시
+			$("#checkAll").click(function(){
+				
+				var val = $(this).prop("checked");
+				//방법1)
+				$("[name=hobby]").prop("checked", val);
+			
+				//방법2)
+// 				$(":checkbox", "#divChk").prop("checked", val);
+	
+				//방법3)
+				if(val) {
+					$("[name=hobby]").not(":checked").each(function(idx, item){				
+						$(item).prop("checked", val);
+					});					
+				}else {
+					$("[name=hobby]").each(function(idx, item){				
+						$(item).prop("checked", val);
+					});
+				}
+				
+			});
+						
+			//체크박스 각각에 클릭 이벤트
+			$("[name=hobby]").click(function(){
+				var allCnt = $("[name=hobby]").length;				//전체 체크박스 개수
+				var checkedCnt = $("[name=hobby]:checked").length;	//체크된 체크박스 개수
+				
+				if(checkedCnt == allCnt) {
+					$("#checkAll").prop("checked", true);
+				}else {
+					$("#checkAll").prop("checked", false);
+				}
+				
+			});			
+						
+		});
+	</script>
+</head>
+<body>
+	<form>
+		<label>체크박스: </label>
+		<input type="checkbox" id="tmp"><label for="tmp">선택</label>
+		<br><br>
+		<label>성별 : </label>
+		<input type="radio" name="gender" id="genderM" value="M"><label for="genderM">남자</label>
+		<input type="radio" name="gender" id="genderF" value="F" checked="checked"><label for="genderF">여자</label>
+		<br><br>
+		<label>리스트박스 : </label>
+		<select id="number">
+			<option>--선택--</option>
+			<option>하나</option>
+			<option selected="selected">둘</option>
+			<option>셋</option>
+		</select>
+		<br><br>
+		(readonly) : <input type="text" value="가나다" readonly="readonly" id="input1"><br><br>
+		(disabled) : <input type="text" disabled="disabled" id="input2">
+		<button type="button" disabled="disabled">실행</button>
+		<button type="button" id="btnAttr">attr확인</button>
+		<button type="button" id="btnProp">prop확인</button>
+		<br><br><hr><br>
+		체크박스(전체선택/해제) : <br>
+		
+<!-- 		방법1) 범위 한정  //디자인을 손보는 코딩은 그닥 좋지 않다. -->
+<!-- 		<div id="divChk"> -->
+			<input type="checkbox" id="checkAll" name="hobby"><label for="checkAll">전체선택</label>
+			<input type="checkbox" id="check1" name="hobby"><label for="check1">1</label>
+			<input type="checkbox" id="check2" name="hobby"><label for="check2">2</label>
+			<input type="checkbox" id="check3" name="hobby"><label for="check3">3</label>
+			<input type="checkbox" id="check4" name="hobby"><label for="check4">4</label>
+			<input type="checkbox" id="check5" name="hobby"><label for="check5">5</label>
+<!-- 		</div> -->
+	</form>
+</body>
+</html>

@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Insert title here</title>
+	<script type="text/javascript" src="../../../js/lib/jquery-3.6.0.js"></script>
+	<style type="text/css">
+		li {
+			font-size: 20px;
+		}
+	</style>
+	<script type="text/javascript">
+		$(document).ready(function(){
+			
+			/*
+				예제 1)
+				5번째;인덱스4 보다 작은 요소들 글자 두껍게
+				5번째;인덱스4 보다 큰 요소들 글자 크기 0.5배	
+			*/
+			
+			//필터 사용 방식
+// 			$("li:first, li:last").css("background-color", "yellow");
+// 			$("li:eq(5)").css("background-color", "red");
+// 			$("li:lt(4)").css("font-weight", "bold");
+// 			$("li:gt(4)").css("font-size", "0.5em");
+			
+			//메서드 사용 방식
+			$("li").first().css("background-color", "yellow");
+			$("li").last().css("background-color", "yellow");
+			$("li").eq(5).css("background-color", "red");
+			$("li").slice(0,4).css("font-weight", "bold");
+			$("li").slice(5).css("font-size", "0.5em"); //파라미터 1개 -> 파라미터부터, 요소의 끝
+			
+			/* 예제 2) */
+			$("table").css("text-align", "center");
+			$("table").css({"text-align" : "center"
+							,"width" : "500px"
+							,"height" : "50px"
+			});
+			$("td").css("width", "50px");
+			$("tr:even").css("background-color","lightgray");
+			$("tr:odd").css("background-color","white");
+			
+			$("th").css({"background-color":"black"
+						,"color":"white"
+			});
+			
+			/* 예제 3) */
+			$("ol li").css("font-size","16px");
+			$("ol li").first().css("background-color","yellow");
+			$("ol li").first().css("border","2px solid red");
+			
+			//프로그래머에 파란 dotted 어떻게 넣을까
+			$("ol li:last").first().css("border","1px dotted blue");
+			
+			$("ol:last-child li:first").css("border","2px solid red");
+			$("ol:last-child li").last().css("background-color","green");
+			$("ol:last-child li").last().css("border","1px dotted blue");
+			
+			$("td:nth-child(3n-2)", "#member").css("background","black").css("color","white");
+			$("td:nth-child(3n-1)", "#member").css("background","gray");
+			$("td:nth-child(3n)", "#member").css("background","lightgray");
+			
+			//테이블에 스타일 적용시 주의사항
+			//tr에 스타일을 먹이면 안 먹힌다! => tr의 자식 요소td에 스타일 적용
+			$("tr:first td", "#member").css("background", "pink");
+			//필터말고 메서드 사용, tr내부에 td만 있을시 <=> 
+			$("tr", "#member").first().children().css("background", "salmon");
+			
+			$("tr td", "#member").first().css("background", "salmon"); //? tr 내부의 첫 번째 td, 딱 1개
+			$("tr", "#member").first().children().css("background", "salmon"); //!! 이게 tr내부의 모든 자식요소(td) 선택
+			
+		});
+		
+		/*
+		eins, zwei, drei, vier, fünf, sechs, sieben, acht, neun, zehn
+		*/
+	</script>	
+</head>
+<body>
+	<ul>
+		<li>1</li>
+		<li>2</li>
+		<li>3</li>
+		<li>4</li>
+		<li>5</li>
+		<li>6</li>
+		<li>7</li>
+		<li>8</li>
+		<li>9</li>
+	</ul>
+	<table>
+		<tr><td>one</td><td>11만원</td></tr>
+		<tr><td>two</td><td>22만원</td></tr>
+		<tr><td>three</td><td>33만원</td></tr>
+		<tr><td>four</td><td>44만원</td></tr>
+		<tr><td>five</td><td>55만원</td></tr>
+		<tr><td>six</td><td>66만원</td></tr>
+		<tr><td>seven</td><td>77만원</td></tr>
+		<tr><td>eight</td><td>88만원</td></tr>
+		<tr><td>nine</td><td>99만원</td></tr>
+	</table>
+	<table>
+		<tr><th>이름</th><th>주소</th></tr>
+		<tr><td>무궁화</td><td>대전</td></tr>
+		<tr><td>진달래</td><td>서울</td></tr>
+		<tr><td>개나리</td><td>부산</td></tr>
+		<tr><td>수레국화</td><td>독일</td></tr>
+	</table>
+	<ol>
+	인기있는 남자들
+		<li>능력</li>
+		<li>돈</li>
+		<li>잘생김</li>
+		<li>프로그래머</li>
+	</ol>
+	<ol>
+	인기있는 여자들
+		<li>예쁨</li>
+		<li>귀여움</li>
+		<li>프로그래머</li>
+	</ol>
+	<table id="member">
+		<tr><td>이름</td><td>주소</td><td>전화번호</td></tr>
+		<tr><td>홍길동</td><td>대전</td><td>010-9999-1117</td></tr>
+		<tr><td>진달래</td><td>서울</td><td>010-9999-1117</td></tr>
+		<tr><td>개나리</td><td>부산</td><td>010-9999-1117</td></tr>
+		<tr><td>무궁화</td><td>대구</td><td>010-9999-1117</td></tr>
+	</table>
+	
+</body>
+</html>
