@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>XMLHttpRequest</title>
+	<script type="text/javascript">
+	
+	//-------------------------------------------------------------
+	// 1) XMLHttpRequest 객체 생성 
+		var xhttp = new XMLHttpRequest();
+		//==> xhttp.readyState : 0
+	//-------------------------------------------------------------
+		
+	// 3) 서버로부터 응답 처리 - change에 관한 것이므로, 상태가 변화하기 전인 부분에 선언
+		xhttp.onreadystatechange = function(){
+		
+			// 200: 서버가 데이터를 전부 받아서 처리결과가 성공
+			if(this.readyState == 4 && this.status == 200) {
+				var result = this.responseText;
+				console.log(result);
+				
+				//result가 JSON타입일 경우
+				var objResult = JSON.parse(result);
+				console.log(objResult);
+// 				변환 후 objResult.id 등으로 사용
+			}
+		};	
+		
+	// 2) 서버로 요청
+		//open( method, url, async, user, psw )
+		xhttp.open("GET", "test.jsp", true); // true: 비동기 asynch 
+		// => GET방식, 비동기로  test.jsp에 연결
+		
+	// 2-1) GET방식	
+	
+		//GET  : url 뒤에 데이터를 붙여서 보냄, ? 파싱, & 연결
+		//		 ex.이름이 아이유인 사람 찾기: text.jsp?name=아이유&age=30
+		xhttp.open("GET", "test.jsp?name=아이유&age=30", true); 
+		xhttp.send(); //send(): 요청하기(요청 보내기, 데이터 보내기)
+	
+		
+	// 2-2) POST방식
+	
+		//POST : header에 데이터 담아서 보내기
+		xhttp.open("POST", "test.jsp", true);
+		xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+		xhttp.send("name=아이유&age=30");
+		
+// 		open()이후 ==> xhttp.readyState : 1
+// 		send()이후 ==> xhttp.readyState : 2
+		
+	//-------------------------------------------------------------
+	
+// 		서버가 데이터를 받는 중이면 ==> xhttp.readyState : 3
+// 		서버가 데이터를 다 받았으면 ==> xhttp.readyState : 4
+		
+	</script>
+</head>
+<body>
+	<button type="button" onclick="setGetByAsynch();">GET 비동기 전송</button>
+</body>
+<script type="text/javascript">
+	function setGetByAsynch() {
+		var xhttp = new XMLHttpRequest();
+		xhttp.open("GET", "../../../jq8/json_basic.html", true);
+		xhttp.send();
+		xhttp.onreadystatechange = function(){
+				if(this.readyState == 4 && this.status == 200) {
+					$("#result").html(this.responseText);
+				}
+		};
+		
+	}
+</script>
+</html>
