@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Insert title here</title>
+	<script type="text/javascript" src="../../../js/lib/jquery-3.6.0.js"></script>
+	<script type="text/javascript">
+	/*
+		get방식을 사용 후 console에 location.href입력 
+		location.href
+		"http://localhost/JqueryPj/html/jq9_ajax/0601/intro_kaffee.html?name=%EC%9D%B4%EC%97%AC%EA%B0%95&age=11"
+		
+		get방식은 이렇게 사용
+	*/
+	</script>
+</head>
+<body>
+	<!-- "get"방식으로 하면 url뒤에 파라미터가 붙지만, "post"방식으로 하면 url뒤에 파라미터X -->
+	<form id="fm" action="intro_kaffee_url_parsing.html" method="get">
+	
+		<!-- name속성을 지정해주지 않으면 url뒤에 파라미터로서 붙지 않는다. --> 
+		이름: <input type="text" name="name"><br> 
+		나이: <input type="text" name="age"><br>
+		<br>
+		<button type="button" onclick="fnSubmit()">post버튼</button>
+		<button type="submit">get버튼</button>
+		<hr>
+		<button type="button" id="sendAjax" onclick="fnAjax()">Ajax전송</button>
+	</form>
+	<div id="resultAjax"></div>
+</body>
+<script type="text/javascript">
+
+	//form submit 방식 호출
+	function fnSubmit(){
+		var fm = document.getElementById("fm");
+		fm.method = "post";				
+		fm.action = "json_basic.html";
+		fm.submit();
+	}
+	
+	//jquery ajax 방식 호출
+	function fnAjax() {
+		
+		//ajax 사용 문법 외우기, 앞으로 계속 쓸 거니까.
+		$.ajax({
+			url: "intro_kaffee_url_parsing.html"
+			,type: "get"
+			,dataType: "json"
+			,success: function(data){
+				$("#resultAjax").html(data);
+			}
+			,error: function(xhr){
+				console.log(xhr);
+				alert("오류입니다.");
+			}
+		});
+	}
+
+</script>
+</html>

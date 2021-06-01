@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8"> <!-- 이 태그가 없으면 웹 브라우저 한글이 깨진다. -->
+	<title>Web Programming</title>
+	<script type="text/javascript" src="../../../js/lib/jquery-3.6.0.js"></script>
+	<script type="text/javascript">
+	$(document).ready(function(){
+		
+// 		console.log(window.location);
+// 		console.log(location.href);
+// 		var str = location.href;
+		
+// 		var userName = "";
+// 		var userAge = "";
+
+// 		//첫 ?위치 찾기
+// 		var idxQ = str.indexOf("?");
+// 		str = str.substr(idxQ, str.length);
+
+// 		var idxN = str.indexOf("name=");
+// 		var idxA = str.indexOf("&");
+	
+// 		var tmp = "";
+// 		tmp = str.substr(idxN, idxA);
+// 		console.log(tmp);		
+	
+// 		var idxI = str.indexOf("age=");
+// 		tmp = str.substr(idxI, str.length);
+// 		console.log(tmp);
+	
+// 		console.log(str.substr(question, str.length));
+		
+		var url = location.href;
+		console.log("url");
+		console.log(location.href); //개발자 도구 콘솔에 바로 찍어도 확인 가능
+		
+		//url에 ?가 있다면
+		if(url.indexOf("?") > -1) {
+			var params0 = url.split("?");
+			var params = url.split("?")[1]; //["~", "~"] => "userId=123&userName=1223"
+			var arr = params.split("&");	//["userId=123", "userName=1223", "..."]
+			
+			console.log("params0");
+			console.log(params0);
+			console.log("params[1]");
+			console.log(params);
+			console.log("arr");
+			console.log(arr);
+			
+			for(var i=0; i<arr.length; i++) {
+				var arr1 = arr[i].split("="); //"userId=123" => ["userId", "123"];
+				if(arr1[0] == "name") {
+					userName = arr1[1];
+				}else if(arr1[0] == "age") {
+					userAge = arr1[1];
+				}
+			}
+		}
+		
+		
+
+			//alert()로 찍어주든, 페이지에 보여주기
+			userName = decodeURI(userName);
+			$("#userName").text(userName);
+			$("#userAge").text(userAge);
+		});
+		
+		/*
+		//자바스크립트 인코딩, 디코딩 함수
+		- encodeURI("김겨울")
+		  "%EA%B9%80%EA%B2%A8%EC%9A%B8"
+		- decodeURI("%EA%B9%80%EA%B2%A8%EC%9A%B8")
+		  "김겨울"
+		*/
+	</script>
+</head>
+<body>
+	<p>로그인: <span id="userName"></span>님 <span id="userAge"></span>살</p>
+	<h1>Welcome to the Web Programming!</h1>
+	<img src="../../../images/coffee.jpg">
+	<p>
+		언제든지 오셔서 질문이 있으시면 올려주세요.
+		<em>환영합니다.</em>
+	</p>
+	<h2>내용</h2>
+	<p>HTML5, CSS3, Javascript, jQuery, SQL, JSP, ...</p>
+	<h2>기간</h2>
+	<p>2021.03.10. - 2021.10.21.</p>
+	<h2>장소</h2>
+	<p>대덕인재개발원</p>
+</body>
+
+</html>

@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Insert title here</title>
+	<script type="text/javascript" src="../../../js/lib/jquery-3.6.0.js"></script>
+	<script type="text/javascript">
+		//이름, 전화번호, 나이, 주소, 특기, 양반, 아들
+		var objJS = {
+				name: "홍길동"
+				,phone: "010-1234-1004"
+				,age: 25
+				,birth: "1425-12-14"
+				//"1425/12/14", "1425 12 14"도 가능
+				//그런데 1425-12-14로 하면 09:00 표준시가 같이 나오지만, 뒤의 2개는 시각이 00:00으로 나온다.
+								
+				//객체의 객체
+				,addr: { 
+					sido: "대전광역시"
+					,gugun: "중구"
+					,dong: "대사1동"
+					,bunji: "123번지"
+					,postCode: "12345"
+				}
+				//"대전광역시 중구 대사1동 123번지 12345"
+				
+				,specialty: ["무술", "검술", "독서"]
+				,status: false
+				,son: null
+		}
+		
+		var objJSON = {
+				"name": "홍길동"
+				,"phone": "010-1234-1004"
+				,"age": 25
+				,"addr": { 
+					"sido": "대전광역시"
+					,"gugun": "중구"
+					,"dong": "대사1동"
+					,"bunji": "123번지"
+					,"postCode": "12345"
+					//!의문 : 우편번호는 숫자로 써도 되는 것 아닌가요?
+					//=> 자릿수가 정해져 있는 것은 String으로 사용, SQL의 char
+					//ex. 5자리: "00005"
+					
+					//자릿수가 정해져 있지 않다: SQL의 varchar
+				}
+				,"specialty": ["무술", "검술", "독서"]
+				,"status": false
+				,"son": null
+		}
+		
+		// 	JSON.stringify(objJS); ==> JSON 형식의 문자열 반환
+		// 	JSON.parse(str) ==> 문자열을 Javascript 객체로 반환
+				
+		// 	JSON.parse() 사용시 주의사항
+		// 	JSON.parse("{'name':'홍길동','age':25}") => 에러
+		// 	JSON.parse('{"name":"홍길동","age":25}') => {name: "홍길동", age: 25}
+		//  ==> 큰따옴표""가 밖에 있을시 인식X, java는 문자열에 ""를 사용하므로
+
+// 		document.write("objJS : " + objJS);
+// 		document.write("<hr>");
+// 		document.write("objJSON : " + objJSON);
+// 		document.write("<hr color=\"red\">");
+		
+		function proc() {
+			
+			//1) JSON.stringify(objJS): javascript객체를 json string으로 변환
+			// json string으로 변환하면 키값에도 ""이 적용된다 -> key 또한 value처럼 문자열로 만들기 -> JSON 형태
+			var str = JSON.stringify(objJS);
+			$("#result1").text(str);
+			console.log(str);
+			
+			//2) JSON.parse(strJSON): json string을  javascript객체로 변환
+			//자바에서는 문자열에 ""를 사용하므로, ''사용시 에러
+// 			var strTmp = "{'id':'text01', 'name':'아이유'}";
+
+			//해결 방법1. 작은 따옴표''는 밖에, 큰 따옴표""는 안에 작성
+			var strTmp = '{"id":"text01", "name":"아이유"}';
+			
+			//해결 방법2. 안에도 밖에도 ""사용, 내부 큰따옴표에는 "출력을 위해 역슬래시 \사용 => \"name\":\"김겨울\"
+// 			var strTmp = "{\"id\":\"text01\", \"name\":\"아이유\"}";
+
+			var obj = JSON.parse(strTmp);
+			$("#result2").text(obj);
+			console.log(obj);
+			
+			/*
+			
+			이렇게 JSON.parse()을 이용하면
+			javascript객체로 변환 후 쩜.사용이 가능하다!
+			JSON객체가 아니라 javascript객체 !
+			
+			ex) obj2.name
+			
+			*/
+			
+			
+			
+			//이름
+			var str2 = JSON.stringify(objJS);
+			var obj2 = JSON.parse(str2);
+			$("#result3").text(obj2.name);
+			console.log(obj2.name);
+			
+			
+			//주소 - 객체 내부의 객체
+			var objAddr = JSON.stringify(obj2.addr);
+			var strAddr = JSON.parse(objAddr);
+			var strAddr2 = strAddr.sido + " " + strAddr.gugun + " " + strAddr.dong + " " + strAddr.bunji + " " + strAddr.postCode;
+			
+			/*
+				객체 내부의 객체는
+				JSON.stringify()에 매개변수로 객체 내부의 객체를 넣어준다. ex) obj2.addr
+				JSON.parse()를 사용해서 javascript객체로 변환 후, .사용 가능!
+				
+				객체 내부의 객체 변환 -> javascript객체로 변환 후 여러가지 속성값을 사용할 수 있다
+				객체가 아닌 문자열이었다면, 키 값 하나에 하나의 값만 접근이 가능
+				ex.
+				객체 내부 객체 변환
+				strAddr.sido
+				strAddr.gugun
+				strAddr.dong
+				...
+				
+				객체 내부 문자열 변환
+				obj2.name
+			*/
+			
+			$("#result4").text(strAddr2);
+			console.log(strAddr2);
+
+			
+			//취미
+			var obj3 = obj2.specialty;
+			var strSpec = "";
+			for(var i=0; i<obj3.length; i++) {
+				strSpec += obj3[i] + ", ";
+			}
+			strSpec = strSpec.substr(0, strSpec.length-2);
+			
+			$("#result5").text(strSpec);
+			
+			
+			//생년월일
+			//년도까지만 맞출 수 있다
+// 			var date = new Date().setFullYear(1425);			
+// 			$("#result6").text(new Date(date));
+			//년도를 들고오거나 설정할 때는 항상 FullYear를 사용한다
+			//-> getFullYear(), setFullYear()
+
+			var birth = obj2.birth;
+			var date = new Date(birth);
+			$("#result6").text(date);
+			
+			
+			//JSON객체는 영국 시간(표준시)를 출력하는데,
+			//Date객체는 시차를 반영해서, 그 나라의 시간을 출력한다.
+			
+// 			Tue Jun 01 2021 08:53:19 GMT+0900 (대한민국 표준시)	//한국은 8시 53분, 6월 1일
+// 			2021-05-31T23:53:19.205Z						//영국은 23시 53분(11시 53분), 5월 31일
+			
+// 			var d = new Date();
+// 			var n = d.toJSON();
+			
+		}		
+		
+	</script>
+</head>
+<body>
+	<button type="button" onclick="proc();">JSON 변환 테스트</button>
+	<p>1차 변환(obj -> str) : <span id="result1"></span></p>
+	<p>2차 변환(str -> obj) : <span id="result2"></span></p>
+	<p>이름 : <span id="result3"></span></p>
+	<p>주소 : <span id="result4"></span></p>
+	<p>취미 : <span id="result5"></span></p>
+	<p>생년월일 : <span id="result6"></span></p>
+</body>
+</html>

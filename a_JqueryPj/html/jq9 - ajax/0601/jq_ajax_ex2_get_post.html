@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Insert title here</title>
+	<script type="text/javascript" src="../../../js/lib/jquery-3.6.0.js"></script>
+</head>
+<body>
+	<!-- "get"방식으로 하면 url뒤에 파라미터가 붙지만, "post"방식으로 하면 url뒤에 파라미터X -->
+	<form id="fm" action="intro_kaffee.html" method="post"> 
+		이름: <input type="text" name="name"><br> <!-- name속성을 지정해주지 않으면 url뒤에 파라미터로서 붙지 않는다. -->
+		나이: <input type="text" name="age"><br>
+		<br>
+		<button type="button" onclick="fnSubmit()">post버튼</button>
+		<button type="submit">get버튼</button>
+		<!--
+			type="submit"은 더이상 사용하지를 않는다.
+			그 이유는 웹 브라우저 화면에서 엔터를 치면,
+			값을 입력하지 않아도 값이 그대로 전송되고, 화면이 바뀌기 때문이다.
+			항상 버튼을 누르고 이벤트를 발생시켜야 한다.
+		 -->
+		<hr>
+		<button type="button" id="sendAjax" onclick="fnAjax()">Ajax전송</button>
+	</form>
+	<div id="resultAjax"></div>
+</body>
+<script type="text/javascript">
+	//form submit 방식 호출
+	function fnSubmit(){
+		var fm = document.getElementById("fm");
+		// <form>태그 method속성의 기본값은 "get"
+		fm.method = "post";				//전송 방식 - ajax의 'type;
+		fm.action = "json_basic.html";	//호출할 주소 - ajax의 'url', action속성에 html을 작성했지만 바꾸고 싶다면,
+		fm.submit();
+	}
+	
+	//jquery ajax 방식 호출
+	function fnAjax() {
+// 		alert(1);
+		//ajax 사용 문법 외우기, 앞으로 계속 쓸 거니까.
+		$.ajax({
+			url: "intro_kaffee.html"
+// 			url: "intro_kaffee1.html"	//에러 발생시키기 - 일부러 없는 파일로 url값 지정 
+			/*
+				개발자도구 console에서 확인
+				status: 404
+				statusText: "Not Found"
+				
+				403에러 발생조건 아셨는데 지금까먹으셨다...
+			*/
+			,type: "get"	//form태그 뿐만 아니라 ajax에서도 생략이 가능하고, 기본값은 get
+// 			,data:
+			,dataType: "json"
+			/*
+				오류 발생
+				케이스1: 잘못된 dataType, 콘솔에서 responseText를 복붙해서 확인 				
+				케이스2: 아래에 있는 error속성을 기입하지 않았다던가
+			
+			*/
+			,success: function(data){
+				$("#resultAjax").html(data);
+			}
+			,error: function(xhr){
+				console.log(xhr);
+				alert("오류입니다.");
+			}
+		});
+	}
+	
+/*
+- 개발자도구 console에서 들고오기
+	responseText:
+	"<!DOCTYPE html>
+	<html>
+		<head>
+			<meta charset="UTF-8">
+			<!-- 이 태그가 없으면 웹 브라우저 한글이 깨진다. -->
+			<title>Web Programming</title>
+		</head>
+		<body>
+			<h1>Welcome to the Web Programming!</h1>
+			<img src="../../../images/coffee.jpg">
+			<p>
+				언제든지 오셔서 질문이 있으시면 올려주세요.
+				<em>환영합니다.</em>
+			</p>
+			<h2>내용</h2>
+			<p>HTML5, CSS3, Javascript, jQuery, SQL, JSP, ...</p>
+			<h2>기간</h2>
+			<p>2021.03.10. - 2021.10.21.</p>
+			<h2>장소</h2>
+			<p>대덕인재개발원</p>
+		</body>
+	</html>"
+ */
+	
+</script>
+</html>

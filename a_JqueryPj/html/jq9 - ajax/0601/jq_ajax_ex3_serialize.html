@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Insert title here</title>
+	<script type="text/javascript" src="../../../js/lib/jquery-3.6.0.js"></script>
+</head>
+<body>
+	<form action="" id="fm">
+		이름: <input type="text" name="userName"><br>
+		ID: <input type="text" name="userId"><br>
+		나이: <input type="text" name="userAge"><br>
+		비밀번호: <input type="password" name="userPassword"><br>
+	</form>
+	<hr>
+	<button type="button" onclick="proc(1)">serialize()</button>
+	<button type="button" onclick="proc(2)">serializeArray()</button>
+	<button type="button" onclick="proc(3)">serializeJSON()</button>
+	<div id="result">
+	</div>
+</body>
+<script type="text/javascript">
+	function proc(flag) {
+		var str = "";	//string으로 받을지 object로 받을지 아직 모르지만, str로 선언
+		if(flag==1) {
+			str = $("#fm").serialize();
+			//userName=%EA%B9%80%EA%B2%A8%EC%9A%B8&userId=win&userAge=11&userPassword=11
+			
+		}else if(flag==2) {
+			str = $("#fm").serializeArray();
+			//[object Object],[object Object],[object Object],[object Object]
+			/*
+				0: {name: "userName", value: ""}
+				1: {name: "userId", value: ""}
+				2: {name: "userAge", value: ""}
+				3: {name: "userPassword", value: ""}
+				length: 4
+			*/
+			
+		}else if(flag==3) {
+			str = $("#fm").serializeJSON();
+			//.serializeJSON()메서드가 지금 안된다.
+			//Uncaught TypeError: $(...).serializeJson is not a function
+		} 
+		console.log(str);
+		$("#result").text(str);
+	}
+</script>
+</html>

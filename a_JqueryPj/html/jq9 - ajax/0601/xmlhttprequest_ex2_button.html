@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>XMLHttpRequest</title>
+	<script type="text/javascript" src="../../../js/lib/jquery-3.6.0.js"></script>
+</head>
+<body>
+<!-- 	<button type="button" onclick="setGetByAsynch();">GET 비동기 전송</button> -->
+	<button type="button" onclick="setGet(true);">GET 비동기 전송</button>
+	<button type="button" onclick="setGet(false);">GET 동기 전송</button>
+	<br>
+	<button type="button" onclick="setPost(true);">POST 비동기 전송</button>
+	<button type="button" onclick="setPost(false);">POST 동기 전송</button>
+	<hr>
+	<div id="result"></div>
+</body>
+<script type="text/javascript">
+	var url = "json_basic.html";
+
+// 	function setGetByAsynch() {	
+	function setGet(isAsynch) {
+		console.log("호출 확인 1 --------");
+		console.log("1.readyState 2.status 3.responseText");
+		console.log(this.readyState);
+		console.log(this.status);
+		console.log(this.responseText);
+		
+		var xhttp = new XMLHttpRequest();
+		/*
+			직접 로컬 파일을 들고 오면, 오류 발생: cross origin ...
+			Access to XMLHttpRequest at 'file:///D:/A_TeachingMaterial/5.JQuery/workspace/JqueryPj/WebContent/html/jq9_ajax/0531/test.jsp' 
+			from origin 'null' has been blocked by CORS policy: Cross origin requests are 
+			only supported for protocol schemes: http, data, chrome, chrome-extension, chrome-untrusted, https.
+		*/
+		
+
+		
+		console.log("호출 확인 2 --------");
+		console.log("1.readyState 2.status 3.responseText");
+		console.log(this.readyState);
+		console.log(this.status);
+		console.log(this.responseText);
+		
+		//비동기는 onreadystatechange가 뒤에 있어도, (상태가 다 바뀐 뒤의 위치에 있어도)
+		//먹히는데
+		//동기는 먹히지 않는다, 동기 방식은 send() 후에 데이터를 받을 때까지 기다리고
+		//데이터를 다 받은 후에 넘어오기 때문에,(= 더 이상 변할 상태가 없음, 상태 변화 끝)
+		//아래의 function()이 수행되지 않음
+		
+		// 비동기 방식일 경우 'onreadystatechange'가 'send()'뒤에 정의되었어도 정상 동작하지만,
+		// BUT! 동기 방식일 경우 'onreadystatechange'가 'send()'뒤에 정의되면 정상 동작X
+		// 동기 방식이기 때문에 send()에 대한 결과를 받은 다음 'onreadystatechange'가 수행되기 때문
+		xhttp.onreadystatechange = function(){	
+			console.log("호출 확인 3 --------");
+			console.log("1.readyState 2.status 3.responseText");
+			console.log(this.readyState);
+			console.log(this.status);
+			console.log(this.responseText);
+			
+			if(this.readyState == 4 && this.status == 200) {
+				console.log("호출 확인 4 --------");
+				console.log("1.readyState 2.status 3.responseText");
+				console.log(this.readyState);
+				console.log(this.status);
+				console.log(this.responseText);
+				
+				$("#result").html(this.responseText);
+			}
+			console.log("호출 확인 5 --------");
+			console.log("1.readyState 2.status 3.responseText");
+			console.log(this.readyState);
+			console.log(this.status);
+			console.log(this.responseText);
+		};
+		
+// 		xhttp.open("GET", "json_basic.html", true);		//true - 비동기
+		xhttp.open("GET", url + "?pName=hong&pId=test01", isAsynch); //파라미터인 isAsynch값에 의해 동기, 비동기 결정
+														//비동기로 받으면 send() 후에 기다리지 않고 다음 작업 수행
+														//다음 작업: xhttp.onreadystatechange = function(){}
+		//json_basic에 document.wrtie()가 포함되어 있으면
+		//기존 페이지가 다 날라간다, 기존페이지: 버튼이 2개 있는 현재 페이지
+		xhttp.send();
+		//데이터 요청
+		
+	}
+	
+	function setPost(isAsynch) {
+		console.log("호출 확인 1 --------");
+		console.log("1.readyState 2.status 3.responseText");
+		console.log(this.readyState);
+		console.log(this.status);
+		console.log(this.responseText);
+		
+		var xhttp = new XMLHttpRequest();
+		
+		
+		
+		xhttp.onreadystatechange = function(){	
+			console.log("호출 확인 3 --------");
+			console.log("1.readyState 2.status 3.responseText");
+			console.log(this.readyState);
+			console.log(this.status);
+			console.log(this.responseText);
+			
+			if(this.readyState == 4 && this.status == 200) {
+				console.log("호출 확인 4 --------");
+				console.log("1.readyState 2.status 3.responseText");
+				console.log(this.readyState);
+				console.log(this.status);
+				console.log(this.responseText);
+				
+				$("#result").html(this.responseText);
+			}
+			console.log("호출 확인 5 --------");
+			console.log("1.readyState 2.status 3.responseText");
+			console.log(this.readyState);
+			console.log(this.status);
+			console.log(this.responseText);
+		};
+		
+		xhttp.open("GET", url, isAsynch);
+		//GET방식과는 다르게 xhttp.setRequestHeader()가 필요
+// 		xhttp.setRequestHeader("","");		  //?
+		xhttp.send("?pName=hong&pId=test01"); //데이터 요청
+		console.log("호출 확인 2 --------");
+		console.log("1.readyState 2.status 3.responseText");
+		console.log(this.readyState);
+		console.log(this.status);
+		console.log(this.responseText);
+		
+	}
+</script>
+</html>
