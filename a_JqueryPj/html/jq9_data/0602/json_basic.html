@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Insert title here</title>
+	<script type="text/javascript" src="../../../js/lib/jquery-3.6.0.js"></script>
+	<script type="text/javascript">
+
+		//자바스크립트 객체
+		var objJS = {
+				name: "홍길동"
+				,phone: "010-1234-1004"
+				,age: 25
+				,birth: "1425-12-14"
+								
+				//객체의 객체
+				,addr: { 
+					sido: "대전광역시"
+					,gugun: "중구"
+					,dong: "대사1동"
+					,bunji: "123번지"
+					,postCode: "12345"
+				}//"대전광역시 중구 대사1동 123번지 12345"
+				
+				,specialty: ["무술", "검술", "독서"]
+				,status: false
+				,son: null
+		}
+		
+		//JSON 객체
+		var objJSON = {
+				"name": "홍길동"
+				,"phone": "010-1234-1004"
+				,"age": 25
+				,"addr": { 
+					"sido": "대전광역시"
+					,"gugun": "중구"
+					,"dong": "대사1동"
+					,"bunji": "123번지"
+					,"postCode": "12345"
+				}
+				,"specialty": ["무술", "검술", "독서"]
+				,"status": false
+				,"son": null
+		}
+		
+		$("button#btnChange").click(function(){
+		  // action goes here!!
+
+		    var str = JSON.stringify(objJS);
+			$("#result1").text(str);
+
+			var strTmp = '{"id":"text01", "name":"아이유"}';
+
+			var obj = JSON.parse(strTmp);
+			$("#result2").text(obj);
+			
+			//이름
+			var str2 = JSON.stringify(objJS);
+			var obj2 = JSON.parse(str2);
+			$("#result3").text(obj2.name);
+			
+			//주소 - 객체 내부의 객체
+			var objAddr = JSON.stringify(obj2.addr);
+			var strAddr = JSON.parse(objAddr);
+			var strAddr2 = strAddr.sido + " " + strAddr.gugun + " " + strAddr.dong + " " + strAddr.bunji + " " + strAddr.postCode;
+			$("#result4").text(strAddr2);
+
+			//취미
+			var obj3 = obj2.specialty;
+			var strSpec = "";
+			for(var i=0; i<obj3.length; i++) {
+				strSpec += obj3[i] + ", ";
+			}
+			
+			strSpec = strSpec.substr(0, strSpec.length-2);
+			$("#result5").text(strSpec);
+			
+			// text(new Date(문자열))
+			// =>
+			// Wed Dec 14 1425 08:27:52 GMT+0827 (대한민국 표준시)
+			var birth = obj2.birth;
+			var date = new Date(birth);
+			$("#result6").text(date);
+		  
+		});
+		
+	</script>
+</head>
+<body>
+	<button type="button" id="btnChange">JSON 변환 테스트</button>
+	<p>1차 변환(obj -> str) : <span id="result1"></span></p>
+	<p>2차 변환(str -> obj) : <span id="result2"></span></p>
+	<p>이름 : <span id="result3"></span></p>
+	<p>주소 : <span id="result4"></span></p>
+	<p>취미 : <span id="result5"></span></p>
+	<p>생년월일 : <span id="result6"></span></p>
+</body>
+</html>

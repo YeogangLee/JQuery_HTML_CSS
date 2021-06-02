@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Insert title here</title>
+	<script type="text/javascript" src="../../../js/lib/jquery-3.6.0.js"></script>
+	<style type="text/css">
+		table, td, th {
+		    border: 1px solid black;
+		    padding: 10px;
+		}
+		table {
+		    border-collapse: collapse;
+		}
+	</style>
+	<script type="text/javascript">
+	
+		function proc(type) {
+			var strUrl = "";
+			var strDataType = "";
+			
+			if(type == "text") {
+				strUrl = "../../jq9_data/0602/hello.txt";
+				strDataType = "text";
+				
+			}else if(type == "html") {
+				strUrl = "../../jq9_data/0602/json_basic.html";
+				strDataType = "html";
+				
+			}else if(type == "json") {
+				strUrl = "../../jq9_data/0602/data_json.txt";
+				strDataType = "json";
+				//확장자를 지우더라도, json형태(오브젝트)로 가져온다
+				//확장자를 txt가 아닌 html로 설정해도, json형태(오브젝트)로 가져온다
+				//파일 내용이 json형태(오브젝트)이기 때문에, json형태로 읽는다.
+				
+			}else if(type == "xml") {
+				strUrl = "../../jq9_data/0602/data_xml.xml";
+				strDataType = "xml";
+			}
+			
+			$.ajax({
+				url: strUrl
+				, type: "post"
+// 				, data: ""	//데이터는 일단 보내지 말자
+				, dataType: strDataType	//text, html, json, xml
+				, success: function(data) { //여기 들어오는 data는, 보내지는 파일 전부를 페이지 통으로 들고오는 거라고 생각하면 된다.
+					console.log(data);
+// 					alert("성공");
+					
+					makeResult(type, data);
+					//makeReult()함수를 사용하기 전에는, 여기서 if문 처리
+				}
+				, error: function(xhr) {
+					console.log(xhr);
+					alert("오류");
+				}
+			});
+		}
+
+		function makeResult(type, data) {
+			
+			if(type=="text" || type=="html") {
+				$("#result").html(data);
+				
+			}else if(type=="json"){
+				document.getElementById("result").innerHTML = ""
+				
+				$("#result").append(data.name + "님 반갑습니다 <br><br>");
+				$("#result").append("이름 : " + data.name + "<br>");
+				$("#result").append("나이 : " + data.age + "살 <br>");
+				$("#result").append("<br>");
+				
+				//객체 내의 객체는 어떻게 불러와서 사용해야 할까..
+// 				$("#result").append("주소 : " + data.addr);
+								 
+				/*
+					- 객체 내부 객체 가공 방법
+					
+					1. JSON.stringify()메서드
+					  : 오브젝트를  json string으로 변환  
+					2. JSON.parse()메서드
+					  : json string을 자바스크립트 오브젝트로 변환
+					  
+					ex. data.addr이라는 객체 내부 객체가 있을 때,
+						var addr = JSON.parse(JSON.stringify(data.addr));
+						이렇게 중첩해서 사용 => addr.속성 형식으로 사용 가능 
+				*/
+				
+				var addr = JSON.parse(JSON.stringify(data.addr));
+				var strAddr = addr.sido + " " + addr.gugun + " " + addr.dong + " " + addr.bunji + " " + addr.postCode;
+				$("#result").append("주소 : " + strAddr);
+				
+			}else if(type=="xml") {
+				
+// 				console.log(data) // #document
+				//xml문서의 엘리먼트를 html문서의 엘리먼트처럼 사용할 수 있다.
+				//차이점은, xml문서는 받은 데이터인 xml파일에서 요소를 사용하는 것이므로
+				//data.getElementsByTagName() ==> 앞에 data 사용, document가 아닌
+				
+				var lunch = data.getElementsByTagName("LUNCH");
+				console.log(lunch);
+				
+				//버튼을 클릭할 때마다 테이블 행이 새로 추가되지 않게 하기 위해
+				//처음 테이블 메뉴도 함수에서 같이 처리해준다, 미리 태그로 만들어 놓지 않고
+				var myStr = "<table id=\"tb\">" 
+							+ " <tr>"
+							+ "   <th>메뉴명</th>"
+							+ "   <th>가격</th>"
+							+ "</tr>";
+				
+				for(var i=0; i<lunch.length; i++) {
+					myStr += "<tr>";
+					
+					for(var j=0; j<lunch[i].children.length; j++) {
+						myStr += "<td>" + lunch[i].children[j].innerHTML + "</td>";
+					}
+					myStr += "</tr>";
+				}
+				//방법1) 테이블 태그를 사용했다면 그 내부에 자식처럼 append()
+// 				$("#tb").append(myStr);				
+
+				//방법2) html형식의 문자열을 만들어서 출력할 아이디 선택자에 html()
+				myStr += "</table>";
+				$("#result").html(myStr);				
+			}
+		}
+		
+	</script>
+</head>
+<body>
+	<p>각 버튼 클릭시, ajax 호출하고 다른 유형으로 데이터 받기</p>
+	<!-- 데이터 타입을 다르게 해서 ajax 호출 -->
+	<button type="button" onclick="proc('text')">텍스트</button>
+	<button type="button" onclick="proc('html')">HTML</button>
+	<button type="button" onclick="proc('json')">JSON</button>
+	<button type="button" onclick="proc('xml')">XML</button>
+	<hr>
+	<div id="result"></div>
+	<div id="result2"></div>
+	<div id="resultTable"></div>
+</body>
+</html>

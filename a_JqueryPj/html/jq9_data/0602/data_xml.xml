@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<MENU>
+	<LUNCH>
+		<NAME>참치마요</NAME>
+		<PRICE>2900</PRICE>
+	</LUNCH>
+	<LUNCH>
+		<NAME>죽</NAME>
+		<PRICE>3900</PRICE>
+	</LUNCH>
+	<LUNCH>
+		<NAME>제육와퍼</NAME>
+		<PRICE>4900</PRICE>
+	</LUNCH>
+	<LUNCH>
+		<NAME>단식</NAME>
+		<PRICE>0</PRICE>
+	</LUNCH>
+	
+</MENU>
