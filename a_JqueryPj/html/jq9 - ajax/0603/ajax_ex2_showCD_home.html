@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Insert title here</title>
+	<script type="text/javascript" src="../../../js/lib/jquery-3.6.0.js"></script>
+	<style type="text/css">
+ 		table, td, th { 
+ 		    border: 1px solid black; 
+ 		}
+ 		table {
+ 			border-collapse: collapse;
+ 			width: 100%;
+ 		}
+	</style>
+	<script type="text/javascript">
+		function showList(flag) {
+			
+			$.ajax({
+				url: "../../jq9_data/0602/cd_catalog.xml"
+				, type: "get"
+// 				, data:
+				, dataType: "xml"
+				, success: function(data){
+					if(flag == 1) {
+						//노래 제목
+						makeTitle(data);	
+					
+					}else if(flag == 2) {
+						//노래 전체 정보
+						makeAll(data);
+					
+					}else if(flag == null) {
+						if($("#idTitle").prop("checked")){
+							//노래 제목
+							makeTitle(data);
+							
+						}else if($("#idAll").prop("checked")){
+							//노래 전체 정보
+							makeAll(data);
+						}	
+					}
+				}
+				, error: function(xhr){
+					console.log(xhr);
+					alert("에러");
+				}				
+			});
+			
+		}
+		
+		//노래 제목 table을 만드는 메서드
+		function makeTitle(data) {
+		
+			var strHtml =  
+			  "<table>  "
+			+ "  <tr>           "
+			+ "    <th>번호</th> "
+			+ "	   <th>제목</th> "
+			+ "  <tr>           "
+			;
+			
+			var title = data.getElementsByTagName("TITLE");
+			var titleName = "";
+			
+			for(var i=0; i<title.length; i++) {
+				titleName = title[i].innerHTML;
+				
+				strHtml += "<tr><td>" + (i+1) + "</td><td>" + titleName + "</td></tr>";
+			}
+
+			strHtml += "</table>";
+			
+			$("#result").html(strHtml).css("text-align", "center");
+			
+		}
+		
+		function makeAll(data) {
+			
+			var strHtml =  
+				  "<table>  "
+				+ "  <tr>           "
+				+ "	   <th>번호</th> "
+				+ "	   <th>제목</th> "
+				+ "	   <th>가수</th> "
+				+ "	   <th>국가</th> "
+				+ "	   <th>회사</th> "
+				+ "	   <th>가격</th> "
+				+ "	   <th>발행년도</th> "
+				+ "  <tr>           "
+				;
+				
+			var cd = data.getElementsByTagName("CD");
+			
+			for(var i=0; i<cd.length; i++) {
+				strHtml += "<tr><td>" + (i+1) +"</td>";
+				
+				//각 CD요소의 자식 엘리먼트들의 텍스트를 innerHTML로 읽어온다.
+				for(var j=0; j<cd[i].children.length; j++) {
+					strHtml += "<td>" + cd[i].children[j].innerHTML + "</td>";
+				}
+				strHtml += "</tr>";
+			}
+			strHtml += "</table>";
+			
+			$("#result").html(strHtml).css("text-align", "center");
+								
+		}
+		
+		function resetList() {
+					
+			var td = document.getElementsByTagName("tr")[0].children.length;
+			var strHtml = "<table>  "
+						+ "  <tr>           "
+						+ "	   <th>번호</th> "
+						+ "	   <th>제목</th> "
+						;
+				
+			if(td > 2) {
+				strHtml +=	"  <th>가수</th> "
+						+ "    <th>국가</th> "
+						+ "	   <th>회사</th> "
+						+ "	   <th>가격</th> "
+						+ "	   <th>발행년도</th> "
+						+ "  </tr>"
+						+ "</table>"
+						; 
+					  	
+			}else {
+				strHtml += "</tr></table>";  
+			}
+			
+			$("#result").html(strHtml).css("text-align", "center");
+			
+			$("#idTitle").prop("checked", false);
+			$("#idAll").prop("checked", false);
+		}
+		
+	</script>	
+</head>
+<body>
+	<input type="radio" id="idTitle" name="nameRadio"><label for="idTitle">제목</label>
+	<input type="radio" id="idAll" name="nameRadio"><label for="idAll">전체</label>
+	<button type="button" onclick="showList()">조회</button>
+	<button type="button" onclick="showList(1)">노래 제목</button>
+	<button type="button" onclick="showList(2)">노래 전체 정보</button>
+	<button type="button" onclick="resetList()">초기화</button>
+	<hr>
+	<div id="result">
+		<table style="text-align: center">
+			<tr>
+				<th>번호</th>
+				<th>제목</th>
+			</tr>
+			<tr>
+				<td colspan="2">조회 버튼을 클릭하세요.</td>
+			</tr>
+		</table>
+	</div>
+</body>
+</html>

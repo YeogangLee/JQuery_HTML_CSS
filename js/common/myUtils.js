@@ -50,3 +50,21 @@ function checkValueLength(strId, strName, min, max) {
 	} 	
 	return true;
 }
+
+
+function format(type, val) {
+	// + type, val이 null일때 처리
+	
+	if(type=="DATE") {
+		if(val.length != 8) {
+			//ex. 200603
+			return val;
+		}
+		
+		// 20200603 
+		val = val.substr(0, 4) + "-" + val.substr(4, 2) + "-" + val.substr(6);
+		// => 2020-06-03
+	}
+	
+	return val; 
+}

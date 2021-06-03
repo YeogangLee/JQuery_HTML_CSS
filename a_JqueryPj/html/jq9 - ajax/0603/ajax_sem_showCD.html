@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Insert title here</title>
+	<script type="text/javascript" src="../../../js/lib/jquery-3.6.0.js"></script>
+	<style type="text/css">
+ 		table {
+ 			border: 3px double;
+ 			border-collapse: collapse;
+ 			width: 100%;
+ 		}
+		td, th { 
+ 		    border: 1px solid black;
+ 		    text-align: center; 
+ 		}	
+	</style>
+	<script type="text/javascript">
+		function srchList() {
+			$.ajax({
+				url: "../../jq9_data/0602/cd_catalog.xml"
+// 				, type: ""	기본값 get
+// 				, data: ""
+				, dataType: "xml"
+				, success: function(data) {
+					makeTable(data);
+				}
+				, error: function(xhr) {
+					console.log(xhr);
+					alert("에러 발생");
+				}
+			});
+			
+		}
+		
+		function makeTable(data) {
+			
+			var list = data.getElementsByTagName("CD");
+			
+			var srchType = $("[name=srchType]:checked").val();
+			
+			var strHtml = "";
+			
+			if(srchType == 1) {
+				//제목 테이블 만들기
+				strHtml +="<table>  "
+						+ "  <tr>           "
+						+ "    <th>번호</th> "
+						+ "	   <th>제목</th> "
+						+ "  <tr>           "
+						;
+						
+			}else if(srchType == 0) {
+				//전체 테이블 만들기
+				strHtml +="<table>  "
+						+ "  <tr>           "
+						+ "	   <th>번호</th> "
+						+ "	   <th>제목</th> "
+						+ "	   <th>가수</th> "
+						+ "	   <th>국가</th> "
+						+ "	   <th>회사</th> "
+						+ "	   <th>가격</th> "
+						+ "	   <th>발행년도</th> "
+						+ "  <tr>           "
+						;
+			}
+			
+			for(var i=0; i<list.length; i++) {
+				var title = list[i].getElementsByTagName("TITLE")[0].innerHTML;
+				var artist = list[i].getElementsByTagName("ARTIST")[0].innerHTML;
+				var country = list[i].getElementsByTagName("COUNTRY")[0].innerHTML;
+				var company = list[i].getElementsByTagName("COMPANY")[0].innerHTML;
+				var price = list[i].getElementsByTagName("PRICE")[0].innerHTML;
+				var year = list[i].getElementsByTagName("YEAR")[0].innerHTML;
+				
+				//편집자 모드에서 소문자 변환 : ctrl + shift + y 
+				
+				if(srchType == 1) {
+					strHtml += "<tr><td>" + (i+1) + "</td><td>" + title + "</td></tr>";
+				}else if(srchType == 0) {
+					//나중에 수정
+					strHtml 
+						+="<table>  "
+						+ "  <tr>           "
+						+ "	   <th>번호</th> "
+						+ "	   <th>제목</th> "
+						+ "	   <th>가수</th> "
+						+ "	   <th>국가</th> "
+						+ "	   <th>회사</th> "
+						+ "	   <th>가격</th> "
+						+ "	   <th>발행년도</th> "
+						+ "  <tr>           "
+						;
+				}
+			}
+			
+			strHtml += "</table>";
+			
+			$("#result").html(strHtml);						
+		}
+		
+		function reset() {
+			//버튼 타입을 reset으로 줘도 초기화...
+			
+			//검색조건 원래대로, 테이블 원래대로
+			$("#srchType1").prop("checked", false);
+			$("#srchType2").prop("checked", false);
+	
+			var strHtml = 
+						  "<table>
+						+ "	<tr>                                        "
+						+ "		<th>번호</th>                            "
+						+ "		<th>제목</th>                            "
+						+ "	</tr>                                       "
+						+ "	<tr>                                        "
+						+ "		<td colspan=\"2\">조회 버튼을 클릭하세요.</td>"
+						+ "	</tr>                                       "
+						+ "</table>                                     "
+						;
+			
+			$("#result").html(strHtml);
+		}
+		
+	</script>
+</head>
+<body>
+	<input type="radio" id="srchType1" name="srchType" value="1"><label for="srchType1">제목</label>
+	<input type="radio" id="srchType2" name="srchType" value="0"><label for="srchType2">전체</label>
+	&emsp;
+	<button type="button" onclick="srchList()">조회</button>
+	<button type="button" onclick="reset()">초기화</button>
+	<hr>
+	<hr>
+	<div id="result">
+<!-- 	테이블에 검색 조건에 따라 너비를 다르게 주려면, 이렇게 테이블 태그를 먼저 만들어 놓고 사용한다.  -->
+<!-- 	<table id="tb" style="width: 100%"> -->
+		<table>
+			<tr>
+				<th>번호</th>
+				<th>제목</th>
+			</tr>
+			<tr>
+				<td colspan="2">조회 버튼을 클릭하세요.</td>
+			</tr>
+		</table>
+	</div>
+</body>
+</html>

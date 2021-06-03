@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Insert title here</title>
+	<script type="text/javascript" src="../../../js/lib/jquery-3.6.0.js"></script>
+	<script type="text/javascript" src="../../../js/lib/common/myUtils.js"></script>
+	<style type="text/css">
+ 		table {
+ 			border: 3px double;
+ 			border-collapse: collapse;
+ 			width: 100%;
+ 		}
+		td, th { 
+ 		    border: 1px solid black;
+/*  		    text-align: center;  */
+ 		}	
+	</style>
+	<script type="text/javascript">
+		function proc(flag) {
+			var strUrl = "../../jq9_data/0603/data_jsonlist.jsp";
+			
+			if(flag == 0) {
+				alert(0);
+				strUrl = "../../jq9_data/0603/data_json_empty.jsp";
+			}
+			
+			$.ajax({
+				url: strUrl
+// 				, type: "post"
+// 				, data: ""
+				, dataType: "json"
+				, success: function(data) {
+					if(flag == 0) {
+						//초기화?
+						
+					}else {
+// 						useJSON(data);
+						makeTable(data);
+					}
+				}
+				, error: function(xhr) {
+					console.log(xhr);
+					alert("오류 발생");
+				}
+			});
+			
+		}
+		
+		function useJSON(data) {
+			console.log(data);
+			console.log(data.length);
+			console.log(data[0]);
+			console.log(data[0].no);
+			
+// 			var member = JSON.parse(JSON.stringify(data));
+// 			console.log(member);
+			
+			console.log(data.no);
+			console.log(data.id);
+			console.log(data.name);
+			console.log(data.hp);
+			console.log(data.birth);
+			
+			document.getElementsByTagName("tbody").innerHTML = "";
+			
+			var strHtml = "";
+			for(var i=0; i<data.length; i++){
+				strHtml += "<tr><td>" + data[i].no + "</td>"
+						+  "<td>" + data[i].id + "</td>"
+						+  "<td>" + data[i].name + "</td>"
+						+  "<td>" + data[i].hp + "</td>"
+						+  "<td>" + data[i].birth + "</td></tr>"
+						;
+			}
+			
+			$("idTbody").html(strHtml);
+						
+		}
+		
+		function makeTable(data) {
+			$("#tb tbody").empty();
+			
+			var no = "";
+			var id = "";
+			var name = "";
+			var hp = "";
+			var birth  = "";
+			
+			var strHtml = "";
+			var i;
+			for(i=0; i<data.length; i++){
+				no = data[i].no;
+				id = data[i].id;
+				name = data[i].name;
+				hp = data[i].hp;
+				birth = data[i].birth;
+				//방법1) 날짜 문자열 사이에 문자 넣기
+// 				birth = format("DATE", data[i].birth);
+				//null값이라면 여기서 null값 처리 
+
+				strHtml += "<tr><td>" + no + "</td>"
+							+  "<td>" + id + "</td>"
+							+  "<td>" + name + "</td>"
+							+  "<td>" + hp + "</td>"
+							+  "<td>" + format("DATE", birth) + "</td></tr>"
+							//방법2) 날짜 문자열 사이에 문자 넣기
+// 							+  "<td>" + format("DATE", birth) + "</td></tr>"
+							;
+			}
+			
+			console.log(data.length);
+			if(data.length == 0) {
+				strHtml = "<tr>"
+						+ "  <td colspan=\"5\">검색 결과가 없습니다.</td>"
+						+ "</tr>"
+			}
+			
+			$("#tb tbody").html(strHtml);
+		}
+		
+		
+	</script>
+</head>
+<body>
+	<h3>예: 회원 목록</h3>
+	<button type="button" onclick="proc()">JSON List</button>
+	<button type="button" onclick="proc(0)">빈데이터</button>
+	<hr>
+	<div id="result">
+		<table id="tb">
+			<colgroup>
+				<col style="width: 50px;">
+				<col style="width: 100px;">
+				<col style="width: auto;">
+				<col style="width: 140px;">
+				<col style="width: 140px;">				
+			</colgroup>
+			<thead>
+				<tr>
+					<th>번호</th>
+					<th>ID</th>
+					<th>이름</th>
+					<th>연락처</th>
+					<th>생년월일</th>
+				</tr>
+			</thead>
+			<tbody id="idTbody">
+				<tr>
+					<td colspan="5">조회 버튼을 클릭하세요.</td>
+				</tr>
+				<tr>
+					<td>50</td>
+					<td>test1117</td>
+					<td>홍길동</td>
+					<td>010-1234-1234</td>
+					<td>2021-06-03</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</body>
+</html>
